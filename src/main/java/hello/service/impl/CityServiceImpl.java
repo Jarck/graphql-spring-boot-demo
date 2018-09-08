@@ -42,7 +42,11 @@ public class CityServiceImpl implements ICityService {
     @Override
     public CityDto searchWithName(String cityName) {
         City city = cityMapper.searchWithName(cityName);
-        CityDto cityDto = new CityDto(city);
+
+        CityDto cityDto = new CityDto();
+        if (city != null) {
+            cityDto = new CityDto(city);
+        }
 
         return cityDto;
     }

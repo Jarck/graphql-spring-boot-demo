@@ -10,20 +10,20 @@
   <sql id="Base_Column_List">
     id, name, created_at, updated_at
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from city
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from city
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="hello.entity.City">
-    insert into city (id, name, created_at, 
+    insert into city (id, name, created_at,
       updated_at)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="hello.entity.City">
@@ -94,12 +94,13 @@
     select
       <include refid="Base_Column_List"/>
     from city
-    where 1 = 1
-    <if test="id != null and id != ''">
-      and id = #{id}
-    </if>
-    <if test="name != null and id !=''">
-      and name like concat(#{name}, '%')
-    </if>
+    <where>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+      <if test="name != null and id !=''">
+        and name like concat(#{name}, '%')
+      </if>
+    </where>
   </select>
 </mapper>

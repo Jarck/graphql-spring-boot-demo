@@ -144,28 +144,29 @@
     select
     <include refid="Base_Column_List"/>
     from user
-    where 1 = 1
-    <if test="status != null and status != ''">
-      and status = #{status}
-    </if>
-    <if test="status == null or status == ''">
-      and status = 1
-    </if>
-    <if test="name != null and name != ''">
-      and name like concat(#{name}, '%')
-    </if>
-    <if test="phone != null and phone != ''">
-      and phone like concat(#{phone}, '%')
-    </if>
-    <if test="cityId != null and cityId != ''">
-      and city_id = #{cityId}
-    </if>
-    <if test="companyId != null and companyId != ''">
-      and company_id = #{company_id}
-    </if>
-    <if test="id != null and id != ''">
-      and id = #{id}
-    </if>
+    <where>
+      <if test="status != null and status != ''">
+        and status = #{status}
+      </if>
+      <if test="status == null or status == ''">
+        and status = 1
+      </if>
+      <if test="name != null and name != ''">
+        and name like concat(#{name}, '%')
+      </if>
+      <if test="phone != null and phone != ''">
+        and phone like concat(#{phone}, '%')
+      </if>
+      <if test="cityId != null and cityId != ''">
+        and city_id = #{cityId}
+      </if>
+      <if test="companyId != null and companyId != ''">
+        and company_id = #{company_id}
+      </if>
+      <if test="id != null and id != ''">
+        and id = #{id}
+      </if>
+    </where>
   </select>
   <insert id="insertUser" parameterType="hello.entity.User" useGeneratedKeys="true" keyProperty="id">
     insert into user (name, phone, city_id, company_id)

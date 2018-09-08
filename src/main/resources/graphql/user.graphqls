@@ -1,5 +1,5 @@
 type User {
-    id: ID!
+    id: ID
     name: String
     phone: String
     cityId: Long
@@ -32,10 +32,10 @@ type Query {
     searchUsers(input: ConditionSearchUser): [User]
 
     # 通过ID查询用户
-    getUserWithId(id: Int!): User!
+    getUserWithId(id: Int!): User
 
     # 通过手机号查询用户
-    getUserWithPhone(phone: String!): User!
+    getUserWithPhone(phone: String!): User
 }
 
 type Mutation {
