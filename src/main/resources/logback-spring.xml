@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <include resource="org/springframework/boot/logging/logback/base.xml"/> <!-- logback 提供的基本配置 -->
+
+    <contextName>spring-boot-demo</contextName>
+
+    <!-- Console 输出设置 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!--解决中文乱码问题-->
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 按照每天生成日志文件 -->
+    <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- 最新的log文件名 -->
+        <File>logs/shiro-demo.log</File>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--日志文件输出的文件名-->
+            <fileNamePattern>logs/logback.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <!-- 保留30天的日志 -->
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %contextName [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <!--解决中文乱码问题-->
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
+    <springProfile name="test,dev">
+        <logger name="hello" level="DEBUG" >
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="dailyRollingFileAppender" />
+        </logger>
+        <logger name="org.springframework.boot" level="DEBUG"/>
+
+        <!-- 其他框架的日志输出 -->
+        <property name="LOG_FILE" value="logs/.log"/>
+        <logger name="org.springframework.web" level="INFO"/>   <!-- spring web 包下的 logger, 只输出 INFO 级别的 -->
+        <logger name="org.springframework.boot.web.filter" level="INFO"/>
+    </springProfile>
+
+    <!-- 生产环境. -->
+    <springProfile name="prod">
+        <logger name="hello" level="ERROR" >
+            <appender-ref ref="CONSOLE" />
+            <appender-ref ref="dailyRollingFileAppender" />
+        </logger>
+        <logger name="org.springframework.boot" level="ERROR"/>
+
+        <!-- 其他框架的日志输出 -->
+        <property name="LOG_FILE" value="logs/demo.log"/>
+        <logger name="org.springframework.web" level="ERROR"/>   <!-- spring web 包下的 logger, 只输出 INFO 级别的 -->
+        <logger name="org.springframework.boot.web.filter" level="ERROR"/>
+    </springProfile>
+
+</configuration>

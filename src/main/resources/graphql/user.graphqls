@@ -1,0 +1,44 @@
+type User {
+    id: ID!
+    name: String
+    phone: String
+    cityId: Long
+    city: City
+    companyId: Long
+    status: Int
+    createdAt: String
+    updatedAt: String
+}
+
+input ConditionSearchUser {
+    id: ID
+    name: String
+    phone: String
+    cityId: Long
+    companyId: Long
+    status: Int
+}
+
+input CreateUser {
+    name: String!
+    phone: String!
+    cityId: Long!
+    companyId: Long!
+    roleIds: [Long]
+}
+
+type Query {
+    # 通过查询条件查询用户
+    searchUsers(input: ConditionSearchUser): [User]
+
+    # 通过ID查询用户
+    getUserWithId(id: Int!): User!
+
+    # 通过手机号查询用户
+    getUserWithPhone(phone: String!): User!
+}
+
+type Mutation {
+    # 创建用户
+    createUser(input: CreateUser!): String!
+}

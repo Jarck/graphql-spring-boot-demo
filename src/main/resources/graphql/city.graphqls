@@ -1,0 +1,29 @@
+type City {
+    id: ID!
+    name: String
+}
+
+input ConditionSearchCity {
+    id: ID
+    name: String
+}
+
+input CreateCity {
+    name: String!
+}
+
+extend type Query {
+    # 通过查询条件查询城市
+    searchCities(input: ConditionSearchCity): [City]
+
+    # 通过ID查询城市
+    getCityWithId(id: Int!): City!
+
+    # 通过城市名查询
+    getCityWithName(name: String!): City!
+}
+
+extend type Mutation {
+    # 创建城市
+    createCity(input: CreateCity!): String!
+}

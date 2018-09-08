@@ -1,0 +1,57 @@
+spring:
+  profiles:
+    active: dev
+  jackson:
+    time-zone: GMT+8
+    date-format: yyyy-MM-dd HH:mm:ss
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password:
+    jedis:
+      pool:
+        max-active: 8
+        max-wait: -1
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
+server:
+  port: 8080
+
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+
+secret_key: secret_key
+
+graphql:
+  servlet:
+    mapping: /graphql
+    enabled: true
+    corsEnabled: true
+  tools:
+    schemaLocationPattern: "**/*.graphqls"
+graphiql:
+  mapping: /graphiql
+  endpoint: /graphql
+  enabled: true
+
+---
+# 开发环境
+spring:
+  profiles: dev
+  datasource:
+    url: jdbc:mysql://localhost:3306/shiro_demo?useUnicode=true&characterEncoding=utf8&autoReconnect=true&useSSL=false
+    username: username
+    password: password
+
+---
+# 测试环境
+spring:
+  profiles: test
+  datasource:
+    schema: classpath:init_tables.sql
+    driver-class-name: org.h2.Driver
