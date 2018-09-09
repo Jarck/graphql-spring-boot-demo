@@ -8,8 +8,8 @@
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, created_at, updated_at
-  </sql>
+        id, name, created_at, updated_at
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -17,15 +17,15 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from city
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+      delete from city
+      where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="hello.entity.City">
-    insert into city (id, name, created_at,
-      updated_at)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
-      #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
+        insert into city (id, name, created_at,
+          updated_at)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdAt,jdbcType=TIMESTAMP},
+          #{updatedAt,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="hello.entity.City">
         insert into city
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,17 +73,17 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="hello.entity.City">
-    update city
-    set name = #{name,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update city
+        set name = #{name,jdbcType=VARCHAR},
+          created_at = #{createdAt,jdbcType=TIMESTAMP},
+          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+     </update>
 
     <insert id="insertCity" useGeneratedKeys="true" keyProperty="id">
-    insert into city (name)
-    values (#{name})
-  </insert>
+        insert into city (name)
+        values (#{name})
+    </insert>
     <select id="searchWithName" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -96,7 +96,7 @@
         from city
         <where>
             <if test="id != null and id != ''">
-                and id = #{id}
+                id = #{id}
             </if>
             <if test="name != null and id !=''">
                 and name like concat(#{name}, '%')

@@ -70,11 +70,11 @@ public class RoleMapperTest {
 
   @Test
   public void testFindByUserId() {
-    List<Role> admin_roles = roleMapper.findByUserId(1L);
+    List<Role> admin_roles = roleMapper.searchWithUserId(1L);
     Assert.assertEquals(admin_roles.size(), 2);
     Assert.assertEquals(admin_roles.get(0).getName(), "admin");
 
-    List<Role> test_roles = roleMapper.findByUserId(2L);
+    List<Role> test_roles = roleMapper.searchWithUserId(2L);
     Assert.assertEquals(test_roles.size(), 1);
     Assert.assertEquals(test_roles.get(0).getName(), "test");
   }

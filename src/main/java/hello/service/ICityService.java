@@ -26,7 +26,7 @@ public interface ICityService {
    * @param cityName
    * @return
    */
-  CityDto searchWithName(String cityName);
+  List<City> searchWithName(String cityName);
 
   /**
    * 按条件查询

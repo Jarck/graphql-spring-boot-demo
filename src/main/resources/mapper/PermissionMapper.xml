@@ -11,8 +11,8 @@
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, permission, resource_type, available, created_at, updated_at
-  </sql>
+        id, name, permission, resource_type, available, created_at, updated_at
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -20,17 +20,17 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from permission
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from permission
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="hello.entity.Permission">
-    insert into permission (id, name, permission,
-      resource_type, available, created_at,
-      updated_at)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{method,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
-      #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
+        insert into permission (id, name, permission,
+          resource_type, available, created_at,
+          updated_at)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
+          #{method,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
+          #{updatedAt,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="hello.entity.Permission">
         insert into permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -105,27 +105,32 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="hello.entity.Permission">
-    update permission
-    set name = #{name,jdbcType=VARCHAR},
-      permission = #{permission,jdbcType=VARCHAR},
-      resource_type = #{resource_type,jdbcType=VARCHAR},
-      available = #{available,jdbcType=VARCHAR},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update permission
+        set name = #{name,jdbcType=VARCHAR},
+          permission = #{permission,jdbcType=VARCHAR},
+          resource_type = #{resource_type,jdbcType=VARCHAR},
+          available = #{available,jdbcType=VARCHAR},
+          created_at = #{createdAt,jdbcType=TIMESTAMP},
+          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+      </update>
 
-    <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select permission.*
-    from permission
-    left join role_permission on permission.id = role_permission.permission_id
-    where role_permission.role_id = #{roleId}
-  </select>
-    <select id="findByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select permission.*
-    from permission
-    left join role_permission on permission.id = role_permission.permission_id
-    left join user_role on user_role.role_id = role_permission.role_id
-    where user_role.user_id = #{userId}
-  </select>
+    <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        where name like concat(#{name}, "%")
+    </select>
+    <select id="searchWithRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select permission.*
+        from permission
+        left join role_permission on permission.id = role_permission.permission_id
+        where role_permission.role_id = #{roleId}
+      </select>
+    <select id="searchWithUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select permission.*
+        from permission
+        left join role_permission on permission.id = role_permission.permission_id
+        left join user_role on user_role.role_id = role_permission.role_id
+        where user_role.user_id = #{userId}
+      </select>
 </mapper>

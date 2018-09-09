@@ -5,6 +5,7 @@ type User {
     cityId: Long
     city: City
     companyId: Long
+    company: Company
     status: Int
     createdAt: String
     updatedAt: String
@@ -32,10 +33,10 @@ type Query {
     searchUsers(input: ConditionSearchUser): [User]
 
     # 通过ID查询用户
-    getUserWithId(id: Int!): User
+    searchUserWithId(id: Int!): User
 
     # 通过手机号查询用户
-    getUserWithPhone(phone: String!): User
+    searchUserWithPhone(phone: String!): User
 }
 
 type Mutation {

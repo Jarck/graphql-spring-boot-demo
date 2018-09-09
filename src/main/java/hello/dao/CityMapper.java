@@ -42,7 +42,7 @@ public interface CityMapper {
    * @param name
    * @return
    */
-  City searchWithName(String name);
+  List<City> searchWithName(String name);
 
   /**
    * 按条件查询

@@ -1,5 +1,6 @@
 package hello.dao;
 
+import hello.dto.create.CreateRoleDto;
 import hello.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,7 +29,11 @@ public interface RoleMapper {
 
   int updateByPrimaryKey(Role record);
 
+  Integer insertRole(CreateRoleDto createRoleDto);
+
   List<Role> findAll();
 
-  List<Role> findByUserId(@Param("userId") Long userId);
+  List<Role> searchWithName(String name);
+
+  List<Role> searchWithUserId(@Param("userId") Long userId);
 }

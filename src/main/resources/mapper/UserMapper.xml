@@ -15,8 +15,8 @@
     <resultMap id="userDtoMap" type="hello.dto.result.UserDto" extends="BaseResultMap"/>
 
     <sql id="Base_Column_List">
-    id, name, phone, city_id, status, created_at, updated_at, company_id
-  </sql>
+        id, name, phone, city_id, status, created_at, updated_at, company_id
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -24,17 +24,17 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from user
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from user
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="hello.entity.User">
-    insert into user (id, name, phone,
-      city_id, status, created_at, 
-      updated_at, company_id)
-    values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-      #{cityId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP}, #{companyId,jdbcType=INTEGER})
-  </insert>
+        insert into user (id, name, phone,
+          city_id, status, created_at,
+          updated_at, company_id)
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+          #{cityId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
+          #{updatedAt,jdbcType=TIMESTAMP}, #{companyId,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="hello.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -118,16 +118,16 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="hello.entity.User">
-    update user
-    set name = #{name,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      city_id = #{cityId,jdbcType=BIGINT},
-      status = #{status,jdbcType=INTEGER},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      company_id = #{companyId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update user
+        set name = #{name,jdbcType=VARCHAR},
+          phone = #{phone,jdbcType=VARCHAR},
+          city_id = #{cityId,jdbcType=BIGINT},
+          status = #{status,jdbcType=INTEGER},
+          created_at = #{createdAt,jdbcType=TIMESTAMP},
+          updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+          company_id = #{companyId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 
     <select id="findAll" resultMap="BaseResultMap">
         select
@@ -138,7 +138,7 @@
         select
         <include refid="Base_Column_List"/>
         from user
-        where phone like concat(#{phone}, '%')
+        where phone = #{phone}
     </select>
     <select id="searchCondition" resultMap="userDtoMap">
         select
@@ -146,7 +146,7 @@
         from user
         <where>
             <if test="status != null and status != ''">
-                and status = #{status}
+                status = #{status}
             </if>
             <if test="status == null or status == ''">
                 and status = 1
@@ -169,7 +169,7 @@
         </where>
     </select>
     <insert id="insertUser" parameterType="hello.entity.User" useGeneratedKeys="true" keyProperty="id">
-    insert into user (name, phone, city_id, company_id)
-    values (#{name}, #{phone}, #{city_id}, #{company_id})
-  </insert>
+        insert into user (name, phone, city_id, company_id)
+        values (#{name}, #{phone}, #{city_id}, #{company_id})
+    </insert>
 </mapper>

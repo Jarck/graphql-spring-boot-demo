@@ -101,7 +101,7 @@ public class UserServiceImpl implements IUserService {
   }
 
   private void setUserRolePermission(UserDto userDto) {
-    List<UserRole> userRoleList = userRoleMapper.selectByUserId(userDto.getId());
+    List<UserRole> userRoleList = userRoleMapper.searchWithUserId(userDto.getId());
     List<Role> roleList = userDto.getRoles();
     List<Permission> permissionList = userDto.getPermissions();
 
@@ -117,9 +117,9 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public List<User> searchWithCondition(SearchUserDto searchUserDto) {
-    List<User> users = userMapper.searchCondition(searchUserDto);
+    List<User> userList = userMapper.searchCondition(searchUserDto);
 
-    return users;
+    return userList;
   }
 
   @Override

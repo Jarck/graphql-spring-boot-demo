@@ -38,7 +38,7 @@ public class CityQuery implements GraphQLQueryResolver {
    * @param cityId
    * @return
    */
-  public City getCityWithId(Long cityId) {
+  public City searchCityWithId(Long cityId) {
     City city = cityService.searchWithId(cityId);
 
     return city;
@@ -50,9 +50,9 @@ public class CityQuery implements GraphQLQueryResolver {
    * @param cityName
    * @return
    */
-  public City getCityWithName(String cityName) {
-    City city = cityService.searchWithName(cityName);
+  public List<City> searchCityWithName(String cityName) {
+    List<City> cityList = cityService.searchWithName(cityName);
 
-    return city;
+    return cityList;
   }
 }

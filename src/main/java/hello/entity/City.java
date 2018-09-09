@@ -12,7 +12,7 @@ import java.util.Date;
  **/
 @Data
 public class City {
-  private Integer id;
+  private Long id;
   private String name;
   private Date createdAt;
   private Date updatedAt;

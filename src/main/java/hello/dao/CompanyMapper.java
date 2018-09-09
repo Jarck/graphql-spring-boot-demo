@@ -1,8 +1,12 @@
 package hello.dao;
 
+import hello.dto.condition.SearchCompanyDto;
+import hello.dto.create.CreateCompanyDto;
 import hello.entity.Company;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 公司DAO
@@ -19,9 +23,17 @@ public interface CompanyMapper {
 
   int insertSelective(Company record);
 
-  Company selectByPrimaryKey(Integer id);
+  Company selectByPrimaryKey(Long id);
 
   int updateByPrimaryKeySelective(Company record);
 
   int updateByPrimaryKey(Company record);
+
+  List<Company> searchWithName(String name);
+
+  List<Company> searchWithCityId(Long cityId);
+
+  List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
+
+  Integer createCompany(CreateCompanyDto createCompanyDto);
 }

@@ -28,7 +28,9 @@ public interface PermissionMapper {
 
   int updateByPrimaryKey(Permission record);
 
-  List<Permission> findByRoleId(@Param("roleId") Long roleId);
+  List<Permission> searchWithName(String name);
 
-  List<Permission> findByUserId(@Param("userId") Long userId);
+  List<Permission> searchWithRoleId(@Param("roleId") Long roleId);
+
+  List<Permission> searchWithUserId(@Param("userId") Long userId);
 }

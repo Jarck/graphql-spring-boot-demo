@@ -1,0 +1,43 @@
+type Company {
+    id: ID
+    name: String
+    shortName: String
+    address: String
+    linkName: String
+    phone: String
+    cityId: Long
+    city: City
+    status: Int
+    createdAt: String
+    updatedAt: String
+}
+
+input ConditionSearchCompany {
+    id: ID
+    name: String
+    cityId: Int
+}
+
+input createCompany {
+    name: String!
+}
+
+extend type Query {
+    # 通过查询条件查询公司
+    searchCompanies(input: ConditionSearchCompany): [Company]
+
+    # 通过ID查询公司
+    searchCompanyWithId(id: Int!): Company
+
+    # 通过城市ID查询公司
+    searchCompanyWithCityId(cityId: Int!): [Company]
+
+    # 通过公司名查询
+    searchCompanyWithName(name: String!): [Company]
+}
+
+extend type Mutation {
+    # 创建公司
+    createCompany(company: createCompany): Int!
+}
+

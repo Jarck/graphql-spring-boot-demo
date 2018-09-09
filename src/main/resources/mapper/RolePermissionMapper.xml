@@ -9,8 +9,8 @@
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, role_id, permission_id, created_at, updated_at
-  </sql>
+        id, role_id, permission_id, created_at, updated_at
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -18,15 +18,15 @@
         where id = #{id,jdbcType=BIGINT}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from role_permission
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
+        delete from role_permission
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
     <insert id="insert" parameterType="hello.entity.RolePermission">
-    insert into role_permission (id, role_id, permission_id,
-      created_at, updated_at)
-    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT}, 
-      #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
+        insert into role_permission (id, role_id, permission_id,
+          created_at, updated_at)
+        values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT}, #{permissionId,jdbcType=BIGINT},
+          #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="hello.entity.RolePermission">
         insert into role_permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -83,11 +83,11 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
     <update id="updateByPrimaryKey" parameterType="hello.entity.RolePermission">
-    update role_permission
-    set role_id = #{roleId,jdbcType=BIGINT},
-      permission_id = #{permissionId,jdbcType=BIGINT},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        update role_permission
+        set role_id = #{roleId,jdbcType=BIGINT},
+          permission_id = #{permissionId,jdbcType=BIGINT},
+          created_at = #{createdAt,jdbcType=TIMESTAMP},
+          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

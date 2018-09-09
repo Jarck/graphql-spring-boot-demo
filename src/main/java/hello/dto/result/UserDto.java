@@ -29,7 +29,6 @@ public class UserDto extends User implements Serializable {
     this.setName(user.getName());
     this.setCityId(user.getCityId());
     this.setCompanyId(user.getCompanyId());
-    ;
     this.setPhone(user.getPhone());
     this.setStatus(user.getStatus());
     this.setCreatedAt(user.getCreatedAt());

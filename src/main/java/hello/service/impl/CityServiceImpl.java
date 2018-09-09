@@ -44,15 +44,10 @@ public class CityServiceImpl implements ICityService {
    * @return
    */
   @Override
-  public CityDto searchWithName(String cityName) {
-    City city = cityMapper.searchWithName(cityName);
+  public List<City> searchWithName(String cityName) {
+    List<City> cityList = cityMapper.searchWithName(cityName);
 
-    CityDto cityDto = new CityDto();
-    if (city != null) {
-      cityDto = new CityDto(city);
-    }
-
-    return cityDto;
+    return cityList;
   }
 
   /**
@@ -63,9 +58,9 @@ public class CityServiceImpl implements ICityService {
    */
   @Override
   public List<City> searchWithCondition(SearchCityDto searchCityDto) {
-    List<City> cities = cityMapper.searchCondition(searchCityDto);
+    List<City> cityList = cityMapper.searchCondition(searchCityDto);
 
-    return cities;
+    return cityList;
   }
 
   /**

@@ -14,8 +14,8 @@
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, name, short_name, address, link_name, phone, city_id, status, created_at, updated_at
-  </sql>
+        id, name, short_name, address, link_name, phone, city_id, status, created_at, updated_at
+      </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -23,19 +23,19 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from company
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from company
+        where id = #{id,jdbcType=INTEGER}
+      </delete>
     <insert id="insert" parameterType="hello.entity.Company">
-    insert into company (id, name, short_name, 
-      address, link_name, phone, 
-      city_id, status, created_at, 
-      updated_at)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR}, 
-      #{address,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, 
-      #{cityId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP}, 
-      #{updatedAt,jdbcType=TIMESTAMP})
-  </insert>
+        insert into company (id, name, short_name,
+          address, link_name, phone,
+          city_id, status, created_at,
+          updated_at)
+        values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{shortName,jdbcType=VARCHAR},
+          #{address,jdbcType=VARCHAR}, #{linkName,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
+          #{cityId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
+          #{updatedAt,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="hello.entity.Company">
         insert into company
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -137,16 +137,44 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="hello.entity.Company">
-    update company
-    set name = #{name,jdbcType=VARCHAR},
-      short_name = #{shortName,jdbcType=VARCHAR},
-      address = #{address,jdbcType=VARCHAR},
-      link_name = #{linkName,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      city_id = #{cityId,jdbcType=INTEGER},
-      status = #{status,jdbcType=INTEGER},
-      created_at = #{createdAt,jdbcType=TIMESTAMP},
-      updated_at = #{updatedAt,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update company
+        set name = #{name,jdbcType=VARCHAR},
+          short_name = #{shortName,jdbcType=VARCHAR},
+          address = #{address,jdbcType=VARCHAR},
+          link_name = #{linkName,jdbcType=VARCHAR},
+          phone = #{phone,jdbcType=VARCHAR},
+          city_id = #{cityId,jdbcType=INTEGER},
+          status = #{status,jdbcType=INTEGER},
+          created_at = #{createdAt,jdbcType=TIMESTAMP},
+          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+      </update>
+    
+    <select id="searchWithName" parameterType="java.lang.String">
+        select 
+        <include refid="Base_Column_List"/>
+        from company
+        where name like concat(#{name}, "%")
+    </select>
+    <select id="searchWithCityId" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        where city_id = #{cityId}
+    </select>
+    <select id="searchCondition" parameterType="hello.dto.condition.SearchCompanyDto">
+        select
+        <include refid="Base_Column_List"/>
+        <where>
+            <if test="name != null and name !=''">
+                name like concat(#{name}, "%")
+            </if>
+            <if test="cityId != null and cityId !=''">
+                and city_id = #{cityId}
+            </if>
+        </where>
+    </select>
+    <insert id="createCompany" useGeneratedKeys="true" keyProperty="id">
+        insert into company (name, short_name, address, link_name, phone, city_id)
+        values (#{name}, #{shortName}, #{address}, #{linkName}, #{phone}, #{cityId})
+    </insert>
 </mapper>

@@ -1,6 +1,8 @@
 type City {
     id: ID
     name: String
+    createdAt: String
+    updatedAt: String
 }
 
 input ConditionSearchCity {
@@ -17,10 +19,10 @@ extend type Query {
     searchCities(input: ConditionSearchCity): [City]
 
     # 通过ID查询城市
-    getCityWithId(id: Int!): City
+    searchCityWithId(id: Int!): City
 
     # 通过城市名查询
-    getCityWithName(name: String!): City
+    searchCityWithName(name: String!): [City]
 }
 
 extend type Mutation {

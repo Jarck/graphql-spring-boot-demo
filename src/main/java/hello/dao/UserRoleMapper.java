@@ -31,5 +31,5 @@ public interface UserRoleMapper {
   int updateByPrimaryKey(UserRole record);
 
   @Cacheable(key = "#p0")
-  List<UserRole> selectByUserId(Long userId);
+  List<UserRole> searchWithUserId(Long userId);
 }

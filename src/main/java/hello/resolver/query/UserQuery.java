@@ -36,7 +36,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param userId
    * @return
    */
-  public User getUserWithId(Long userId) {
+  public User searchUserWithId(Long userId) {
     return userService.searchWithId(userId);
   }
 
@@ -46,7 +46,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param phone
    * @return
    */
-  public User getUserWithPhone(String phone) {
+  public User searchUserWithPhone(String phone) {
     return userService.getUserByPhone(phone);
   }
 }
