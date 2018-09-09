@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="hello.dao.PermissionMapper">
-  <resultMap id="BaseResultMap" type="hello.entity.Permission">
-    <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="permission" jdbcType="VARCHAR" property="permission" />
-    <result column="resource_type" jdbcType="VARCHAR" property="resource_type" />
-    <result column="available" jdbcType="INTEGER" property="available" />
-    <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
-    <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt" />
-  </resultMap>
-  <sql id="Base_Column_List">
+    <resultMap id="BaseResultMap" type="hello.entity.Permission">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="permission" jdbcType="VARCHAR" property="permission"/>
+        <result column="resource_type" jdbcType="VARCHAR" property="resource_type"/>
+        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
+        <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, name, permission, resource_type, available, created_at, updated_at
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from permission
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from permission
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from permission
     where id = #{id,jdbcType=BIGINT}
   </delete>
-  <insert id="insert" parameterType="hello.entity.Permission">
+    <insert id="insert" parameterType="hello.entity.Permission">
     insert into permission (id, name, permission,
       resource_type, available, created_at,
       updated_at)
@@ -31,80 +31,80 @@
       #{method,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
       #{updatedAt,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="hello.entity.Permission">
-    insert into permission
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="name != null">
-        name,
-      </if>
-      <if test="permission != null">
-        permission,
-      </if>
-      <if test="resource_type != null">
-        resource_type,
-      </if>
-      <if test="available != null">
-        available,
-      </if>
-      <if test="createdAt != null">
-        created_at,
-      </if>
-      <if test="updatedAt != null">
-        updated_at,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="permission != null">
-        #{permission,jdbcType=VARCHAR},
-      </if>
-      <if test="resource_type != null">
-        #{resource_type,jdbcType=VARCHAR},
-      </if>
-      <if test="available != null">
-        #{available,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="hello.entity.Permission">
-    update permission
-    <set>
-      <if test="name != null">
-        name = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="permission != null">
-        permission = #{permission,jdbcType=VARCHAR},
-      </if>
-      <if test="resource_type != null">
-        resource_type = #{resource_type,jdbcType=VARCHAR},
-      </if>
-      <if test="available != null">
-        available = #{available,jdbcType=INTEGER},
-      </if>
-      <if test="createdAt != null">
-        created_at = #{createdAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatedAt != null">
-        updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="hello.entity.Permission">
+    <insert id="insertSelective" parameterType="hello.entity.Permission">
+        insert into permission
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="name != null">
+                name,
+            </if>
+            <if test="permission != null">
+                permission,
+            </if>
+            <if test="resource_type != null">
+                resource_type,
+            </if>
+            <if test="available != null">
+                available,
+            </if>
+            <if test="createdAt != null">
+                created_at,
+            </if>
+            <if test="updatedAt != null">
+                updated_at,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="name != null">
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="permission != null">
+                #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="resource_type != null">
+                #{resource_type,jdbcType=VARCHAR},
+            </if>
+            <if test="available != null">
+                #{available,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="hello.entity.Permission">
+        update permission
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="permission != null">
+                permission = #{permission,jdbcType=VARCHAR},
+            </if>
+            <if test="resource_type != null">
+                resource_type = #{resource_type,jdbcType=VARCHAR},
+            </if>
+            <if test="available != null">
+                available = #{available,jdbcType=INTEGER},
+            </if>
+            <if test="createdAt != null">
+                created_at = #{createdAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedAt != null">
+                updated_at = #{updatedAt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="hello.entity.Permission">
     update permission
     set name = #{name,jdbcType=VARCHAR},
       permission = #{permission,jdbcType=VARCHAR},
@@ -115,13 +115,13 @@
     where id = #{id,jdbcType=BIGINT}
   </update>
 
-  <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="findByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select permission.*
     from permission
     left join role_permission on permission.id = role_permission.permission_id
     where role_permission.role_id = #{roleId}
   </select>
-  <select id="findByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="findByUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select permission.*
     from permission
     left join role_permission on permission.id = role_permission.permission_id

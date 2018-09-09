@@ -25,5 +25,5 @@ extend type Query {
 
 extend type Mutation {
     # 创建城市
-    createCity(input: CreateCity!): String!
+    createCity(city: CreateCity!): String!
 }

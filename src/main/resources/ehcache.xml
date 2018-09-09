@@ -9,7 +9,7 @@
             user.dir  – 用户当前工作目录
             java.io.tmpdir – 默认临时文件路径
      -->
-    <diskStore path="java.io.tmpdir/ehcache" />
+    <diskStore path="java.io.tmpdir/ehcache"/>
 
     <!--
        name:缓存名称。
@@ -32,13 +32,13 @@
     -->
 
     <defaultCache
-        maxElementsInMemory="50000"
-        eternal="false"
-        timeToIdleSeconds="3600"
-        timeToLiveSeconds="3600"
-        overflowToDisk="true"
-        diskPersistent="false"
-        diskExpiryThreadIntervalSeconds="120"
+            maxElementsInMemory="50000"
+            eternal="false"
+            timeToIdleSeconds="3600"
+            timeToLiveSeconds="3600"
+            overflowToDisk="true"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
     />
 
     <cache name="users"

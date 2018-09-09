@@ -16,23 +16,27 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author jarck-lou
+ * @date 2018/9/1 12:52
+ **/
 @Slf4j
 @RestController
 @Api(value = "Rest登录", description = "Rest登录")
 @RequestMapping("api")
 public class LoginController {
-    @Autowired
-    private IUserService userService;
+  @Autowired
+  private IUserService userService;
 
-    @ApiOperation("login")
-    @PostMapping("login")
-    public Map<String, Object> login(LoginDto loginUser, BindingResult bindingResult) {
-        String token = userService.login(loginUser);
-        User user = userService.getUserByPhone(loginUser.getPhone());
-        Map<String, Object> result = new HashMap<>(1);
-        result.put("user", user);
-        result.put(SystemConstant.TOKEN_HEADER + loginUser.getPhone(), token);
+  @ApiOperation("login")
+  @PostMapping("login")
+  public Map<String, Object> login(LoginDto loginUser, BindingResult bindingResult) {
+    String token = userService.login(loginUser);
+    User user = userService.getUserByPhone(loginUser.getPhone());
+    Map<String, Object> result = new HashMap<>(1);
+    result.put("user", user);
+    result.put(SystemConstant.TOKEN_HEADER + loginUser.getPhone(), token);
 
-        return result;
-    }
+    return result;
+  }
 }

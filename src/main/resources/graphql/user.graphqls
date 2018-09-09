@@ -40,5 +40,5 @@ type Query {
 
 type Mutation {
     # 创建用户
-    createUser(input: CreateUser!): String!
+    createUser(user: CreateUser!): String!
 }

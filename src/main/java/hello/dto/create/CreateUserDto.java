@@ -1,11 +1,11 @@
-package hello.dto.condition;
+package hello.dto.create;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * 搜索城市DTO
+ * 创建用户DTO
  *
  * @author jarck-lou
  * @date 2018/9/1 12:52
@@ -13,7 +13,10 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class SearchCityDto {
-  private Long id;
+public class CreateUserDto {
   private String name;
+  private String phone;
+  private Long cityId;
+  private Long companyId;
+  private Long[] roleIds;
 }

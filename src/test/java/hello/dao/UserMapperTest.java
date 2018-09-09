@@ -20,43 +20,45 @@ import javax.annotation.Resource;
 import javax.sql.DataSource;
 import java.util.List;
 
+/**
+ * @author jarck-lou
+ * @date 2018/9/1 12:52
+ **/
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @MybatisTest
 @Transactional
 public class UserMapperTest {
-    @Autowired
-    private UserMapper userMapper;
+  private static DbSetupTracker dbSetupTracker = new DbSetupTracker();
+  @Autowired
+  private UserMapper userMapper;
+  @Resource
+  private DataSource dataSource;
 
-    @Resource
-    private DataSource dataSource;
-
-    private static DbSetupTracker dbSetupTracker = new DbSetupTracker();
-
-    @Before
-    public void setup() {
-        Operation operation = Operations.sequenceOf(
+  @Before
+  public void setup() {
+    Operation operation = Operations.sequenceOf(
             Operations.deleteAllFrom("user"),
-                Operations.insertInto("user")
+            Operations.insertInto("user")
                     .columns("id", "name", "phone", "status")
                     .values(1, "test", "18812345671", 1)
                     .build()
-        );
+    );
 
-        DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
-        dbSetupTracker.launchIfNecessary(dbSetup);
-    }
+    DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
+    dbSetupTracker.launchIfNecessary(dbSetup);
+  }
 
-    @Test
-    public void testFindAll() {
-        List<User> users = userMapper.findAll();
-        Assert.assertEquals(users.size(), 1);
-        Assert.assertEquals(users.get(0).getName(), "test");
-    }
+  @Test
+  public void testFindAll() {
+    List<User> users = userMapper.findAll();
+    Assert.assertEquals(users.size(), 1);
+    Assert.assertEquals(users.get(0).getName(), "test");
+  }
 
-    @Test
-    public void testSelectByPhone() {
-        User user = userMapper.selectByPhone("18812345671");
-        Assert.assertEquals(user.getName(), "test");
-    }
+  @Test
+  public void testSelectByPhone() {
+    User user = userMapper.selectByPhone("18812345671");
+    Assert.assertEquals(user.getName(), "test");
+  }
 }

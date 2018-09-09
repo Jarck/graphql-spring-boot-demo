@@ -33,9 +33,9 @@
 
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
     <springProfile name="test,dev">
-        <logger name="hello" level="DEBUG" >
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="dailyRollingFileAppender" />
+        <logger name="hello" level="DEBUG">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="dailyRollingFileAppender"/>
         </logger>
         <logger name="org.springframework.boot" level="DEBUG"/>
 
@@ -47,9 +47,9 @@
 
     <!-- 生产环境. -->
     <springProfile name="prod">
-        <logger name="hello" level="ERROR" >
-            <appender-ref ref="CONSOLE" />
-            <appender-ref ref="dailyRollingFileAppender" />
+        <logger name="hello" level="ERROR">
+            <appender-ref ref="CONSOLE"/>
+            <appender-ref ref="dailyRollingFileAppender"/>
         </logger>
         <logger name="org.springframework.boot" level="ERROR"/>
 
