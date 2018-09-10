@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="hello.dao.UserRoleMapper">
-    <resultMap id="BaseResultMap" type="hello.entity.UserRole">
+<mapper namespace="com.hello.world.dao.UserRoleMapper">
+    <resultMap id="BaseResultMap" type="com.hello.world.entity.UserRole">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="role_id" jdbcType="BIGINT" property="roleId"/>
@@ -21,12 +21,12 @@
         delete from user_role
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="hello.entity.UserRole">
+    <insert id="insert" parameterType="com.hello.world.entity.UserRole">
       insert into user_role (id, user_id, role_id, created_at, updated_at)
       values (#{id,jdbcType=BIGINT}, #{userId,jdbcType=BIGINT}, #{roleId,jdbcType=BIGINT},
       #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="hello.entity.UserRole">
+    <insert id="insertSelective" parameterType="com.hello.world.entity.UserRole">
         insert into user_role
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -63,7 +63,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="hello.entity.UserRole">
+    <update id="updateByPrimaryKeySelective" parameterType="com.hello.world.entity.UserRole">
         update user_role
         <set>
             <if test="userId != null">
@@ -81,7 +81,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="hello.entity.UserRole">
+    <update id="updateByPrimaryKey" parameterType="com.hello.world.entity.UserRole">
         update user_role
         set user_id = #{userId,jdbcType=BIGINT},
           role_id = #{roleId,jdbcType=BIGINT},
