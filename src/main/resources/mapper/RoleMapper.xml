@@ -5,9 +5,9 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
-        <result column="remark" jdbcType="VARCHAR" property="remark"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, name, status, created_at, updated_at, remark

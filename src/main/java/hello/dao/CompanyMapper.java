@@ -29,11 +29,35 @@ public interface CompanyMapper {
 
   int updateByPrimaryKey(Company record);
 
+  /**
+   * 按公司名查询
+   *
+   * @param name
+   * @return
+   */
   List<Company> searchWithName(String name);
 
+  /**
+   * 按城市ID查询
+   *
+   * @param cityId
+   * @return
+   */
   List<Company> searchWithCityId(Long cityId);
 
+  /**
+   * 按条件查询
+   *
+   * @param searchCompanyDto
+   * @return
+   */
   List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
 
-  Integer createCompany(CreateCompanyDto createCompanyDto);
+  /**
+   * 创建公司
+   *
+   * @param createCompanyDto
+   * @return 影响的行数
+   */
+  Long createCompany(CreateCompanyDto createCompanyDto);
 }

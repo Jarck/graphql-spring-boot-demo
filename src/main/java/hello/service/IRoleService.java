@@ -48,5 +48,5 @@ public interface IRoleService {
    * @param createRoleDto
    * @return
    */
-  Integer createRole(CreateRoleDto createRoleDto);
+  Long createRole(CreateRoleDto createRoleDto);
 }

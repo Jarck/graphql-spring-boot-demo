@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 城市Query
- *
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/

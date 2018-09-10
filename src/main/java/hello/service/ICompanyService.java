@@ -50,5 +50,5 @@ public interface ICompanyService {
    * @param createCompanyDto
    * @return
    */
-  Integer createCompany(CreateCompanyDto createCompanyDto);
+  Long createCompany(CreateCompanyDto createCompanyDto);
 }

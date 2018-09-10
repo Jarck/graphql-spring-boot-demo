@@ -1,6 +1,7 @@
 package hello.dao;
 
 import hello.dto.condition.SearchCityDto;
+import hello.dto.create.CreateCityDto;
 import hello.entity.City;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -31,10 +32,10 @@ public interface CityMapper {
   /**
    * 创建城市
    *
-   * @param record 用户对象
+   * @param createCityDto
    * @return 影响的行数
    */
-  Integer insertCity(City record);
+  Long insertCity(CreateCityDto createCityDto);
 
   /**
    * 通过城市名查询

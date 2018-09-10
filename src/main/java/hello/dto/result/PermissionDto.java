@@ -20,6 +20,8 @@ public class PermissionDto extends Permission implements Serializable {
     this.setName(permission.getName());
     this.setPermission(permission.getPermission());
     this.setResourceType(permission.getResourceType());
-    this.setAvaliable(permission.getAvaliable());
+    this.setAvailable(permission.getAvailable());
+    this.setCreatedAt(permission.getCreatedAt());
+    this.setUpdatedAt(permission.getUpdatedAt());
   }
 }

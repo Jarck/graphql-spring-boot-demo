@@ -30,6 +30,12 @@ public interface UserRoleMapper {
 
   int updateByPrimaryKey(UserRole record);
 
+  /**
+   * 通过用户ID查询
+   *
+   * @param userId
+   * @return
+   */
   @Cacheable(key = "#p0")
   List<UserRole> searchWithUserId(Long userId);
 }

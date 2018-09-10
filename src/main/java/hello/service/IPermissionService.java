@@ -1,6 +1,6 @@
 package hello.service;
 
-import hello.dto.result.PermissionDto;
+import hello.dto.create.CreatePermissionDto;
 import hello.entity.Permission;
 
 import java.util.List;
@@ -16,7 +16,7 @@ public interface IPermissionService {
    * @param permissionId
    * @return
    */
-  PermissionDto searchWithId(Long permissionId);
+  Permission searchWithId(Long permissionId);
 
   /**
    * 通过权限名查询
@@ -41,4 +41,12 @@ public interface IPermissionService {
    * @return
    */
   List<Permission> searchWithUserId(Long userId);
+
+  /**
+   * 创建权限
+   *
+   * @param createPermissionDto
+   * @return
+   */
+  Long insertPermission(CreatePermissionDto createPermissionDto);
 }

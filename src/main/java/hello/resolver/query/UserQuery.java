@@ -10,8 +10,6 @@ import org.springframework.stereotype.Component;
 import java.util.List;
 
 /**
- * 用户Query
- *
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
@@ -19,16 +17,6 @@ import java.util.List;
 public class UserQuery implements GraphQLQueryResolver {
   @Autowired
   private IUserService userService;
-
-  /**
-   * 通过查询条件查询用户
-   *
-   * @param input
-   * @return
-   */
-  public List<User> searchUsers(SearchUserDto input) {
-    return userService.searchWithCondition(input);
-  }
 
   /**
    * 通过ID查询用户
@@ -48,5 +36,15 @@ public class UserQuery implements GraphQLQueryResolver {
    */
   public User searchUserWithPhone(String phone) {
     return userService.getUserByPhone(phone);
+  }
+
+  /**
+   * 通过查询条件查询用户
+   *
+   * @param input
+   * @return
+   */
+  public List<User> searchUsers(SearchUserDto input) {
+    return userService.searchWithCondition(input);
   }
 }

@@ -1,5 +1,6 @@
 package hello.dao;
 
+import hello.dto.create.CreatePermissionDto;
 import hello.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,9 +29,35 @@ public interface PermissionMapper {
 
   int updateByPrimaryKey(Permission record);
 
+  /**
+   * 创建权限
+   *
+   * @param createPermissionDto
+   * @return 影响的行数
+   */
+  Long insertPermission(CreatePermissionDto createPermissionDto);
+
+  /**
+   * 按权限名查询
+   *
+   * @param name
+   * @return
+   */
   List<Permission> searchWithName(String name);
 
+  /**
+   * 按角色ID查询
+   *
+   * @param roleId
+   * @return
+   */
   List<Permission> searchWithRoleId(@Param("roleId") Long roleId);
 
+  /**
+   * 按用户ID查询
+   *
+   * @param userId
+   * @return
+   */
   List<Permission> searchWithUserId(@Param("userId") Long userId);
 }

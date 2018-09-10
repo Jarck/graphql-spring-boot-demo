@@ -1,5 +1,5 @@
 type Company {
-    id: ID
+    id: ID!
     name: String
     shortName: String
     address: String
@@ -23,21 +23,21 @@ input createCompany {
 }
 
 extend type Query {
-    # 通过查询条件查询公司
-    searchCompanies(input: ConditionSearchCompany): [Company]
-
     # 通过ID查询公司
     searchCompanyWithId(id: Int!): Company
 
     # 通过城市ID查询公司
-    searchCompanyWithCityId(cityId: Int!): [Company]
+    searchCompanyWithCityId(cityId: Int): [Company]
 
     # 通过公司名查询
-    searchCompanyWithName(name: String!): [Company]
+    searchCompanyWithName(name: String): [Company]
+
+    # 通过查询条件查询公司
+    searchCompanies(input: ConditionSearchCompany): [Company]
 }
 
 extend type Mutation {
     # 创建公司
-    createCompany(company: createCompany): Int!
+    createCompany(company: createCompany): Company!
 }
 

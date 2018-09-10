@@ -2,6 +2,7 @@ package hello.config;
 
 import hello.auth.AuthRealm;
 import hello.auth.JWTFilter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
@@ -10,8 +11,6 @@ import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -26,10 +25,9 @@ import java.util.Map;
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
+@Slf4j
 @Configuration
 public class ShiroConfig {
-  private static final Logger LOGGER = LoggerFactory.getLogger(ShiroConfig.class);
-
   /**
    * 自定义Realm
    *
@@ -44,7 +42,7 @@ public class ShiroConfig {
 
   @Bean
   public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
-    LOGGER.info("======== Shiro config ==========");
+    log.info("======== Shiro config ==========");
 
     ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
     shiroFilterFactoryBean.setSecurityManager(securityManager);

@@ -1,8 +1,9 @@
 package hello.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
-import hello.dao.CompanyMapper;
 import hello.dto.create.CreateCompanyDto;
+import hello.entity.Company;
+import hello.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -13,11 +14,12 @@ import org.springframework.stereotype.Component;
 @Component
 public class CompanyMutation implements GraphQLMutationResolver {
   @Autowired
-  private CompanyMapper companyMapper;
+  private ICompanyService companyService;
 
-  public Integer createCompany(CreateCompanyDto createCompanyDto) {
-    Integer integer = companyMapper.createCompany(createCompanyDto);
+  public Company createCompany(CreateCompanyDto createCompanyDto) {
+    Long company_id = companyService.createCompany(createCompanyDto);
+    Company company = companyService.searchWithId(company_id);
 
-    return integer;
+    return company;
   }
 }

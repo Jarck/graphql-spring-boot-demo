@@ -17,7 +17,6 @@ import hello.entity.UserRole;
 import hello.exception.LoginFailedException;
 import hello.service.IUserService;
 import hello.util.SpringContextUtil;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -33,7 +32,6 @@ import java.util.concurrent.TimeUnit;
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
-@Slf4j
 @Service
 public class UserServiceImpl implements IUserService {
   @Value("${secret_key}")
@@ -124,31 +122,7 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   @Transactional
-  public String createUser(CreateUserDto createUserDto) {
-    try {
-      User user = generateUser(createUserDto);
-      userMapper.insertUser(user);
-    } catch (Exception e) {
-      log.error("Create user error", e);
-      return SystemConstant.RETURN_ERROR;
-    }
-
-    return SystemConstant.RETURN_SUCCESS;
-  }
-
-  /**
-   * 构建user
-   *
-   * @param createUserDto 构建参数
-   * @return user
-   */
-  private User generateUser(CreateUserDto createUserDto) {
-    User user = new User();
-    user.setName(createUserDto.getName());
-    user.setPhone(createUserDto.getPhone());
-    user.setCityId(createUserDto.getCityId());
-    user.setCompanyId(createUserDto.getCompanyId());
-
-    return user;
+  public Long createUser(CreateUserDto createUserDto) {
+    return userMapper.insertUser(createUserDto);
   }
 }

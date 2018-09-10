@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class createPermissionDto {
+public class CreatePermissionDto {
   String name;
   String permission;
   String resourceType;

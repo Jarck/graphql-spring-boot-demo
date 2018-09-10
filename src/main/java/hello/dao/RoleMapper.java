@@ -29,11 +29,29 @@ public interface RoleMapper {
 
   int updateByPrimaryKey(Role record);
 
-  Integer insertRole(CreateRoleDto createRoleDto);
-
   List<Role> findAll();
 
+  /**
+   * 创建角色
+   *
+   * @param createRoleDto
+   * @return 影响的行数
+   */
+  Long insertRole(CreateRoleDto createRoleDto);
+
+  /**
+   * 通过角色名查询
+   *
+   * @param name
+   * @return
+   */
   List<Role> searchWithName(String name);
 
+  /**
+   * 通过用户ID查询
+   *
+   * @param userId
+   * @return
+   */
   List<Role> searchWithUserId(@Param("userId") Long userId);
 }

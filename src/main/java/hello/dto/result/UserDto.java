@@ -17,11 +17,12 @@ import java.util.List;
  **/
 @Data
 public class UserDto extends User implements Serializable {
+  private String secretKey;
   private List<Role> roles = new ArrayList<>();
   private List<Permission> permissions = new ArrayList<>();
-  private String secretKey;
 
   public UserDto() {
+
   }
 
   public UserDto(User user) {

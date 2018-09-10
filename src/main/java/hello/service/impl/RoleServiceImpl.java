@@ -4,7 +4,6 @@ import hello.dao.RoleMapper;
 import hello.dto.create.CreateRoleDto;
 import hello.entity.Role;
 import hello.service.IRoleService;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +13,6 @@ import java.util.List;
  * @author jarck-lou
  * @date 2018/9/9 16:13
  **/
-@Slf4j
 @Service
 public class RoleServiceImpl implements IRoleService {
   @Autowired
@@ -27,7 +25,8 @@ public class RoleServiceImpl implements IRoleService {
 
   @Override
   public Role searchWithId(Long roleId) {
-    return roleMapper.selectByPrimaryKey(roleId);
+    Role role = roleMapper.selectByPrimaryKey(roleId);
+    return role;
   }
 
   @Override
@@ -41,7 +40,7 @@ public class RoleServiceImpl implements IRoleService {
   }
 
   @Override
-  public Integer createRole(CreateRoleDto createRoleDto) {
+  public Long createRole(CreateRoleDto createRoleDto) {
     return roleMapper.insertRole(createRoleDto);
   }
 }

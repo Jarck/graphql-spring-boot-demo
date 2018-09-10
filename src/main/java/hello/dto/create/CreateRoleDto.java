@@ -13,4 +13,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateRoleDto {
   String name;
+  String remark;
 }

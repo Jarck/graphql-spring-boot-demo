@@ -1,11 +1,12 @@
 type User {
-    id: ID
+    id: ID!
     name: String
     phone: String
     cityId: Long
     city: City
     companyId: Long
     company: Company
+    roles: [Role]
     status: Int
     createdAt: String
     updatedAt: String
@@ -29,17 +30,17 @@ input CreateUser {
 }
 
 type Query {
-    # 通过查询条件查询用户
-    searchUsers(input: ConditionSearchUser): [User]
-
     # 通过ID查询用户
-    searchUserWithId(id: Int!): User
+    searchUserWithId(id: Int): User
 
     # 通过手机号查询用户
     searchUserWithPhone(phone: String!): User
+
+    # 通过查询条件查询用户
+    searchUsers(input: ConditionSearchUser): [User]
 }
 
 type Mutation {
     # 创建用户
-    createUser(user: CreateUser!): String!
+    createUser(user: CreateUser!): User!
 }

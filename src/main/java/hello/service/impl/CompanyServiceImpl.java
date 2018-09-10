@@ -54,7 +54,7 @@ public class CompanyServiceImpl implements ICompanyService {
   }
 
   @Override
-  public Integer createCompany(CreateCompanyDto companyDto) {
+  public Long createCompany(CreateCompanyDto companyDto) {
     return companyMapper.createCompany(companyDto);
   }
 

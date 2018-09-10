@@ -68,5 +68,5 @@ public interface IUserService {
    * @param createUserDto
    * @return
    */
-  String createUser(CreateUserDto createUserDto);
+  Long createUser(CreateUserDto createUserDto);
 }

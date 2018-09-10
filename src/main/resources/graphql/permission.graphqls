@@ -1,0 +1,33 @@
+type Permission {
+    id: ID!
+    name: String
+    permission: String
+    resourceType: String
+    createdAt: String
+    updatedAt: String
+}
+
+input createPermission {
+    name: String!
+    permission: String!
+    resourceType: String!
+}
+
+extend type Query {
+    # 通过ID查询权限
+    searchPermissionWithId(id: Int): Permission
+
+    # 通过权限名查询
+    searchPermissionWithName(name: String): [Permission]
+
+    # 通过角色ID查询
+    searchPermissionWithRoleId(roleId: Int): [Permission]
+
+    # 通过用户ID查询
+    searchPermissionWithUserId(userId: Int): [Permission]
+}
+
+extend type Mutation {
+    # 创建权限
+    createPermission(permission: createPermission!): Permission!
+}

@@ -1,0 +1,29 @@
+type Role {
+    id: ID!
+    name: String
+    remark: String
+    permissions: [Permission]
+    createdAt: String
+    updatedAt: String
+}
+
+input createRoleInput {
+    name: String!
+    remark: String
+}
+
+extend type Query {
+    # 通过ID查询角色
+    searchRoleWithId(id: Int!): Role
+
+    # 通过角色名查询
+    searchRoleWithName(name: String): [Role]
+
+    # 通过用户ID查询
+    searchRoleWithUserId(userId: Int): [Role]
+}
+
+extend type Mutation {
+    # 新建角色
+    createRole(role: createRoleInput): Role!
+}

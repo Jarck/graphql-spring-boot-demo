@@ -20,5 +20,7 @@ public class CityDto extends City implements Serializable {
   public CityDto(City city) {
     this.setId(city.getId());
     this.setName(city.getName());
+    this.setCreatedAt(city.getCreatedAt());
+    this.setUpdatedAt(city.getUpdatedAt());
   }
 }

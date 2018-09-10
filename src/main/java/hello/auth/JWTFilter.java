@@ -1,9 +1,8 @@
 package hello.auth;
 
 import hello.constant.SystemConstant;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.web.filter.authc.BasicHttpAuthenticationFilter;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,9 +18,8 @@ import java.io.IOException;
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
+@Slf4j
 public class JWTFilter extends BasicHttpAuthenticationFilter {
-  private Logger logger = LoggerFactory.getLogger(this.getClass());
-
   /**
    * 判断用户是否可登录
    * 检测Header中是否包含token信息
@@ -116,7 +114,7 @@ public class JWTFilter extends BasicHttpAuthenticationFilter {
       HttpServletResponse httpServletResponse = (HttpServletResponse) response;
       httpServletResponse.sendRedirect("/401");
     } catch (IOException e) {
-      logger.error(e.getMessage());
+      log.error(e.getMessage());
     }
   }
 }

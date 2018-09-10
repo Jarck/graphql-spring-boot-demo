@@ -2,13 +2,12 @@ package hello.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import hello.dto.create.CreateCityDto;
+import hello.entity.City;
 import hello.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 城市Mutations
- *
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
@@ -23,7 +22,10 @@ public class CityMutation implements GraphQLMutationResolver {
    * @param input
    * @return
    */
-  public String createCity(CreateCityDto input) {
-    return cityService.createCity(input);
+  public City createCity(CreateCityDto input) {
+    Long city_id = cityService.createCity(input);
+    City city = cityService.searchWithId(city_id);
+
+    return city;
   }
 }

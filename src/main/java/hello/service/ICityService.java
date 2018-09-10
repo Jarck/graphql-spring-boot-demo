@@ -42,5 +42,5 @@ public interface ICityService {
    * @param createCityDto
    * @return
    */
-  String createCity(CreateCityDto createCityDto);
+  Long createCity(CreateCityDto createCityDto);
 }

@@ -15,7 +15,7 @@ public class Role {
   private Long id;
   private String name;
   private Integer status;
+  private String remark;
   private Date createdAt;
   private Date updatedAt;
-  private String remark;
 }

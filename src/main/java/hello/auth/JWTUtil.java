@@ -6,8 +6,7 @@ import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import hello.dto.result.UserDto;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
@@ -18,9 +17,8 @@ import java.util.Date;
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
+@Slf4j
 public class JWTUtil {
-  private static final Logger LOGGER = LoggerFactory.getLogger(JWTUtil.class);
-
   // 过期时间5min
   private static final long EXPIRE_TIME = 5 * 60 * 1000;
 
@@ -47,7 +45,7 @@ public class JWTUtil {
 
       return true;
     } catch (Exception exception) {
-      LOGGER.error("校验token失败", exception);
+      log.error("校验token失败", exception);
       return false;
     }
   }

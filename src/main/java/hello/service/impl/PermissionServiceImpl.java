@@ -1,6 +1,7 @@
 package hello.service.impl;
 
 import hello.dao.PermissionMapper;
+import hello.dto.create.CreatePermissionDto;
 import hello.dto.result.PermissionDto;
 import hello.entity.Permission;
 import hello.service.IPermissionService;
@@ -49,5 +50,10 @@ public class PermissionServiceImpl implements IPermissionService {
     List<Permission> permissionList = permissionMapper.searchWithUserId(userId);
 
     return permissionList;
+  }
+
+  @Override
+  public Long insertPermission(CreatePermissionDto createPermissionDto) {
+    return permissionMapper.insertPermission(createPermissionDto);
   }
 }

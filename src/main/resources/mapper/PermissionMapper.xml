@@ -5,7 +5,7 @@
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
-        <result column="resource_type" jdbcType="VARCHAR" property="resource_type"/>
+        <result column="resource_type" jdbcType="VARCHAR" property="resourceType"/>
         <result column="available" jdbcType="INTEGER" property="available"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
@@ -27,8 +27,8 @@
         insert into permission (id, name, permission,
           resource_type, available, created_at,
           updated_at)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR},
-          #{method,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
+        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR},
+          #{available,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
           #{updatedAt,jdbcType=TIMESTAMP})
     </insert>
     <insert id="insertSelective" parameterType="hello.entity.Permission">
@@ -66,8 +66,8 @@
             <if test="permission != null">
                 #{permission,jdbcType=VARCHAR},
             </if>
-            <if test="resource_type != null">
-                #{resource_type,jdbcType=VARCHAR},
+            <if test="resourceType != null">
+                #{resourceType,jdbcType=VARCHAR},
             </if>
             <if test="available != null">
                 #{available,jdbcType=INTEGER},
@@ -89,8 +89,8 @@
             <if test="permission != null">
                 permission = #{permission,jdbcType=VARCHAR},
             </if>
-            <if test="resource_type != null">
-                resource_type = #{resource_type,jdbcType=VARCHAR},
+            <if test="resourceType != null">
+                resource_type = #{resourceType,jdbcType=VARCHAR},
             </if>
             <if test="available != null">
                 available = #{available,jdbcType=INTEGER},
@@ -108,13 +108,17 @@
         update permission
         set name = #{name,jdbcType=VARCHAR},
           permission = #{permission,jdbcType=VARCHAR},
-          resource_type = #{resource_type,jdbcType=VARCHAR},
+          resource_type = #{resourceType,jdbcType=VARCHAR},
           available = #{available,jdbcType=VARCHAR},
           created_at = #{createdAt,jdbcType=TIMESTAMP},
           updated_at = #{updatedAt,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}
       </update>
 
+    <insert id="insertPermission" useGeneratedKeys="true" keyProperty="id">
+        insert into permission (name, permission, resource_type)
+        values (#{name}, #{permission}, #{resourceType})
+    </insert>
     <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

@@ -1,6 +1,7 @@
 package hello.dao;
 
 import hello.dto.condition.SearchUserDto;
+import hello.dto.create.CreateUserDto;
 import hello.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -37,10 +38,10 @@ public interface UserMapper {
   /**
    * 创建用户
    *
-   * @param record 用户对象
+   * @param createUserDto
    * @return 影响的行数
    */
-  Integer insertUser(User record);
+  Long insertUser(CreateUserDto createUserDto);
 
   /**
    * 按条件查询

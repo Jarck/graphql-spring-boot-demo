@@ -16,7 +16,7 @@ public class Permission {
   private String name;
   private String permission;
   private String resourceType;
-  private String avaliable;
+  private String available;
   private Date createdAt;
   private Date updatedAt;
 }
