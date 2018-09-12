@@ -6,7 +6,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
         <result column="resource_type" jdbcType="VARCHAR" property="resourceType"/>
-        <result column="available" property="available"/>
+        <result column="available" javaType="com.hello.world.enums.PermissionAvailableEnum" property="available"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>

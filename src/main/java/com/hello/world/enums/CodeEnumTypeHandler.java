@@ -13,7 +13,7 @@ import java.sql.SQLException;
  * @author jarck-lou
  * @date 2018/9/11 14:04
  **/
-@MappedTypes({UserStatusEnum.class, CompanyStatusEnum.class, PermissionAvailableEnum.class})
+@MappedTypes({UserStatusEnum.class, RoleStatusEnum.class, CompanyStatusEnum.class, PermissionAvailableEnum.class})
 public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeHandler<BaseEnum> {
   private Class<E> type;
   private E[] enums;

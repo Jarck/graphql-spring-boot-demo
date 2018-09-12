@@ -4,7 +4,7 @@
     <resultMap id="BaseResultMap" type="com.hello.world.entity.Role">
         <id column="id" jdbcType="BIGINT" property="id"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" javaType="com.hello.world.enums.RoleStatusEnum" property="status"/>
         <result column="remark" jdbcType="VARCHAR" property="remark"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
@@ -23,13 +23,19 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.hello.world.entity.Role">
-        insert into role (id, name, status,
-          created_at, updated_at, remark
+        insert into role (id, name, status, created_at, updated_at, remark
           )
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
-          #{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}
+        values (#{id}, #{name}, #{status}, #{createdAt}, #{updatedAt}, #{remark}
           )
     </insert>
+    <!--<insert id="insert" parameterType="com.hello.world.entity.Role">-->
+        <!--insert into role (id, name, status,-->
+          <!--created_at, updated_at, remark-->
+          <!--)-->
+        <!--values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},-->
+          <!--#{createdAt,jdbcType=TIMESTAMP}, #{updatedAt,jdbcType=TIMESTAMP}, #{remark,jdbcType=VARCHAR}-->
+          <!--)-->
+    <!--</insert>-->
     <insert id="insertSelective" parameterType="com.hello.world.entity.Role">
         insert into role
         <trim prefix="(" suffix=")" suffixOverrides=",">

@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.hello.world.enums.RoleStatusEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -14,7 +15,7 @@ import java.util.Date;
 public class Role {
   private Long id;
   private String name;
-  private Integer status;
+  private RoleStatusEnum status;
   private String remark;
   private Date createdAt;
   private Date updatedAt;

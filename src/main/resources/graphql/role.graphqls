@@ -3,8 +3,17 @@ type Role {
     name: String
     remark: String
     permissions: [Permission]
+    status: RoleStatus
     createdAt: String
     updatedAt: String
+}
+
+# 角色状态
+enum RoleStatus {
+    # 无效
+    ARCHIVED
+    # 有效
+    ACTIVE
 }
 
 input createRoleInput {
