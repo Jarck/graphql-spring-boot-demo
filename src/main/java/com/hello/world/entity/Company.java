@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.hello.world.enums.CompanyStatusEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -19,7 +20,7 @@ public class Company {
   private String linkName;
   private String phone;
   private Long cityId;
-  private Integer status;
+  private CompanyStatusEnum status;
   private Date createdAt;
   private Date updatedAt;
 }

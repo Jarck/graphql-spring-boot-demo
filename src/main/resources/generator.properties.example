@@ -1,0 +1,5 @@
+# Mybaits Generator configuration
+mybatis.generator.jdbcDriver=com.mysql.jdbc.Driver
+mybatis.generator.jdbcURL=jdbc:mysql://127.0.0.1:3306/spring_boot_demo
+mybatis.generator.jdbcUserId=user
+mybatis.generator.jdbcPassword=password

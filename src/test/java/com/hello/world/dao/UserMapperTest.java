@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.entity.User;
+import com.hello.world.enums.UserStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -60,5 +61,18 @@ public class UserMapperTest {
   public void testSelectByPhone() {
     User user = userMapper.selectByPhone("18812345671");
     Assert.assertEquals(user.getName(), "test");
+  }
+
+  @Test
+  public void testInsert() {
+    User user = new User();
+    user.setName("test_enum");
+    user.setPhone("12345678901");
+    user.setStatus(UserStatusEnum.ARCHIVED);
+    int i = userMapper.insert(user);
+
+    User user_insert = userMapper.selectByPhone("12345678901");
+    Assert.assertEquals(user.getPhone(), user_insert.getPhone());
+    Assert.assertEquals(user_insert.getStatus(), UserStatusEnum.ARCHIVED);
   }
 }

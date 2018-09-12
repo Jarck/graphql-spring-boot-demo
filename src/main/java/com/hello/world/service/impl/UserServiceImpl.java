@@ -115,9 +115,7 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public List<User> searchWithCondition(SearchUserDto searchUserDto) {
-    List<User> userList = userMapper.searchCondition(searchUserDto);
-
-    return userList;
+    return userMapper.searchCondition(searchUserDto);
   }
 
   @Override

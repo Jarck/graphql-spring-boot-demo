@@ -1,9 +1,9 @@
 package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.hello.world.service.IUserService;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.entity.User;
+import com.hello.world.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

@@ -16,15 +16,17 @@ public class CompanyDto extends Company implements Serializable {
   }
 
   public CompanyDto(Company company) {
-    this.setId(company.getId());
-    this.setName(company.getName());
-    this.setShortName(company.getShortName());
-    this.setAddress(company.getAddress());
-    this.setLinkName(company.getLinkName());
-    this.setPhone(company.getPhone());
-    this.setCityId(company.getCityId());
-    this.setStatus(company.getStatus());
-    this.setCreatedAt(company.getCreatedAt());
-    this.setUpdatedAt(company.getUpdatedAt());
+    if (company != null) {
+      this.setId(company.getId());
+      this.setName(company.getName());
+      this.setShortName(company.getShortName());
+      this.setAddress(company.getAddress());
+      this.setLinkName(company.getLinkName());
+      this.setPhone(company.getPhone());
+      this.setCityId(company.getCityId());
+      this.setStatus(company.getStatus());
+      this.setCreatedAt(company.getCreatedAt());
+      this.setUpdatedAt(company.getUpdatedAt());
+    }
   }
 }

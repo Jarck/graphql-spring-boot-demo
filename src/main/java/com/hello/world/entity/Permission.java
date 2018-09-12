@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.hello.world.enums.PermissionAvailableEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -16,7 +17,7 @@ public class Permission {
   private String name;
   private String permission;
   private String resourceType;
-  private String available;
+  private PermissionAvailableEnum available;
   private Date createdAt;
   private Date updatedAt;
 }

@@ -7,9 +7,17 @@ type User {
     companyId: Long
     company: Company
     roles: [Role]
-    status: Int
+    status: UserStatus
     createdAt: String
     updatedAt: String
+}
+
+# 用户状态
+enum UserStatus {
+    # 无效
+    ARCHIVED
+    # 有效
+    ACTIVE
 }
 
 input ConditionSearchUser {

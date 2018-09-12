@@ -23,11 +23,13 @@ public class RoleDto extends Role implements Serializable {
   }
 
   public RoleDto(Role role) {
-    this.setId(role.getId());
-    this.setName(role.getName());
-    this.setStatus(role.getStatus());
-    this.setRemark(role.getRemark());
-    this.setCreatedAt(role.getCreatedAt());
-    this.setUpdatedAt(role.getUpdatedAt());
+    if (role != null) {
+      this.setId(role.getId());
+      this.setName(role.getName());
+      this.setStatus(role.getStatus());
+      this.setRemark(role.getRemark());
+      this.setCreatedAt(role.getCreatedAt());
+      this.setUpdatedAt(role.getUpdatedAt());
+    }
   }
 }

@@ -8,7 +8,9 @@ type Role {
 }
 
 input createRoleInput {
+    # 角色名(仅英文)
     name: String!
+    # 备注
     remark: String
 }
 

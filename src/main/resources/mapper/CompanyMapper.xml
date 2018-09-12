@@ -9,13 +9,13 @@
         <result column="link_name" jdbcType="VARCHAR" property="linkName"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="city_id" jdbcType="INTEGER" property="cityId"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" javaType="com.hello.world.enums.CompanyStatusEnum" property="status"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
     <sql id="Base_Column_List">
         id, name, short_name, address, link_name, phone, city_id, status, created_at, updated_at
-      </sql>
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
@@ -159,11 +159,13 @@
     <select id="searchWithCityId" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
+        from company
         where city_id = #{cityId}
     </select>
-    <select id="searchCondition" parameterType="com.hello.world.dto.condition.SearchCompanyDto">
+    <select id="searchCondition" parameterType="com.hello.world.dto.condition.SearchCompanyDto" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
+        from company
         <where>
             <if test="name != null and name !=''">
                 name like concat(#{name}, "%")

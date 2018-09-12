@@ -6,7 +6,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="city_id" jdbcType="BIGINT" property="cityId"/>
-        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="status" javaType="com.hello.world.enums.UserStatusEnum" property="status"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
         <result column="company_id" jdbcType="INTEGER" property="companyId"/>
@@ -28,13 +28,17 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.hello.world.entity.User">
-        insert into user (id, name, phone,
-          city_id, status, created_at,
-          updated_at, company_id)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-          #{cityId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
-          #{updatedAt,jdbcType=TIMESTAMP}, #{companyId,jdbcType=INTEGER})
+        insert into user (id, name, phone, status, city_id, company_id, created_at, updated_at)
+        values (#{id}, #{name}, #{phone}, #{status}, #{cityId}, #{companyId}, #{createdAt}, #{updatedAt})
     </insert>
+    <!--<insert id="insert" parameterType="com.hello.world.entity.User">-->
+        <!--insert into user (id, name, phone,-->
+          <!--city_id, status, created_at,-->
+          <!--updated_at, company_id)-->
+        <!--values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},-->
+          <!--#{cityId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},-->
+          <!--#{updatedAt,jdbcType=TIMESTAMP}, #{companyId,jdbcType=INTEGER})-->
+    <!--</insert>-->
     <insert id="insertSelective" parameterType="com.hello.world.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -140,7 +144,7 @@
         from user
         where phone = #{phone}
     </select>
-    <select id="searchCondition" resultMap="userDtoMap">
+    <select id="searchCondition" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from user
@@ -170,6 +174,6 @@
     </select>
     <insert id="insertUser" parameterType="com.hello.world.entity.User" useGeneratedKeys="true" keyProperty="id">
         insert into user (name, phone, city_id, company_id)
-        values (#{name}, #{phone}, #{city_id}, #{company_id})
+        values (#{name}, #{phone}, #{cityId}, #{companyId})
     </insert>
 </mapper>

@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.hello.world.enums.UserStatusEnum;
 import lombok.Data;
 
 import java.util.Date;
@@ -17,7 +18,7 @@ public class User {
   private String phone;
   private Long cityId;
   private Long companyId;
-  private Integer status;
+  private UserStatusEnum status;
   private Date createdAt;
   private Date updatedAt;
 }

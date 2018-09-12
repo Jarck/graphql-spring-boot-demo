@@ -6,7 +6,7 @@
         <result column="name" jdbcType="VARCHAR" property="name"/>
         <result column="permission" jdbcType="VARCHAR" property="permission"/>
         <result column="resource_type" jdbcType="VARCHAR" property="resourceType"/>
-        <result column="available" jdbcType="INTEGER" property="available"/>
+        <result column="available" property="available"/>
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
@@ -24,13 +24,19 @@
         where id = #{id,jdbcType=BIGINT}
     </delete>
     <insert id="insert" parameterType="com.hello.world.entity.Permission">
-        insert into permission (id, name, permission,
-          resource_type, available, created_at,
+        insert into permission (id, name, permission, resource_type, available, created_at,
           updated_at)
-        values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR},
-          #{available,jdbcType=VARCHAR}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},
-          #{updatedAt,jdbcType=TIMESTAMP})
+        values (#{id}, #{name}, #{resourceType}, #{available}, #{remark}, #{createdAt},
+          #{updatedAt})
     </insert>
+    <!--<insert id="insert" parameterType="com.hello.world.entity.Permission">-->
+        <!--insert into permission (id, name, permission,-->
+          <!--resource_type, available, created_at,-->
+          <!--updated_at)-->
+        <!--values (#{id,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR},-->
+          <!--#{available,jdbcType=INTEGER}, #{remark,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},-->
+          <!--#{updatedAt,jdbcType=TIMESTAMP})-->
+    <!--</insert>-->
     <insert id="insertSelective" parameterType="com.hello.world.entity.Permission">
         insert into permission
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -109,7 +115,7 @@
         set name = #{name,jdbcType=VARCHAR},
           permission = #{permission,jdbcType=VARCHAR},
           resource_type = #{resourceType,jdbcType=VARCHAR},
-          available = #{available,jdbcType=VARCHAR},
+          available = #{available,jdbcType=INTEGER},
           created_at = #{createdAt,jdbcType=TIMESTAMP},
           updated_at = #{updatedAt,jdbcType=TIMESTAMP}
         where id = #{id,jdbcType=BIGINT}

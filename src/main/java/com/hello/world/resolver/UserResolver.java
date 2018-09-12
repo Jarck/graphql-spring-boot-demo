@@ -1,13 +1,13 @@
 package com.hello.world.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.hello.world.service.IRoleService;
 import com.hello.world.entity.City;
 import com.hello.world.entity.Company;
 import com.hello.world.entity.Role;
 import com.hello.world.entity.User;
 import com.hello.world.service.ICityService;
 import com.hello.world.service.ICompanyService;
+import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

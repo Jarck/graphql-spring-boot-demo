@@ -1,15 +1,29 @@
 type Company {
     id: ID!
+    # 公司名
     name: String
+    # 公司简称
     shortName: String
+    # 公司地址
     address: String
+    # 联系人
     linkName: String
+    # 联系人电话
     phone: String
     cityId: Long
     city: City
-    status: Int
+    # 公司状态
+    status: CompanyStatus
     createdAt: String
     updatedAt: String
+}
+
+# 公司状态
+enum CompanyStatus {
+    # 无效
+    ARCHIVED
+    # 有效
+    ACTIVE
 }
 
 input ConditionSearchCompany {

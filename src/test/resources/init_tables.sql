@@ -41,19 +41,25 @@ VALUES
 
 CREATE TABLE `user_role` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `role_id` INT(11) NOT NULL,
   `user_id` INT(11) NOT NULL,
+  `role_id` INT(11) NOT NULL,
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '编辑时间',
   PRIMARY KEY (`id`)
 );
+
+INSERT INTO `user_role` (`id`, `user_id`, `role_id`)
+VALUES
+  (1, 1, 1),
+  (2, 1, 2),
+  (3, 2, 1);
 
 CREATE TABLE `permission` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(50) NOT NULL COMMENT '权限名称',
   `permission` VARCHAR(200) NOT NULL COMMENT '权限名称 例如: user:read' UNIQUE,
   `resource_type` VARCHAR(20) NOT NULL COMMENT '权限类别',
-  `available` INT(11) DEFAULT NULL,
+  `available` INT(11) DEFAULT 1 COMMENT '状态 1: 可用; 0: 不可用',
   `created_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '编辑时间',
   PRIMARY KEY (`id`)
@@ -73,6 +79,13 @@ CREATE TABLE `role_permission` (
   `updated_at` DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT '编辑时间',
   PRIMARY KEY (`id`)
 );
+
+INSERT INTO `role_permission` (`id`, `role_id`, `permission_id`)
+VALUES
+  (1, 1, 1),
+  (2, 1, 2),
+  (3, 1, 3),
+  (4, 2, 1);
 
 CREATE TABLE `city` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,

@@ -1,10 +1,23 @@
 type Permission {
     id: ID!
+    # 权限名
     name: String
+    # 权限名称, 例如: user:read
     permission: String
+    # 权限类别
     resourceType: String
+    # 是否可用
+    available: PermissionAvailable
     createdAt: String
     updatedAt: String
+}
+
+# 权限状态
+enum PermissionAvailable {
+    # 可用
+    AVAILABLE
+    # 禁用
+    UNAVAILABLE
 }
 
 input createPermission {
