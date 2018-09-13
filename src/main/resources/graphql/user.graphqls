@@ -1,3 +1,5 @@
+scalar LocalDateTime
+
 type User {
     id: ID!
     name: String
@@ -8,8 +10,8 @@ type User {
     company: Company
     roles: [Role]
     status: UserStatus
-    createdAt: String
-    updatedAt: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
 }
 
 # 用户状态

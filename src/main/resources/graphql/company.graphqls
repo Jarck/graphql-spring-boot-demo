@@ -14,8 +14,8 @@ type Company {
     city: City
     # 公司状态
     status: CompanyStatus
-    createdAt: String
-    updatedAt: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
 }
 
 # 公司状态

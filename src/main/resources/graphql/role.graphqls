@@ -4,8 +4,8 @@ type Role {
     remark: String
     permissions: [Permission]
     status: RoleStatus
-    createdAt: String
-    updatedAt: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
 }
 
 # 角色状态

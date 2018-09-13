@@ -8,8 +8,8 @@ type Permission {
     resourceType: String
     # 是否可用
     available: PermissionAvailable
-    createdAt: String
-    updatedAt: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
 }
 
 # 权限状态

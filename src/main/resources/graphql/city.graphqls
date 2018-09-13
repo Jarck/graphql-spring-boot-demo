@@ -1,8 +1,8 @@
 type City {
     id: ID!
     name: String
-    createdAt: String
-    updatedAt: String
+    createdAt: LocalDateTime
+    updatedAt: LocalDateTime
 }
 
 input ConditionSearchCity {
