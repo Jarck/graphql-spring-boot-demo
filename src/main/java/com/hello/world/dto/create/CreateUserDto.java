@@ -14,6 +14,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateUserDto {
+  private Long id;
   private String name;
   private String phone;
   private Long cityId;

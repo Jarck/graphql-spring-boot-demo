@@ -128,11 +128,11 @@
         select
         <include refid="Base_Column_List"/>
         from role
-        where name like concat(#{name}, "%")
+        where name like concat(#{name}, '%')
     </select>
 
     <insert id="insertRole" useGeneratedKeys="true" keyProperty="id">
-        insert into role (name)
-        values (#{name})
+        insert into role (name, remark)
+        values (#{name}, #{remark})
     </insert>
 </mapper>

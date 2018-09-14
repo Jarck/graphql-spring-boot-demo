@@ -128,7 +128,8 @@
     <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        where name like concat(#{name}, "%")
+        from permission
+        where name like concat(#{name}, '%')
     </select>
     <select id="searchWithRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select permission.*

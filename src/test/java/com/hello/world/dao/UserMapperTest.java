@@ -1,5 +1,6 @@
 package com.hello.world.dao;
 
+import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.entity.User;
 import com.hello.world.enums.UserStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
@@ -61,6 +62,19 @@ public class UserMapperTest {
   public void testSelectByPhone() {
     User user = userMapper.selectByPhone("18812345671");
     Assert.assertEquals(user.getName(), "test");
+  }
+
+  @Test
+  public void testInsertUser() {
+    CreateUserDto createUserDto = new CreateUserDto();
+    createUserDto.setName("test2");
+    createUserDto.setPhone("12345678902");
+    Long i = userMapper.insertUser(createUserDto);
+
+    User user = userMapper.selectByPhone("12345678902");
+    Assert.assertEquals(user.getId(), createUserDto.getId());
+    Assert.assertEquals(user.getName(), createUserDto.getName());
+    Assert.assertEquals(user.getPhone(), createUserDto.getPhone());
   }
 
   @Test

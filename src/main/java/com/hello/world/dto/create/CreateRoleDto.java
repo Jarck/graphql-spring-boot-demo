@@ -12,6 +12,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateRoleDto {
-  String name;
-  String remark;
+  private Long id;
+  private String name;
+  private String remark;
 }

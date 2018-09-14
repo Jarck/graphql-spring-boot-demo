@@ -116,5 +116,5 @@ CREATE TABLE `company` (
 
 INSERT INTO `company` (`id`, `name`, `short_name`, `city_id`)
 VALUES
-  (1, '杭州小车东有限公司', '杭州小车东', 1),
-  (2, '苏州小车东有限公司', '苏州小车东', 2);
+  (1, '杭州xxx有限公司', '杭州xxx', 1),
+  (2, '苏州xxx有限公司', '苏州xxx', 2);

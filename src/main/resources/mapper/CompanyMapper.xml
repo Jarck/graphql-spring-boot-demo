@@ -150,13 +150,13 @@
         where id = #{id,jdbcType=INTEGER}
       </update>
     
-    <select id="searchWithName" parameterType="java.lang.String">
+    <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
         select 
         <include refid="Base_Column_List"/>
         from company
-        where name like concat(#{name}, "%")
+        where name like concat(#{name}, '%')
     </select>
-    <select id="searchWithCityId" parameterType="java.lang.Integer">
+    <select id="searchWithCityId" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from company
@@ -168,7 +168,7 @@
         from company
         <where>
             <if test="name != null and name !=''">
-                name like concat(#{name}, "%")
+                name like concat(#{name}, '%')
             </if>
             <if test="cityId != null and cityId !=''">
                 and city_id = #{cityId}

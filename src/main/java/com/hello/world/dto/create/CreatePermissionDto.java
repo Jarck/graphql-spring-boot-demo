@@ -12,7 +12,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatePermissionDto {
-  String name;
-  String permission;
-  String resourceType;
+  private Long id;
+  private String name;
+  private String permission;
+  private String resourceType;
 }

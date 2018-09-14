@@ -1,5 +1,6 @@
 package com.hello.world.dao;
 
+import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.entity.Role;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
@@ -59,6 +60,30 @@ public class RoleMapperTest {
 
     DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
     dbSetupTracker.launchIfNecessary(dbSetup);
+  }
+
+  @Test
+  public void testInsertRole() {
+    CreateRoleDto createRoleDto = new CreateRoleDto();
+    createRoleDto.setName("test2");
+    createRoleDto.setRemark("测试2");
+    Long i = roleMapper.insertRole(createRoleDto);
+
+    List<Role> roleList = roleMapper.searchWithName("test2");
+    Assert.assertEquals(roleList.size(), 1);
+    Assert.assertEquals(roleList.get(0).getId(), createRoleDto.getId());
+    Assert.assertEquals(roleList.get(0).getName(), createRoleDto.getName());
+    Assert.assertEquals(roleList.get(0).getRemark(), createRoleDto.getRemark());
+  }
+
+  @Test
+  public void testSearchWithName() {
+    List<Role> roleList = roleMapper.searchWithName("admin");
+
+    Assert.assertEquals(roleList.size(), 1);
+    Assert.assertEquals(roleList.get(0).getId(), new Long(1));
+    Assert.assertEquals(roleList.get(0).getName(), "admin");
+    Assert.assertEquals(roleList.get(0).getRemark(), "系统管理员");
   }
 
   @Test

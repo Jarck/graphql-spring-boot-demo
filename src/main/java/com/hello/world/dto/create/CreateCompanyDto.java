@@ -12,10 +12,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreateCompanyDto {
+  private Long id;
   private String name;
   private String shortName;
   private String address;
   private String linkName;
   private String phone;
-  private Integer cityId;
+  private Long cityId;
 }
