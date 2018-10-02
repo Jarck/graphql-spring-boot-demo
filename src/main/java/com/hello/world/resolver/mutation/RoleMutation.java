@@ -19,12 +19,12 @@ public class RoleMutation implements GraphQLMutationResolver {
   /**
    * 新建角色
    *
-   * @param createRoleDto
-   * @return
+   * @param createRoleDto createRoleDto
+   * @return 角色
    */
   public Role createRole(CreateRoleDto createRoleDto) {
-    Long role_id = roleService.createRole(createRoleDto);
-    Role role = roleService.searchWithId(role_id);
+    Long roleId = roleService.createRole(createRoleDto);
+    Role role = roleService.searchWithId(roleId);
 
     return role;
   }

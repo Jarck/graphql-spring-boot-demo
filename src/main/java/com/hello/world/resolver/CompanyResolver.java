@@ -16,6 +16,12 @@ public class CompanyResolver implements GraphQLResolver<Company> {
   @Autowired
   private CityMapper cityMapper;
 
+  /**
+   * 按公司查找城市
+   *
+   * @param company 公司
+   * @return 城市
+   */
   public City city(Company company) {
     return cityMapper.selectByPrimaryKey(company.getCityId());
   }

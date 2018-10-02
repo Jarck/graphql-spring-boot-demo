@@ -18,6 +18,12 @@ public class RoleResolver implements GraphQLResolver<Role> {
   @Autowired
   private IPermissionService permissionService;
 
+  /**
+   * 按角色查询权限
+   *
+   * @param role 角色
+   * @return 权限列表
+   */
   public List<Permission> permissions(Role role) {
     return permissionService.searchWithRoleId(role.getId());
   }

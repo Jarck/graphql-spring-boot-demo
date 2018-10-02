@@ -20,8 +20,8 @@ public class RoleQuery implements GraphQLQueryResolver {
   /**
    * 通过ID查询角色
    *
-   * @param roleId
-   * @return
+   * @param roleId 角色ID
+   * @return 角色
    */
   public Role searchRoleWithId(Long roleId) {
     return roleService.searchWithId(roleId);
@@ -30,8 +30,8 @@ public class RoleQuery implements GraphQLQueryResolver {
   /**
    * 通过角色名查询
    *
-   * @param name
-   * @return
+   * @param name 角色名
+   * @return 角色列表
    */
   public List<Role> searchRoleWithName(String name) {
     return roleService.searchWithName(name);
@@ -40,8 +40,8 @@ public class RoleQuery implements GraphQLQueryResolver {
   /**
    * 通过用户ID查询
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 角色列表
    */
   public List<Role> searchRoleWithUserId(Long userId) {
     return roleService.searchWithUserId(userId);

@@ -1,7 +1,11 @@
 package com.hello.world.resolver.scalar;
 
 import graphql.language.StringValue;
-import graphql.schema.*;
+import graphql.schema.GraphQLScalarType;
+import graphql.schema.Coercing;
+import graphql.schema.CoercingSerializeException;
+import graphql.schema.CoercingParseValueException;
+import graphql.schema.CoercingParseLiteralException;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
@@ -21,10 +25,10 @@ public class LocalDateTimeScalar extends GraphQLScalarType {
       public String serialize(Object input) throws CoercingSerializeException {
         if (input instanceof Date) {
           ZoneId zoneId = ZoneId.of(ZoneId.SHORT_IDS.get("CTT"));
-          LocalDateTime localDateTime = ((Date)input).toInstant().atZone(zoneId).toLocalDateTime();
+          LocalDateTime localDateTime = ((Date) input).toInstant().atZone(zoneId).toLocalDateTime();
           return localDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         } else if (input instanceof LocalDateTime) {
-          return ((LocalDateTime)input).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+          return ((LocalDateTime) input).format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         } else {
           LocalDateTime localDateTime = convertImpl(input);
 
@@ -61,7 +65,7 @@ public class LocalDateTimeScalar extends GraphQLScalarType {
       private LocalDateTime convertImpl(Object input) {
         if (input instanceof String) {
           DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-          LocalDateTime localDateTime = LocalDateTime.parse((String)input, formatter);
+          LocalDateTime localDateTime = LocalDateTime.parse((String) input, formatter);
 
           return localDateTime;
         }

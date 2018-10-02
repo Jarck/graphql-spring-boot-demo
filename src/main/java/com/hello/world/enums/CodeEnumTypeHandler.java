@@ -10,9 +10,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
+ * @param <E>
  * @author jarck-lou
  * @date 2018/9/11 14:04
- **/
+ */
 @MappedTypes({UserStatusEnum.class, RoleStatusEnum.class, CompanyStatusEnum.class, PermissionAvailableEnum.class})
 public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeHandler<BaseEnum> {
   private Class<E> type;
@@ -27,7 +28,8 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
   }
 
   @Override
-  public void setNonNullParameter(PreparedStatement ps, int i, BaseEnum parameter, JdbcType jdbcType) throws SQLException {
+  public void setNonNullParameter(PreparedStatement ps, int i, BaseEnum parameter, JdbcType jdbcType)
+          throws SQLException {
     ps.setInt(i, parameter.getCode());
   }
 
@@ -64,6 +66,12 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
     }
   }
 
+  /**
+   * 根据code查找枚举
+   *
+   * @param code code
+   * @return enum
+   */
   private E codeOf(int code) {
     for (E e : type.getEnumConstants()) {
       if (e.getCode() == code) {

@@ -27,8 +27,8 @@ public enum UserStatusEnum implements BaseEnum {
   /**
    * 通过状态获取状态编码
    *
-   * @param status
-   * @return
+   * @param status 状态
+   * @return 编码
    */
   public static int statusOf(String status) {
     switch (status) {
@@ -44,8 +44,8 @@ public enum UserStatusEnum implements BaseEnum {
   /**
    * 通过状态编码获取状态说明
    *
-   * @param code
-   * @return
+   * @param code 编码
+   * @return 状态说明
    */
   public static String codeOf(int code) {
     switch (code) {

@@ -18,27 +18,74 @@ import java.util.List;
 @Mapper
 @Repository
 public interface UserMapper {
+  /**
+   * 按ID删除
+   *
+   * @param id ID
+   * @return 影响行数
+   */
   int deleteByPrimaryKey(Long id);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insert(User record);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insertSelective(User record);
 
+  /**
+   * 按ID查询
+   *
+   * @param id ID
+   * @return 用户
+   */
   User selectByPrimaryKey(Long id);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKeySelective(User record);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKey(User record);
 
+  /**
+   * 所有用户
+   *
+   * @return 用户列表
+   */
   List<User> findAll();
 
+  /**
+   * 按手机号查询用户
+   *
+   * @param phone phone
+   * @return 用户
+   */
   @Cacheable("users")
   User selectByPhone(String phone);
 
   /**
    * 创建用户
    *
-   * @param createUserDto
+   * @param createUserDto createUserDto
    * @return 影响的行数
    */
   Long insertUser(CreateUserDto createUserDto);
@@ -46,8 +93,8 @@ public interface UserMapper {
   /**
    * 按条件查询
    *
-   * @param searchUserDto
-   * @return
+   * @param searchUserDto searchUserDto
+   * @return 用户列表
    */
   List<User> searchCondition(SearchUserDto searchUserDto);
 }

@@ -16,9 +16,15 @@ public class CompanyMutation implements GraphQLMutationResolver {
   @Autowired
   private ICompanyService companyService;
 
+  /**
+   * 新建公司
+   *
+   * @param createCompanyDto 公司
+   * @return 公司
+   */
   public Company createCompany(CreateCompanyDto createCompanyDto) {
-    Long company_id = companyService.createCompany(createCompanyDto);
-    Company company = companyService.searchWithId(company_id);
+    Long companyId = companyService.createCompany(createCompanyDto);
+    Company company = companyService.searchWithId(companyId);
 
     return company;
   }

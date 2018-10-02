@@ -18,7 +18,7 @@ import java.util.Date;
  * @date 2018/9/1 12:52
  **/
 @Slf4j
-public class JWTUtil {
+public final class JWTUtil {
   // 过期时间5min
   private static final long EXPIRE_TIME = 5 * 60 * 1000;
 
@@ -53,7 +53,7 @@ public class JWTUtil {
   /**
    * 获取token中的用户id
    *
-   * @param token
+   * @param token token
    * @return token中包含的用户id
    */
   public static Integer getUserId(String token) {
@@ -69,7 +69,7 @@ public class JWTUtil {
   /**
    * 获取token中的手机号码
    *
-   * @param token
+   * @param token token
    * @return token中包含的手机号码
    */
   public static String getPhone(String token) {

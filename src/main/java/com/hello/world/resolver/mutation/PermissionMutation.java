@@ -16,9 +16,15 @@ public class PermissionMutation implements GraphQLMutationResolver {
   @Autowired
   private IPermissionService permissionService;
 
+  /**
+   * 新建权限
+   *
+   * @param createPermissionDto createPermissionDto
+   * @return 权限
+   */
   public Permission createPermission(CreatePermissionDto createPermissionDto) {
-    Long permission_id = permissionService.insertPermission(createPermissionDto);
-    Permission permission = permissionService.searchWithId(permission_id);
+    Long permissionId = permissionService.insertPermission(createPermissionDto);
+    Permission permission = permissionService.searchWithId(permissionId);
 
     return permission;
   }

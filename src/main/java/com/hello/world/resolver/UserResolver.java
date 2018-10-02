@@ -28,14 +28,32 @@ public class UserResolver implements GraphQLResolver<User> {
   @Autowired
   private IRoleService roleService;
 
+  /**
+   * 按用户查询城市
+   *
+   * @param user user
+   * @return 城市
+   */
   public City city(User user) {
     return cityService.searchWithId(user.getCityId());
   }
 
+  /**
+   * 按用户查询公司
+   *
+   * @param user user
+   * @return 公司
+   */
   public Company company(User user) {
     return companyService.searchWithId(user.getCompanyId());
   }
 
+  /**
+   * 角色列表
+   *
+   * @param user user
+   * @return 角色列表
+   */
   public List<Role> roles(User user) {
     return roleService.searchWithUserId(user.getId());
   }

@@ -17,22 +17,58 @@ import java.util.List;
 @Mapper
 @Repository
 public interface CityMapper {
+  /**
+   * 按主键删除
+   *
+   * @param id id
+   * @return 影响行数
+   */
   int deleteByPrimaryKey(Integer id);
 
+  /**
+   * 插入
+   *
+   * @param record 城市
+   * @return 影响行数
+   */
   int insert(City record);
 
+  /**
+   * 插入
+   *
+   * @param record 城市
+   * @return 影响行数
+   */
   int insertSelective(City record);
 
+  /**
+   * 按主键查询
+   *
+   * @param id id
+   * @return 城市
+   */
   City selectByPrimaryKey(Long id);
 
+  /**
+   * 更新
+   *
+   * @param record 城市
+   * @return 影响行数
+   */
   int updateByPrimaryKeySelective(City record);
 
+  /**
+   * 更新
+   *
+   * @param record 城市
+   * @return 影响行数
+   */
   int updateByPrimaryKey(City record);
 
   /**
    * 创建城市
    *
-   * @param createCityDto
+   * @param createCityDto createCityDto
    * @return 影响的行数
    */
   Long insertCity(CreateCityDto createCityDto);
@@ -40,16 +76,16 @@ public interface CityMapper {
   /**
    * 通过城市名查询
    *
-   * @param name
-   * @return
+   * @param name name
+   * @return 城市列表
    */
   List<City> searchWithName(String name);
 
   /**
    * 按条件查询
    *
-   * @param searchCityDto
-   * @return
+   * @param searchCityDto 查询条件
+   * @return 城市列表
    */
   List<City> searchCondition(SearchCityDto searchCityDto);
 }

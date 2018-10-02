@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 /**
  * @author jarck-lou
- * @date 2018/9/9 20:16
+ * @date 2018/9/01 20:16
  **/
 @Data
 public class PermissionDto extends Permission implements Serializable {

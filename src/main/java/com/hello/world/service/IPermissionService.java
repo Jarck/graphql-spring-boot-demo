@@ -13,40 +13,40 @@ public interface IPermissionService {
   /**
    * find by id
    *
-   * @param permissionId
-   * @return
+   * @param permissionId 权限ID
+   * @return 权限
    */
   Permission searchWithId(Long permissionId);
 
   /**
    * 通过权限名查询
    *
-   * @param name
-   * @return
+   * @param name 权限名称
+   * @return 权限列表
    */
   List<Permission> searchWithName(String name);
 
   /**
    * 通过角色id查询
    *
-   * @param roleId
-   * @return
+   * @param roleId 角色ID
+   * @return 权限列表
    */
   List<Permission> searchWithRoleId(Long roleId);
 
   /**
    * 通过用户id查询
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 权限列表
    */
   List<Permission> searchWithUserId(Long userId);
 
   /**
    * 创建权限
    *
-   * @param createPermissionDto
-   * @return
+   * @param createPermissionDto 权限
+   * @return 影响行数
    */
   Long insertPermission(CreatePermissionDto createPermissionDto);
 }

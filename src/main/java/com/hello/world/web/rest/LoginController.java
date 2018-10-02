@@ -28,6 +28,12 @@ public class LoginController {
   @Autowired
   private IUserService userService;
 
+  /**
+   * 用户登录
+   * @param loginUser loginUser
+   * @param bindingResult bindingResult
+   * @return 登录结果
+   */
   @ApiOperation("login")
   @PostMapping("login")
   public Map<String, Object> login(LoginDto loginUser, BindingResult bindingResult) {

@@ -21,8 +21,8 @@ public class UserQuery implements GraphQLQueryResolver {
   /**
    * 通过ID查询用户
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 用户
    */
   public User searchUserWithId(Long userId) {
     return userService.searchWithId(userId);
@@ -31,8 +31,8 @@ public class UserQuery implements GraphQLQueryResolver {
   /**
    * 通过手机号查询用户
    *
-   * @param phone
-   * @return
+   * @param phone 手机号
+   * @return 用户
    */
   public User searchUserWithPhone(String phone) {
     return userService.getUserByPhone(phone);
@@ -41,10 +41,10 @@ public class UserQuery implements GraphQLQueryResolver {
   /**
    * 通过查询条件查询用户
    *
-   * @param input
-   * @return
+   * @param searchUserDto searchUserDto
+   * @return 用户列表
    */
-  public List<User> searchUsers(SearchUserDto input) {
-    return userService.searchWithCondition(input);
+  public List<User> searchUsers(SearchUserDto searchUserDto) {
+    return userService.searchWithCondition(searchUserDto);
   }
 }

@@ -24,6 +24,15 @@ public class WebLoginController {
   @Autowired
   private IUserService userService;
 
+  /**
+   * 用户登录
+   *
+   * @param loginUser loginUser
+   * @param model model
+   * @param redirectAttributes redirectAttributes
+   * @param session session
+   * @return 用户列表
+   */
   @PostMapping("webLogin")
   public String login(LoginDto loginUser, Model model, RedirectAttributes redirectAttributes, HttpSession session) {
     try {

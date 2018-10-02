@@ -18,7 +18,7 @@ public interface IUserService {
   /**
    * find all users
    *
-   * @return
+   * @return 用户列表
    */
   List<User> findAll();
 
@@ -41,7 +41,7 @@ public interface IUserService {
   /**
    * find user by phone
    *
-   * @param phone
+   * @param phone phone
    * @return user
    */
   User getUserByPhone(@Param("phone") String phone);
@@ -58,15 +58,15 @@ public interface IUserService {
    * 按条件查询
    *
    * @param searchUserDto 搜索条件
-   * @return
+   * @return 用户列表
    */
   List<User> searchWithCondition(SearchUserDto searchUserDto);
 
   /**
    * 创建用户
    *
-   * @param createUserDto
-   * @return
+   * @param createUserDto 用户
+   * @return 影响行数
    */
   Long createUser(CreateUserDto createUserDto);
 }

@@ -23,8 +23,8 @@ public interface ICityService {
   /**
    * 通过城市名查询
    *
-   * @param cityName
-   * @return
+   * @param cityName 城市名
+   * @return 城市列表
    */
   List<City> searchWithName(String cityName);
 
@@ -32,15 +32,15 @@ public interface ICityService {
    * 按条件查询
    *
    * @param searchCityDto 搜索条件
-   * @return
+   * @return 城市列表
    */
   List<City> searchWithCondition(SearchCityDto searchCityDto);
 
   /**
    * 创建城市
    *
-   * @param createCityDto
-   * @return
+   * @param createCityDto 城市
+   * @return 城市列表
    */
   Long createCity(CreateCityDto createCityDto);
 }

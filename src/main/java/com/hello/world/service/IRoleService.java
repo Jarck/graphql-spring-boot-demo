@@ -14,39 +14,39 @@ public interface IRoleService {
   /**
    * find all roles
    *
-   * @return
+   * @return 角色列表
    */
   List<Role> findAll();
 
   /**
    * 通过角色id查询
    *
-   * @param roleId
-   * @return
+   * @param roleId 角色ID
+   * @return 角色
    */
   Role searchWithId(Long roleId);
 
   /**
    * 通过角色名查询
    *
-   * @param name
-   * @return
+   * @param name 角色名
+   * @return 角色列表
    */
   List<Role> searchWithName(String name);
 
   /**
-   * 通过用户id查询
+   * 通过用户ID查询
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 角色列表
    */
   List<Role> searchWithUserId(Long userId);
 
   /**
    * 创建角色
    *
-   * @param createRoleDto
-   * @return
+   * @param createRoleDto 角色
+   * @return 影响行数
    */
   Long createRole(CreateRoleDto createRoleDto);
 }

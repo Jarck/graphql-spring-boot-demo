@@ -6,10 +6,19 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+/**
+ * @author jarck-lou
+ * @date 2018/9/1 16:52
+ */
 @SpringBootApplication
 public class Application {
   private static final int TIME_OUT = 3600;
 
+  /**
+   * main方法
+   *
+   * @param args args
+   */
   public static void main(String[] args) {
     SpringApplication.run(Application.class, args);
   }
@@ -17,7 +26,7 @@ public class Application {
   /**
    * 跨域配置
    *
-   * @return
+   * @return cors config
    */
   @Bean
   public WebMvcConfigurer corsConfigurer() {

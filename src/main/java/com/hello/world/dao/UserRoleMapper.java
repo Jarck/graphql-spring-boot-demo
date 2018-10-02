@@ -18,23 +18,59 @@ import java.util.List;
 @Repository
 @CacheConfig(cacheNames = "userRoles")
 public interface UserRoleMapper {
+  /**
+   * 按ID删除
+   *
+   * @param id ID
+   * @return 影响行数
+   */
   int deleteByPrimaryKey(Long id);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insert(UserRole record);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insertSelective(UserRole record);
 
+  /**
+   * 按ID查询
+   *
+   * @param id ID
+   * @return 用户角色
+   */
   UserRole selectByPrimaryKey(Long id);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKeySelective(UserRole record);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKey(UserRole record);
 
   /**
    * 通过用户ID查询
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 用户角色列表
    */
   @Cacheable(key = "#p0")
   List<UserRole> searchWithUserId(Long userId);

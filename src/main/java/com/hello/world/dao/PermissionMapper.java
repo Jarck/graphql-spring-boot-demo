@@ -17,22 +17,58 @@ import java.util.List;
 @Mapper
 @Repository
 public interface PermissionMapper {
+  /**
+   * 按ID删除
+   *
+   * @param id id
+   * @return 影响行数
+   */
   int deleteByPrimaryKey(Long id);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insert(Permission record);
 
+  /**
+   * 新建
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int insertSelective(Permission record);
 
+  /**
+   * 按ID查询
+   *
+   * @param id id
+   * @return 权限
+   */
   Permission selectByPrimaryKey(Long id);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKeySelective(Permission record);
 
+  /**
+   * 更新
+   *
+   * @param record record
+   * @return 影响行数
+   */
   int updateByPrimaryKey(Permission record);
 
   /**
    * 创建权限
    *
-   * @param createPermissionDto
+   * @param createPermissionDto createPermissionDto
    * @return 影响的行数
    */
   Long insertPermission(CreatePermissionDto createPermissionDto);
@@ -40,24 +76,24 @@ public interface PermissionMapper {
   /**
    * 按权限名查询
    *
-   * @param name
-   * @return
+   * @param name 权限名
+   * @return 权限列表
    */
   List<Permission> searchWithName(String name);
 
   /**
    * 按角色ID查询
    *
-   * @param roleId
-   * @return
+   * @param roleId 角色ID
+   * @return 权限列表
    */
   List<Permission> searchWithRoleId(@Param("roleId") Long roleId);
 
   /**
    * 按用户ID查询
    *
-   * @param userId
-   * @return
+   * @param userId 用户ID
+   * @return 权限列表
    */
   List<Permission> searchWithUserId(@Param("userId") Long userId);
 }

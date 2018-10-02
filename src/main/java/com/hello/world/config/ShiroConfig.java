@@ -31,7 +31,7 @@ public class ShiroConfig {
   /**
    * 自定义Realm
    *
-   * @return
+   * @return authRealm
    */
   @Bean
   public AuthRealm realm() {
@@ -40,6 +40,12 @@ public class ShiroConfig {
     return authRealm;
   }
 
+  /**
+   * Shiro Filter
+   *
+   * @param securityManager securityManager
+   * @return shiroFilterFactoryBean
+   */
   @Bean
   public ShiroFilterFactoryBean shiroFilter(SecurityManager securityManager) {
     log.info("======== Shiro config ==========");
@@ -71,6 +77,11 @@ public class ShiroConfig {
     return shiroFilterFactoryBean;
   }
 
+  /**
+   * Security Manager
+   *
+   * @return securityManager
+   */
   @Bean
   public SecurityManager securityManager() {
     DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
@@ -109,7 +120,7 @@ public class ShiroConfig {
    * Shiro 生命周期管理
    * 注解使用的Bean, 没有则Shiro的注解不生效
    *
-   * @return
+   * @return lifecycleBeanPostProcessor
    */
   @Bean
   public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
@@ -120,7 +131,7 @@ public class ShiroConfig {
    * DefaultAdvisorAutoProxyCreator, Spring的一个bean, 由Advisor决定对哪些类的方法进行AOP代理
    * 注解使用的Bean, 没有则Shiro的注解不生效
    *
-   * @return
+   * @return proxyCreator
    */
   @Bean
   public DefaultAdvisorAutoProxyCreator defaultAdvisorAutoProxyCreator() {

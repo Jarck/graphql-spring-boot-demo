@@ -13,7 +13,7 @@ import org.apache.shiro.util.ByteSource;
  * @author jarck-lou
  * @date 2018/9/1 12:52
  **/
-public class ShiroKit {
+public final class ShiroKit {
   /**
    * 散列算法
    */
@@ -33,7 +33,7 @@ public class ShiroKit {
    *
    * @param credentials 密码
    * @param saltSource  密码盐
-   * @return
+   * @return 加密后字符串
    */
   public static String md5(String credentials, String saltSource) {
     ByteSource salt = new Md5Hash(saltSource);

@@ -21,20 +21,20 @@ public class CityQuery implements GraphQLQueryResolver {
   /**
    * 通过查询条件查询城市
    *
-   * @param input
-   * @return
+   * @param searchCityDto 查询条件
+   * @return 城市列表
    */
-  public List<City> searchCities(SearchCityDto input) {
-    List<City> cities = cityService.searchWithCondition(input);
+  public List<City> searchCities(SearchCityDto searchCityDto) {
+    List<City> cityList = cityService.searchWithCondition(searchCityDto);
 
-    return cities;
+    return cityList;
   }
 
   /**
    * 通过ID查询城市
    *
-   * @param cityId
-   * @return
+   * @param cityId 城市ID
+   * @return 城市
    */
   public City searchCityWithId(Long cityId) {
     City city = cityService.searchWithId(cityId);
@@ -45,8 +45,8 @@ public class CityQuery implements GraphQLQueryResolver {
   /**
    * 通过城市名查询
    *
-   * @param cityName
-   * @return
+   * @param cityName 城市名
+   * @return 城市列表
    */
   public List<City> searchCityWithName(String cityName) {
     List<City> cityList = cityService.searchWithName(cityName);

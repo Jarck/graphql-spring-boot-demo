@@ -19,12 +19,12 @@ public class CityMutation implements GraphQLMutationResolver {
   /**
    * 创建城市
    *
-   * @param input
-   * @return
+   * @param createCityDto 城市
+   * @return 城市
    */
-  public City createCity(CreateCityDto input) {
-    Long city_id = cityService.createCity(input);
-    City city = cityService.searchWithId(city_id);
+  public City createCity(CreateCityDto createCityDto) {
+    Long cityId = cityService.createCity(createCityDto);
+    City city = cityService.searchWithId(cityId);
 
     return city;
   }

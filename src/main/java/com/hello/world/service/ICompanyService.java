@@ -15,24 +15,24 @@ public interface ICompanyService {
   /**
    * find by id
    *
-   * @param companyId
-   * @return
+   * @param companyId 公司ID
+   * @return 公司
    */
   CompanyDto searchWithId(Long companyId);
 
   /**
    * 通过公司名查询
    *
-   * @param name
-   * @return
+   * @param name 公司名
+   * @return 公司列表
    */
   List<Company> searchWithName(String name);
 
   /**
    * 通过城市id查询
    *
-   * @param cityId
-   * @return
+   * @param cityId 城市ID
+   * @return 城市列表
    */
   List<Company> searchWithCityId(Long cityId);
 
@@ -40,15 +40,15 @@ public interface ICompanyService {
    * 按条件查询
    *
    * @param searchCompanyDto 搜索条件
-   * @return
+   * @return 城市列表
    */
   List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
 
   /**
    * 创建公司
    *
-   * @param createCompanyDto
-   * @return
+   * @param createCompanyDto 公司
+   * @return 影响行数
    */
   Long createCompany(CreateCompanyDto createCompanyDto);
 }

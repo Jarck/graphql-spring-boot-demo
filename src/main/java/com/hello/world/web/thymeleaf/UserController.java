@@ -20,6 +20,12 @@ public class UserController {
   @Autowired
   private IUserService userService;
 
+  /**
+   * 用户列表
+   *
+   * @param model model
+   * @return 用户列表页面
+   */
   @GetMapping("")
   @RequiresPermissions("user:read")
   public String index(Model model) {

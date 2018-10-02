@@ -83,7 +83,8 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public String login(LoginDto loginDto) {
-    String redisVerifyCode = stringRedisTemplate.opsForValue().get(loginDto.getPhone() + SystemConstant.VERIFY_CODE_SUFFIX);
+    String redisVerifyCode = stringRedisTemplate.opsForValue().get(loginDto.getPhone()
+            + SystemConstant.VERIFY_CODE_SUFFIX);
     if ("prod".equals(SpringContextUtil.getActiveProfile())) {
       if (!loginDto.getVerifyCode().equals(redisVerifyCode)) {
         throw new LoginFailedException("验证码错误");
@@ -93,11 +94,17 @@ public class UserServiceImpl implements IUserService {
     UserDto userDto = searchWithPhone(loginDto.getPhone());
     String token = JWTUtil.sign(userDto);
 
-    stringRedisTemplate.opsForValue().set(SystemConstant.TOKEN_HEADER + userDto.getPhone(), token, 1, TimeUnit.DAYS);
+    stringRedisTemplate.opsForValue().set(SystemConstant.TOKEN_HEADER + userDto.getPhone(),
+            token, 1, TimeUnit.DAYS);
 
     return token;
   }
 
+  /**
+   * 设置用户角色
+   *
+   * @param userDto userDto
+   */
   private void setUserRolePermission(UserDto userDto) {
     List<UserRole> userRoleList = userRoleMapper.searchWithUserId(userDto.getId());
     List<Role> roleList = userDto.getRoles();
