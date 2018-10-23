@@ -24,7 +24,7 @@ server:
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
-  type-handlers-package: com.hello.world.enums
+  config-location: classpath:mybatis-config.xml
 
 secret_key: secret_key
 
