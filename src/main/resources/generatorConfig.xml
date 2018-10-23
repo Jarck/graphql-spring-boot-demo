@@ -43,43 +43,43 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
 
-        <table schema="shiro_demo" tableName="user" domainObjectName="User"
+        <table schema="${mybatis.generator.schema}" tableName="user" domainObjectName="User"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="role" domainObjectName="Role"
+        <table schema="${mybatis.generator.schema}" tableName="role" domainObjectName="Role"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="permission" domainObjectName="Permission"
+        <table schema="${mybatis.generator.schema}" tableName="permission" domainObjectName="Permission"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="user_role" domainObjectName="UserRole"
+        <table schema="${mybatis.generator.schema}" tableName="user_role" domainObjectName="UserRole"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="role_permission" domainObjectName="RolePermission"
+        <table schema="${mybatis.generator.schema}" tableName="role_permission" domainObjectName="RolePermission"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="city" domainObjectName="City"
+        <table schema="${mybatis.generator.schema}" tableName="city" domainObjectName="City"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
         </table>
 
-        <table schema="shiro_demo" tableName="company" domainObjectName="Company"
+        <table schema="${mybatis.generator.schema}" tableName="company" domainObjectName="Company"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
