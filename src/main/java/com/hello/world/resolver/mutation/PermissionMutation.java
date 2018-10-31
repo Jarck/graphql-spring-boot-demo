@@ -23,8 +23,8 @@ public class PermissionMutation implements GraphQLMutationResolver {
    * @return 权限
    */
   public Permission createPermission(CreatePermissionDto createPermissionDto) {
-    Long permissionId = permissionService.insertPermission(createPermissionDto);
-    Permission permission = permissionService.searchWithId(permissionId);
+    permissionService.insertPermission(createPermissionDto);
+    Permission permission = permissionService.searchWithId(createPermissionDto.getId());
 
     return permission;
   }

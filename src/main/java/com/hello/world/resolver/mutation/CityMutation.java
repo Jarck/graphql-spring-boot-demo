@@ -23,8 +23,8 @@ public class CityMutation implements GraphQLMutationResolver {
    * @return 城市
    */
   public City createCity(CreateCityDto createCityDto) {
-    Long cityId = cityService.createCity(createCityDto);
-    City city = cityService.searchWithId(cityId);
+    cityService.createCity(createCityDto);
+    City city = cityService.searchWithId(createCityDto.getId());
 
     return city;
   }

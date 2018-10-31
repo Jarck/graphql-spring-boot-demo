@@ -25,6 +25,10 @@ public class CodeEnumTypeHandler<E extends Enum<?> & BaseEnum> extends BaseTypeH
     }
 
     this.type = type;
+    this.enums = type.getEnumConstants();
+    if (this.enums == null) {
+      throw new IllegalArgumentException(type.getSimpleName() + " does not represent an enum type");
+    }
   }
 
   @Override

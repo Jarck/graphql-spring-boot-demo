@@ -23,8 +23,8 @@ public class UserMutation implements GraphQLMutationResolver {
    * @return 用户
    */
   public User createUser(CreateUserDto createUserDto) {
-    Long userId = userService.createUser(createUserDto);
-    User user = userService.searchWithId(userId);
+    userService.createUser(createUserDto);
+    User user = userService.searchWithId(createUserDto.getId());
 
     return user;
   }

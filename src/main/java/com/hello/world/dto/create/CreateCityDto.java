@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotBlank;
+
 /**
  * 创建城市DTO
  *
@@ -15,5 +17,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class CreateCityDto {
   private Long id;
+  @NotBlank(message = "城市名不能为空")
   private String name;
 }

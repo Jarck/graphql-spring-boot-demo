@@ -23,8 +23,8 @@ public class CompanyMutation implements GraphQLMutationResolver {
    * @return 公司
    */
   public Company createCompany(CreateCompanyDto createCompanyDto) {
-    Long companyId = companyService.createCompany(createCompanyDto);
-    Company company = companyService.searchWithId(companyId);
+    companyService.createCompany(createCompanyDto);
+    Company company = companyService.searchWithId(createCompanyDto.getId());
 
     return company;
   }
