@@ -2,7 +2,9 @@ package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.dto.condition.SearchCityDto;
+import com.hello.world.dto.result.CityDto;
 import com.hello.world.entity.City;
+import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -37,9 +39,13 @@ public class CityQuery implements GraphQLQueryResolver {
    * @return 城市
    */
   public City searchCityWithId(Long cityId) {
-    City city = cityService.searchWithId(cityId);
+    CityDto cityDto = cityService.searchWithId(cityId);
 
-    return city;
+    if (cityDto == null) {
+      throw new GraphQLNotFoundException("Not found city with id " + cityId);
+    }
+
+    return cityDto;
   }
 
   /**

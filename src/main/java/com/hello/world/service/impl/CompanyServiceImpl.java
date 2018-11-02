@@ -24,7 +24,7 @@ public class CompanyServiceImpl implements ICompanyService {
   public CompanyDto searchWithId(Long cityId) {
     Company company = companyMapper.selectByPrimaryKey(cityId);
 
-    CompanyDto companyDto = new CompanyDto();
+    CompanyDto companyDto = null;
     if (company != null) {
       companyDto = new CompanyDto(company);
     }

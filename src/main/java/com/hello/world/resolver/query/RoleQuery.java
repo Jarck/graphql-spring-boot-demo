@@ -2,6 +2,7 @@ package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.entity.Role;
+import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -24,7 +25,12 @@ public class RoleQuery implements GraphQLQueryResolver {
    * @return 角色
    */
   public Role searchRoleWithId(Long roleId) {
-    return roleService.searchWithId(roleId);
+    Role role = roleService.searchWithId(roleId);
+
+    if (role == null) {
+      throw new GraphQLNotFoundException("Not found role with id " + roleId);
+    }
+    return role;
   }
 
   /**

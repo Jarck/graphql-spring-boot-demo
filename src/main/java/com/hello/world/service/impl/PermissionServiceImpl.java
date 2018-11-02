@@ -23,7 +23,7 @@ public class PermissionServiceImpl implements IPermissionService {
   public PermissionDto searchWithId(Long permissionId) {
     Permission permission = permissionMapper.selectByPrimaryKey(permissionId);
 
-    PermissionDto permissionDto = new PermissionDto();
+    PermissionDto permissionDto = null;
     if (permission != null) {
       permissionDto = new PermissionDto(permission);
     }

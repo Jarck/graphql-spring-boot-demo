@@ -60,8 +60,12 @@ public class UserServiceImpl implements IUserService {
   @Override
   public UserDto searchWithId(Long userId) {
     User user = userMapper.selectByPrimaryKey(userId);
-    UserDto userDto = new UserDto(user);
-    setUserRolePermission(userDto);
+    UserDto userDto = null;
+
+    if (user != null) {
+      userDto = new UserDto(user);
+      setUserRolePermission(userDto);
+    }
 
     return userDto;
   }

@@ -2,7 +2,9 @@ package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.dto.condition.SearchUserDto;
+import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
+import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +27,13 @@ public class UserQuery implements GraphQLQueryResolver {
    * @return 用户
    */
   public User searchUserWithId(Long userId) {
-    return userService.searchWithId(userId);
+    UserDto userDto = userService.searchWithId(userId);
+
+    if (userDto == null) {
+      throw new GraphQLNotFoundException("Not found user with id " + userId);
+    }
+    return userDto;
+//    return userService.searchWithId(userId);
   }
 
   /**

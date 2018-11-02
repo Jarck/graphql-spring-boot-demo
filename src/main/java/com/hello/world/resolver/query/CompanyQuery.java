@@ -1,8 +1,10 @@
 package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
-import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
+import com.hello.world.dto.result.CompanyDto;
+import com.hello.world.entity.Company;
+import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -35,7 +37,13 @@ public class CompanyQuery implements GraphQLQueryResolver {
    * @return 公司
    */
   public Company searchCompanyWithId(Long companyId) {
-    return companyService.searchWithId(companyId);
+    CompanyDto companyDto = companyService.searchWithId(companyId);
+
+    if (companyDto == null) {
+      throw new GraphQLNotFoundException("Not found company with id " + companyId);
+    }
+
+    return companyDto;
   }
 
   /**

@@ -29,7 +29,11 @@ public class CityServiceImpl implements ICityService {
   @Override
   public CityDto searchWithId(Long cityId) {
     City city = cityMapper.selectByPrimaryKey(cityId);
-    CityDto cityDto = new CityDto(city);
+    CityDto cityDto = null;
+
+    if (city != null) {
+      cityDto = new CityDto(city);
+    }
 
     return cityDto;
   }
