@@ -20,6 +20,5 @@ to http://localhost:8080/graphiql to start executing queries. For example:
 
 ### TODO
 
-1. add validator
-2. use shiro to graphql
-3. ...
+1. use shiro to graphql
+2. ...

@@ -3,9 +3,13 @@ package com.hello.world.resolver.mutation;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.entity.User;
+import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.IUserService;
+import com.hello.world.util.ValidatorUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.Map;
 
 /**
  * @author jarck-lou
@@ -21,8 +25,16 @@ public class UserMutation implements GraphQLMutationResolver {
    *
    * @param createUserDto createUserDto
    * @return 用户
+   * @throws GraphQLValidateException 参数校验异常
    */
-  public User createUser(CreateUserDto createUserDto) {
+  public User createUser(CreateUserDto createUserDto) throws GraphQLValidateException {
+
+    // 校验参数
+    Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createUserDto);
+    if (errorMap != null) {
+      throw new GraphQLValidateException(errorMap.toString());
+    }
+
     userService.createUser(createUserDto);
     User user = userService.searchWithId(createUserDto.getId());
 
