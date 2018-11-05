@@ -1,5 +1,8 @@
 package com.hello.world.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dao.CityMapper;
 import com.hello.world.dto.condition.SearchCityDto;
@@ -62,6 +65,24 @@ public class CityServiceImpl implements ICityService {
     List<City> cityList = cityMapper.searchCondition(searchCityDto);
 
     return cityList;
+  }
+
+  /**
+   * 分页查询
+   * @param searchCityDto 搜索条件
+   * @param pageDto 分页信息
+   * @return 城市page
+   */
+  @Override
+  public PageInfo<City> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto) {
+    PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
+    PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
+
+    List<City> cityList = cityMapper.searchCondition(searchCityDto);
+
+    PageInfo<City> cityPageInfo = new PageInfo<>(cityList);
+
+    return  cityPageInfo;
   }
 
   /**

@@ -1,6 +1,9 @@
 package com.hello.world.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.CompanyMapper;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
@@ -51,6 +54,18 @@ public class CompanyServiceImpl implements ICompanyService {
     List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
 
     return companyList;
+  }
+
+  @Override
+  public PageInfo<Company> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
+    PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
+    PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "acs"));
+
+    List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
+
+    PageInfo<Company> companyPage = new PageInfo<>(companyList);
+
+    return companyPage;
   }
 
   @Override

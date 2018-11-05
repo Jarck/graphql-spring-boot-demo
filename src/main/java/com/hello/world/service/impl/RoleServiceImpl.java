@@ -1,6 +1,9 @@
 package com.hello.world.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.RoleMapper;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.entity.Role;
 import com.hello.world.service.IRoleService;
@@ -21,6 +24,17 @@ public class RoleServiceImpl implements IRoleService {
   @Override
   public List<Role> findAll() {
     return roleMapper.findAll();
+  }
+
+  @Override
+  public PageInfo<Role> findAll(PageDto pageDto) {
+    PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
+    PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
+
+    List<Role> roleList = roleMapper.findAll();
+    PageInfo<Role> rolePageInfo = new PageInfo<>(roleList);
+
+    return rolePageInfo;
   }
 
   @Override

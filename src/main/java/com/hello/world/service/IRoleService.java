@@ -1,5 +1,7 @@
 package com.hello.world.service;
 
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.entity.Role;
 
@@ -17,6 +19,13 @@ public interface IRoleService {
    * @return 角色列表
    */
   List<Role> findAll();
+
+  /**
+   * 分页查询
+   * @param pageDto 分页信息
+   * @return 角色id
+   */
+  PageInfo<Role> findAll(PageDto pageDto);
 
   /**
    * 通过角色id查询

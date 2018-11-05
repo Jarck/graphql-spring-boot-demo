@@ -1,5 +1,7 @@
 package com.hello.world.service;
 
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
@@ -32,7 +34,7 @@ public interface ICompanyService {
    * 通过城市id查询
    *
    * @param cityId 城市ID
-   * @return 城市列表
+   * @return 公司列表
    */
   List<Company> searchWithCityId(Long cityId);
 
@@ -40,9 +42,18 @@ public interface ICompanyService {
    * 按条件查询
    *
    * @param searchCompanyDto 搜索条件
-   * @return 城市列表
+   * @return 公司列表
    */
   List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
+
+  /**
+   * 分页查询
+   *
+   * @param searchCompanyDto 搜索条件
+   * @param pageDto 分页信息
+   * @return 公司page
+   */
+  PageInfo<Company> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto);
 
   /**
    * 创建公司

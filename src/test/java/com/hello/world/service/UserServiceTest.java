@@ -1,5 +1,8 @@
 package com.hello.world.service;
 
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
+import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.entity.User;
 import org.junit.Assert;
 import org.junit.Test;
@@ -26,5 +29,20 @@ public class UserServiceTest {
   public void testGetUserByPhone() {
     User user = userService.getUserByPhone("18812345671");
     Assert.assertEquals(user.getName(), "admin");
+  }
+
+  @Test
+  public void testPageSearchWithCondition() {
+    SearchUserDto searchUserDto = new SearchUserDto();
+    searchUserDto.setName("admin");
+
+    PageDto pageDto = new PageDto();
+    PageInfo<User> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
+
+    Assert.assertEquals(userPageInfo.getPageNum(), 1);
+    Assert.assertEquals(userPageInfo.getPageSize(), 20);
+    Assert.assertEquals(userPageInfo.getTotal(), 1L);
+    Assert.assertEquals(userPageInfo.isHasNextPage(), false);
+    Assert.assertEquals(userPageInfo.getList().get(0).getName(), "admin");
   }
 }

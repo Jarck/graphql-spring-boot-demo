@@ -1,5 +1,7 @@
 package com.hello.world.service;
 
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.result.CityDto;
@@ -35,6 +37,14 @@ public interface ICityService {
    * @return 城市列表
    */
   List<City> searchWithCondition(SearchCityDto searchCityDto);
+
+  /**
+   * 分页查询
+   * @param searchCityDto 搜索条件
+   * @param pageDto 分页信息
+   * @return 城市page
+   */
+  PageInfo<City> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto);
 
   /**
    * 创建城市

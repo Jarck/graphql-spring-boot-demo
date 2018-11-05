@@ -1,6 +1,9 @@
 package com.hello.world.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.hello.world.auth.JWTUtil;
+import com.hello.world.dto.PageDto;
 import com.hello.world.exception.LoginFailedException;
 import com.hello.world.service.IUserService;
 import com.hello.world.util.SpringContextUtil;
@@ -127,6 +130,18 @@ public class UserServiceImpl implements IUserService {
   @Override
   public List<User> searchWithCondition(SearchUserDto searchUserDto) {
     return userMapper.searchCondition(searchUserDto);
+  }
+
+  @Override
+  public PageInfo<User> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto) {
+    PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
+    PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
+
+    List<User> userList = userMapper.searchCondition(searchUserDto);
+
+    PageInfo<User> userPageInfo = new PageInfo<>(userList);
+
+    return userPageInfo;
   }
 
   @Override
