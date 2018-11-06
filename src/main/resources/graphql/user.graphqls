@@ -39,6 +39,13 @@ input CreateUser {
     roleIds: [Long]
 }
 
+input Page {
+    pageNum: Int
+    pageSize: Int
+    orderBy: String
+    desc: Boolean
+}
+
 type Query {
     # 通过ID查询用户
     searchUserWithId(id: Int): User
@@ -48,6 +55,9 @@ type Query {
 
     # 通过查询条件查询用户
     searchUsers(input: ConditionSearchUser): [User]
+
+    # 分页查询用户
+    searchUser(input: ConditionSearchUser, page: Page): [User]
 }
 
 type Mutation {

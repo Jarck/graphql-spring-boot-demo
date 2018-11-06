@@ -26,6 +26,11 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   config-location: classpath:mybatis-config.xml
 
+pagehelper:
+  row-bounds-with-count: true
+  offset-as-page-num: true
+  reasonable: true
+
 secret_key: secret_key
 
 graphql:

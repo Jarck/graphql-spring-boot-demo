@@ -1,6 +1,8 @@
 package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
+import com.github.pagehelper.PageInfo;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
@@ -33,7 +35,6 @@ public class UserQuery implements GraphQLQueryResolver {
       throw new GraphQLNotFoundException("Not found user with id " + userId);
     }
     return userDto;
-//    return userService.searchWithId(userId);
   }
 
   /**
@@ -54,5 +55,18 @@ public class UserQuery implements GraphQLQueryResolver {
    */
   public List<User> searchUsers(SearchUserDto searchUserDto) {
     return userService.searchWithCondition(searchUserDto);
+  }
+
+  /**
+   * 分页查询
+   *
+   * @param searchUserDto searchUserDto
+   * @param pageDto 分页参数
+   * @return 用户page
+   */
+  public List<User> searchUser(SearchUserDto searchUserDto, PageDto pageDto) {
+    PageInfo<User> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
+    List<User> userList = userPageInfo.getList();
+    return userList;
   }
 }
