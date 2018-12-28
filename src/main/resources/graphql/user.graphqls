@@ -57,7 +57,7 @@ type Query {
     searchUsers(input: ConditionSearchUser): [User]
 
     # 分页查询用户
-    searchUser(input: ConditionSearchUser, page: Page): [User]
+    searchUserPage(input: ConditionSearchUser, page: Page): [User]
 }
 
 type Mutation {

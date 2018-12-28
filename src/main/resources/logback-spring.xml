@@ -17,10 +17,10 @@
     <!-- 按照每天生成日志文件 -->
     <appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <!-- 最新的log文件名 -->
-        <File>logs/shiro-demo.log</File>
+        <File>logs/spring-demo.log</File>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--日志文件输出的文件名-->
-            <fileNamePattern>logs/logback.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>logs/spring-demo.%d{yyyy-MM-dd}.log</fileNamePattern>
             <!-- 保留30天的日志 -->
             <maxHistory>30</maxHistory>
         </rollingPolicy>
@@ -33,30 +33,32 @@
 
     <!-- 测试环境+开发环境. 多个使用逗号隔开. -->
     <springProfile name="test,dev">
-        <logger name="hello" level="DEBUG">
+        <logger name="com.hello.world" additivity="false" level="INFO">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="dailyRollingFileAppender"/>
         </logger>
-        <logger name="org.springframework.boot" level="DEBUG"/>
+        <logger name="org.springframework.boot" level="INFO"/>
 
         <!-- 其他框架的日志输出 -->
-        <property name="LOG_FILE" value="logs/.log"/>
         <logger name="org.springframework.web" level="INFO"/>   <!-- spring web 包下的 logger, 只输出 INFO 级别的 -->
         <logger name="org.springframework.boot.web.filter" level="INFO"/>
     </springProfile>
 
     <!-- 生产环境. -->
     <springProfile name="prod">
-        <logger name="hello" level="ERROR">
+        <logger name="com.hello.world" additivity="false" level="ERROR">
             <appender-ref ref="CONSOLE"/>
             <appender-ref ref="dailyRollingFileAppender"/>
         </logger>
         <logger name="org.springframework.boot" level="ERROR"/>
 
         <!-- 其他框架的日志输出 -->
-        <property name="LOG_FILE" value="logs/demo.log"/>
-        <logger name="org.springframework.web" level="ERROR"/>   <!-- spring web 包下的 logger, 只输出 INFO 级别的 -->
+        <logger name="org.springframework.web" level="ERROR"/>   <!-- spring web 包下的 logger, 只输出 ERROR 级别的 -->
         <logger name="org.springframework.boot.web.filter" level="ERROR"/>
     </springProfile>
 
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="dailyRollingFileAppender"/>
+    </root>
 </configuration>

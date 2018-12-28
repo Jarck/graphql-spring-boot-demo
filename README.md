@@ -18,6 +18,17 @@ to http://localhost:8080/graphiql to start executing queries. For example:
 }
 ```
 
+with paginate
+
+```
+{
+  searchUserPage(page: {pageSize: 10, pageNum: 1}){
+    id
+    name
+  }
+}
+```
+
 ### TODO
 
 1. use shiro to graphql

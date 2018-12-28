@@ -64,7 +64,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param pageDto 分页参数
    * @return 用户page
    */
-  public List<User> searchUser(SearchUserDto searchUserDto, PageDto pageDto) {
+  public List<User> searchUserPage(SearchUserDto searchUserDto, PageDto pageDto) {
     PageInfo<User> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
     List<User> userList = userPageInfo.getList();
     return userList;

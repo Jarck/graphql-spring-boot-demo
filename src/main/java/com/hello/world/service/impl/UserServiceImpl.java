@@ -3,14 +3,11 @@ package com.hello.world.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.auth.JWTUtil;
-import com.hello.world.dto.PageDto;
-import com.hello.world.exception.LoginFailedException;
-import com.hello.world.service.IUserService;
-import com.hello.world.util.SpringContextUtil;
 import com.hello.world.constant.SystemConstant;
 import com.hello.world.dao.RoleMapper;
 import com.hello.world.dao.UserMapper;
 import com.hello.world.dao.UserRoleMapper;
+import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
@@ -20,6 +17,9 @@ import com.hello.world.entity.Permission;
 import com.hello.world.entity.Role;
 import com.hello.world.entity.User;
 import com.hello.world.entity.UserRole;
+import com.hello.world.exception.LoginFailedException;
+import com.hello.world.service.IUserService;
+import com.hello.world.util.SpringContextUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -76,9 +76,13 @@ public class UserServiceImpl implements IUserService {
   @Override
   public UserDto searchWithPhone(String phone) {
     User user = userMapper.selectByPhone(phone);
-    UserDto userDto = new UserDto(user);
-    userDto.setSecretKey(secretKey);
-    setUserRolePermission(userDto);
+    UserDto userDto = null;
+
+    if (user != null) {
+      userDto = new UserDto(user);
+      userDto.setSecretKey(secretKey);
+      setUserRolePermission(userDto);
+    }
 
     return userDto;
   }
@@ -99,6 +103,11 @@ public class UserServiceImpl implements IUserService {
     }
 
     UserDto userDto = searchWithPhone(loginDto.getPhone());
+
+    if (userDto == null) {
+      throw new LoginFailedException("用户不存在");
+    }
+
     String token = JWTUtil.sign(userDto);
 
     stringRedisTemplate.opsForValue().set(SystemConstant.TOKEN_HEADER + userDto.getPhone(),
