@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.condition.SearchCityDto;
+import com.hello.world.dto.result.CityDto;
 import com.hello.world.entity.City;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -47,7 +48,7 @@ public interface CityMapper {
    * @param id id
    * @return 城市
    */
-  City selectByPrimaryKey(Long id);
+  CityDto selectByPrimaryKey(Long id);
 
   /**
    * 更新
@@ -79,7 +80,7 @@ public interface CityMapper {
    * @param name name
    * @return 城市列表
    */
-  List<City> searchWithName(String name);
+  List<CityDto> searchWithName(String name);
 
   /**
    * 按条件查询
@@ -87,5 +88,5 @@ public interface CityMapper {
    * @param searchCityDto 查询条件
    * @return 城市列表
    */
-  List<City> searchCondition(SearchCityDto searchCityDto);
+  List<CityDto> searchCondition(SearchCityDto searchCityDto);
 }

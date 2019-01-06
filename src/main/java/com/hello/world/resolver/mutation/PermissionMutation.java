@@ -2,6 +2,7 @@ package com.hello.world.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreatePermissionDto;
+import com.hello.world.dto.result.PermissionDto;
 import com.hello.world.entity.Permission;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.IPermissionService;
@@ -27,7 +28,7 @@ public class PermissionMutation implements GraphQLMutationResolver {
    * @return 权限
    * @throws GraphQLValidateException 参数校验异常
    */
-  public Permission createPermission(CreatePermissionDto createPermissionDto) throws GraphQLValidateException {
+  public PermissionDto createPermission(CreatePermissionDto createPermissionDto) throws GraphQLValidateException {
     // 校验参数
     Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createPermissionDto);
     if (errorMap != null) {
@@ -35,8 +36,8 @@ public class PermissionMutation implements GraphQLMutationResolver {
     }
 
     permissionService.insertPermission(createPermissionDto);
-    Permission permission = permissionService.searchWithId(createPermissionDto.getId());
+    PermissionDto permissionDto = permissionService.searchWithId(createPermissionDto.getId());
 
-    return permission;
+    return permissionDto;
   }
 }

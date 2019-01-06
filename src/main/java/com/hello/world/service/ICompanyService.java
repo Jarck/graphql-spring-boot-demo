@@ -28,7 +28,7 @@ public interface ICompanyService {
    * @param name 公司名
    * @return 公司列表
    */
-  List<Company> searchWithName(String name);
+  List<CompanyDto> searchWithName(String name);
 
   /**
    * 通过城市id查询
@@ -36,7 +36,7 @@ public interface ICompanyService {
    * @param cityId 城市ID
    * @return 公司列表
    */
-  List<Company> searchWithCityId(Long cityId);
+  List<CompanyDto> searchWithCityId(Long cityId);
 
   /**
    * 按条件查询
@@ -44,7 +44,7 @@ public interface ICompanyService {
    * @param searchCompanyDto 搜索条件
    * @return 公司列表
    */
-  List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
+  List<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto);
 
   /**
    * 分页查询
@@ -53,7 +53,7 @@ public interface ICompanyService {
    * @param pageDto 分页信息
    * @return 公司page
    */
-  PageInfo<Company> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto);
+  PageInfo<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto);
 
   /**
    * 创建公司

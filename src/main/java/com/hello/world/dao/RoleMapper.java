@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.result.RoleDto;
 import com.hello.world.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -47,7 +48,7 @@ public interface RoleMapper {
    * @param id ID
    * @return 角色
    */
-  Role selectByPrimaryKey(Long id);
+  RoleDto selectByPrimaryKey(Long id);
 
   /**
    * 更新
@@ -70,7 +71,7 @@ public interface RoleMapper {
    *
    * @return 角色列表
    */
-  List<Role> findAll();
+  List<RoleDto> findAll();
 
   /**
    * 创建角色
@@ -86,7 +87,7 @@ public interface RoleMapper {
    * @param name 角色名
    * @return 角色列表
    */
-  List<Role> searchWithName(String name);
+  List<RoleDto> searchWithName(String name);
 
   /**
    * 通过用户ID查询
@@ -94,5 +95,5 @@ public interface RoleMapper {
    * @param userId 用户ID
    * @return 角色列表
    */
-  List<Role> searchWithUserId(@Param("userId") Long userId);
+  List<RoleDto> searchWithUserId(@Param("userId") Long userId);
 }

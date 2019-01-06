@@ -17,7 +17,7 @@
     <sql id="Base_Column_List">
         id, name, phone, city_id, status, created_at, updated_at, company_id
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="userDtoMap">
         select
         <include refid="Base_Column_List"/>
         from user
@@ -27,7 +27,7 @@
         delete from user
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" parameterType="com.hello.world.entity.User">
+    <insert id="insert" parameterType="com.hello.world.dto.create.CreateUserDto">
         insert into user (id, name, phone, status, city_id, company_id, created_at, updated_at)
         values (#{id}, #{name}, #{phone}, #{status}, #{cityId}, #{companyId}, #{createdAt}, #{updatedAt})
     </insert>
@@ -39,7 +39,7 @@
           <!--#{cityId,jdbcType=BIGINT}, #{status,jdbcType=INTEGER}, #{createdAt,jdbcType=TIMESTAMP},-->
           <!--#{updatedAt,jdbcType=TIMESTAMP}, #{companyId,jdbcType=INTEGER})-->
     <!--</insert>-->
-    <insert id="insertSelective" parameterType="com.hello.world.entity.User">
+    <insert id="insertSelective" parameterType="com.hello.world.dto.create.CreateUserDto">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -121,7 +121,7 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.hello.world.entity.User">
+    <update id="updateByPrimaryKey" parameterType="com.hello.world.dto.create.CreateUserDto">
         update user
         set name = #{name,jdbcType=VARCHAR},
           phone = #{phone,jdbcType=VARCHAR},
@@ -133,18 +133,18 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findAll" resultMap="BaseResultMap">
+    <select id="findAll" resultMap="userDtoMap">
         select
         <include refid="Base_Column_List"/>
         from user
     </select>
-    <select id="selectByPhone" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="selectByPhone" parameterType="java.lang.String" resultMap="userDtoMap">
         select
         <include refid="Base_Column_List"/>
         from user
         where phone = #{phone}
     </select>
-    <select id="searchCondition" resultMap="BaseResultMap">
+    <select id="searchCondition" resultMap="userDtoMap">
         select
         <include refid="Base_Column_List"/>
         from user

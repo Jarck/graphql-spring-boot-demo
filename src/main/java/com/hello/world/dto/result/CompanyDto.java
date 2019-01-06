@@ -11,6 +11,8 @@ import java.io.Serializable;
  **/
 @Data
 public class CompanyDto extends Company implements Serializable {
+  private static final long serialVersionUID = -5501876195207706778L;
+
   public CompanyDto() {
 
   }

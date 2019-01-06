@@ -3,7 +3,7 @@ package com.hello.world.service;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.SearchCityDto;
-import com.hello.world.entity.City;
+import com.hello.world.dto.result.CityDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,7 +32,7 @@ public class CityServiceTest {
 
     PageDto pageDto = new PageDto();
 
-    PageInfo<City> cityPageInfo = cityService.searchWithCondition(searchCityDto, pageDto);
+    PageInfo<CityDto> cityPageInfo = cityService.searchWithCondition(searchCityDto, pageDto);
 
     Assert.assertEquals(cityPageInfo.getPageNum(), 1);
     Assert.assertEquals(cityPageInfo.getPageSize(), 20);

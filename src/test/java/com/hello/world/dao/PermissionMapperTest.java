@@ -1,7 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreatePermissionDto;
-import com.hello.world.entity.Permission;
+import com.hello.world.dto.result.PermissionDto;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -87,7 +87,7 @@ public class PermissionMapperTest {
     createPermissionDto.setResourceType("create");
     Long i = permissionMapper.insertPermission(createPermissionDto);
 
-    List<Permission> permissionList = permissionMapper.searchWithName("创建角色");
+    List<PermissionDto> permissionList = permissionMapper.searchWithName("创建角色");
     Assert.assertEquals(permissionList.size(), 1);
     Assert.assertEquals(permissionList.get(0).getId(), createPermissionDto.getId());
     Assert.assertEquals(permissionList.get(0).getName(), createPermissionDto.getName());
@@ -97,7 +97,7 @@ public class PermissionMapperTest {
 
   @Test
   public void TestSearchWithName() {
-    List<Permission> permissionList = permissionMapper.searchWithName("读取用户");
+    List<PermissionDto> permissionList = permissionMapper.searchWithName("读取用户");
 
     Assert.assertEquals(permissionList.size(), 1);
     Assert.assertEquals(permissionList.get(0).getId(), new Long(1));
@@ -107,12 +107,12 @@ public class PermissionMapperTest {
 
   @Test
   public void TestFindByRoleId() {
-    List<Permission> admin_permissions = permissionMapper.searchWithRoleId(1L);
+    List<PermissionDto> admin_permissions = permissionMapper.searchWithRoleId(1L);
     Assert.assertEquals(admin_permissions.size(), 4);
     Assert.assertEquals(admin_permissions.get(0).getName(), "读取用户");
     Assert.assertEquals(admin_permissions.get(0).getPermission(), "user:read");
 
-    List<Permission> test_permissions = permissionMapper.searchWithRoleId(2L);
+    List<PermissionDto> test_permissions = permissionMapper.searchWithRoleId(2L);
     Assert.assertEquals(test_permissions.size(), 1);
     Assert.assertEquals(test_permissions.get(0).getName(), "读取用户");
     Assert.assertEquals(admin_permissions.get(0).getPermission(), "user:read");
@@ -120,12 +120,12 @@ public class PermissionMapperTest {
 
   @Test
   public void TestFindByUserId() {
-    List<Permission> admin_permissions = permissionMapper.searchWithUserId(1L);
+    List<PermissionDto> admin_permissions = permissionMapper.searchWithUserId(1L);
     Assert.assertEquals(admin_permissions.size(), 5);
     Assert.assertEquals(admin_permissions.get(0).getName(), "读取用户");
     Assert.assertEquals(admin_permissions.get(0).getPermission(), "user:read");
 
-    List<Permission> test_permissions = permissionMapper.searchWithUserId(2L);
+    List<PermissionDto> test_permissions = permissionMapper.searchWithUserId(2L);
     Assert.assertEquals(test_permissions.size(), 1);
     Assert.assertEquals(test_permissions.get(0).getName(), "读取用户");
     Assert.assertEquals(admin_permissions.get(0).getPermission(), "user:read");

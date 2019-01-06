@@ -31,12 +31,7 @@ public class CityServiceImpl implements ICityService {
    */
   @Override
   public CityDto searchWithId(Long cityId) {
-    City city = cityMapper.selectByPrimaryKey(cityId);
-    CityDto cityDto = null;
-
-    if (city != null) {
-      cityDto = new CityDto(city);
-    }
+    CityDto cityDto = cityMapper.selectByPrimaryKey(cityId);
 
     return cityDto;
   }
@@ -48,8 +43,8 @@ public class CityServiceImpl implements ICityService {
    * @return
    */
   @Override
-  public List<City> searchWithName(String cityName) {
-    List<City> cityList = cityMapper.searchWithName(cityName);
+  public List<CityDto> searchWithName(String cityName) {
+    List<CityDto> cityList = cityMapper.searchWithName(cityName);
 
     return cityList;
   }
@@ -61,8 +56,8 @@ public class CityServiceImpl implements ICityService {
    * @return
    */
   @Override
-  public List<City> searchWithCondition(SearchCityDto searchCityDto) {
-    List<City> cityList = cityMapper.searchCondition(searchCityDto);
+  public List<CityDto> searchWithCondition(SearchCityDto searchCityDto) {
+    List<CityDto> cityList = cityMapper.searchCondition(searchCityDto);
 
     return cityList;
   }
@@ -74,15 +69,15 @@ public class CityServiceImpl implements ICityService {
    * @return 城市page
    */
   @Override
-  public PageInfo<City> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto) {
+  public PageInfo<CityDto> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto) {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
 
-    List<City> cityList = cityMapper.searchCondition(searchCityDto);
+    List<CityDto> cityList = cityMapper.searchCondition(searchCityDto);
 
-    PageInfo<City> cityPageInfo = new PageInfo<>(cityList);
+    PageInfo<CityDto> cityPageInfo = new PageInfo<>(cityList);
 
-    return  cityPageInfo;
+    return cityPageInfo;
   }
 
   /**

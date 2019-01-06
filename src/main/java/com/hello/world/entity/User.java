@@ -3,6 +3,7 @@ package com.hello.world.entity;
 import com.hello.world.enums.UserStatusEnum;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,9 @@ import java.util.Date;
  * @date 2018/9/1 12:52
  **/
 @Data
-public class User {
+public class User implements Serializable {
+  private static final long serialVersionUID = 6365954110010810033L;
+
   private Long id;
   private String name;
   private String phone;

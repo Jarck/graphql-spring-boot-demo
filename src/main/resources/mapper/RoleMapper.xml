@@ -9,10 +9,13 @@
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
+
+    <resultMap id="roleDtoMap" type="com.hello.world.dto.result.RoleDto" extends="BaseResultMap"/>
+
     <sql id="Base_Column_List">
         id, name, status, created_at, updated_at, remark
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="roleDtoMap">
         select
         <include refid="Base_Column_List"/>
         from role
@@ -110,21 +113,21 @@
         where id = #{id,jdbcType=BIGINT}
     </update>
 
-    <select id="findAll" resultMap="BaseResultMap">
+    <select id="findAll" resultMap="roleDtoMap">
         select
         <include refid="Base_Column_List"/>
         from role
         where status = 1
     </select>
 
-    <select id="searchWithUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="searchWithUserId" parameterType="java.lang.Long" resultMap="roleDtoMap">
         select
           role.*
         from role left join user_role on role.id = user_role.role_id
         where user_role.user_id = #{userId}
     </select>
 
-    <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="searchWithName" parameterType="java.lang.String" resultMap="roleDtoMap">
         select
         <include refid="Base_Column_List"/>
         from role

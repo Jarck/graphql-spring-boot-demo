@@ -1,5 +1,6 @@
 package com.hello.world.dao;
 
+import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
@@ -47,7 +48,7 @@ public interface CompanyMapper {
    * @param id ID
    * @return 公司
    */
-  Company selectByPrimaryKey(Long id);
+  CompanyDto selectByPrimaryKey(Long id);
 
   /**
    * 更新
@@ -71,7 +72,7 @@ public interface CompanyMapper {
    * @param name name
    * @return 公司列表
    */
-  List<Company> searchWithName(String name);
+  List<CompanyDto> searchWithName(String name);
 
   /**
    * 按城市ID查询
@@ -79,7 +80,7 @@ public interface CompanyMapper {
    * @param cityId 城市ID
    * @return 公司列表
    */
-  List<Company> searchWithCityId(Long cityId);
+  List<CompanyDto> searchWithCityId(Long cityId);
 
   /**
    * 按条件查询
@@ -87,7 +88,7 @@ public interface CompanyMapper {
    * @param searchCompanyDto 查询条件
    * @return 公司列表
    */
-  List<Company> searchCondition(SearchCompanyDto searchCompanyDto);
+  List<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto);
 
   /**
    * 创建公司

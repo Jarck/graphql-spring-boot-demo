@@ -2,7 +2,7 @@ package com.hello.world.service;
 
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
-import com.hello.world.entity.Role;
+import com.hello.world.dto.result.RoleDto;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -29,7 +29,7 @@ public class RoleServiceTest {
     PageDto pageDto = new PageDto();
     pageDto.setDesc(false);
 
-    PageInfo<Role> rolePageInfo = roleService.findAll(pageDto);
+    PageInfo<RoleDto> rolePageInfo = roleService.findAll(pageDto);
 
     Assert.assertEquals(rolePageInfo.getPageNum(), 1);
     Assert.assertEquals(rolePageInfo.getPageSize(), 20);

@@ -10,10 +10,13 @@
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
+
+    <resultMap id="permissionDtoMap" type="com.hello.world.dto.result.PermissionDto" extends="BaseResultMap"/>
+
     <sql id="Base_Column_List">
         id, name, permission, resource_type, available, created_at, updated_at
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="permissionDtoMap">
         select
         <include refid="Base_Column_List"/>
         from permission
@@ -125,19 +128,19 @@
         insert into permission (name, permission, resource_type)
         values (#{name}, #{permission}, #{resourceType})
     </insert>
-    <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="searchWithName" parameterType="java.lang.String" resultMap="permissionDtoMap">
         select
         <include refid="Base_Column_List"/>
         from permission
         where name like concat(#{name}, '%')
     </select>
-    <select id="searchWithRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="searchWithRoleId" parameterType="java.lang.Long" resultMap="permissionDtoMap">
         select permission.*
         from permission
         left join role_permission on permission.id = role_permission.permission_id
         where role_permission.role_id = #{roleId}
       </select>
-    <select id="searchWithUserId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="searchWithUserId" parameterType="java.lang.Long" resultMap="permissionDtoMap">
         select permission.*
         from permission
         left join role_permission on permission.id = role_permission.permission_id

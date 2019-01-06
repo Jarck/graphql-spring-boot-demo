@@ -13,6 +13,8 @@ import java.io.Serializable;
  **/
 @Data
 public class CityDto extends City implements Serializable {
+  private static final long serialVersionUID = -2667574691388311648L;
+
   public CityDto() {
 
   }

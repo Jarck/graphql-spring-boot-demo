@@ -25,7 +25,7 @@ public class PermissionQuery implements GraphQLQueryResolver {
    * @param permissionId 权限ID
    * @return 权限
    */
-  public Permission searchPermissionWithId(Long permissionId) {
+  public PermissionDto searchPermissionWithId(Long permissionId) {
     PermissionDto permissionDto = permissionService.searchWithId(permissionId);
 
     if (permissionDto == null) {
@@ -41,7 +41,7 @@ public class PermissionQuery implements GraphQLQueryResolver {
    * @param name 权限名
    * @return 权限列表
    */
-  public List<Permission> searchPermissionWithName(String name) {
+  public List<PermissionDto> searchPermissionWithName(String name) {
     return permissionService.searchWithName(name);
   }
 
@@ -51,7 +51,7 @@ public class PermissionQuery implements GraphQLQueryResolver {
    * @param roleId 角色ID
    * @return 权限列表
    */
-  public List<Permission> searchPermissionWithRoleId(Long roleId) {
+  public List<PermissionDto> searchPermissionWithRoleId(Long roleId) {
     return permissionService.searchWithRoleId(roleId);
   }
 
@@ -61,7 +61,7 @@ public class PermissionQuery implements GraphQLQueryResolver {
    * @param userId 用户ID
    * @return 权限列表
    */
-  public List<Permission> searchPermissionWithUserId(Long userId) {
+  public List<PermissionDto> searchPermissionWithUserId(Long userId) {
     return permissionService.searchWithUserId(userId);
   }
 }

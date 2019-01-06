@@ -6,7 +6,6 @@ import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -22,7 +21,7 @@ public interface IUserService {
    *
    * @return 用户列表
    */
-  List<User> findAll();
+  List<UserDto> findAll();
 
   /**
    * find by id
@@ -44,9 +43,9 @@ public interface IUserService {
    * find user by phone
    *
    * @param phone phone
-   * @return user
+   * @return userDto
    */
-  User getUserByPhone(@Param("phone") String phone);
+  UserDto getUserByPhone(@Param("phone") String phone);
 
   /**
    * user login
@@ -62,7 +61,7 @@ public interface IUserService {
    * @param searchUserDto 搜索条件
    * @return 用户列表
    */
-  List<User> searchWithCondition(SearchUserDto searchUserDto);
+  List<UserDto> searchWithCondition(SearchUserDto searchUserDto);
 
   /**
    * 分页查询
@@ -71,7 +70,7 @@ public interface IUserService {
    * @param pageDto 分页信息
    * @return 用户page
    */
-  PageInfo<User> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto);
+  PageInfo<UserDto> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto);
 
   /**
    * 创建用户

@@ -2,6 +2,7 @@ package com.hello.world.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -11,7 +12,9 @@ import java.util.Date;
  * @date 2018/9/1 12:52
  **/
 @Data
-public class RolePermission {
+public class RolePermission implements Serializable {
+  private static final long serialVersionUID = 8258965897814256145L;
+
   private Long id;
   private Long roleId;
   private Long permissionId;

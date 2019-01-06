@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
+import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
@@ -48,7 +49,7 @@ public interface UserMapper {
    * @param id ID
    * @return 用户
    */
-  User selectByPrimaryKey(Long id);
+  UserDto selectByPrimaryKey(Long id);
 
   /**
    * 更新
@@ -71,7 +72,7 @@ public interface UserMapper {
    *
    * @return 用户列表
    */
-  List<User> findAll();
+  List<UserDto> findAll();
 
   /**
    * 按手机号查询用户
@@ -80,7 +81,7 @@ public interface UserMapper {
    * @return 用户
    */
   @Cacheable("users")
-  User selectByPhone(String phone);
+  UserDto selectByPhone(String phone);
 
   /**
    * 创建用户
@@ -96,5 +97,5 @@ public interface UserMapper {
    * @param searchUserDto searchUserDto
    * @return 用户列表
    */
-  List<User> searchCondition(SearchUserDto searchUserDto);
+  List<UserDto> searchCondition(SearchUserDto searchUserDto);
 }

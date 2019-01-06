@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.create.CreateCityDto;
+import com.hello.world.dto.result.CityDto;
 import com.hello.world.entity.City;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
@@ -76,7 +77,7 @@ public class CityMapperTest {
     createCityDto.setName("上海");
     Long i = cityMapper.insertCity(createCityDto);
 
-    List<City> cityList = cityMapper.searchWithName("上海");
+    List<CityDto> cityList = cityMapper.searchWithName("上海");
     Assert.assertEquals(cityList.get(0).getName(), "上海");
   }
 
@@ -84,7 +85,7 @@ public class CityMapperTest {
   public void TestSearchWithName() {
     City city = insertCity();
 
-    List<City> cityList = cityMapper.searchWithName("上海");
+    List<CityDto> cityList = cityMapper.searchWithName("上海");
     Assert.assertEquals(cityList.size(), 1);
     Assert.assertEquals(cityList.get(0).getId(), city.getId());
     Assert.assertEquals(cityList.get(0).getName(), city.getName());
@@ -97,7 +98,7 @@ public class CityMapperTest {
     SearchCityDto searchCityDto = new SearchCityDto();
     searchCityDto.setName("上海");
 
-    List<City> cityList = cityMapper.searchCondition(searchCityDto);
+    List<CityDto> cityList = cityMapper.searchCondition(searchCityDto);
     Assert.assertEquals(cityList.size(), 1);
     Assert.assertEquals(cityList.get(0).getName(), city.getName());
   }

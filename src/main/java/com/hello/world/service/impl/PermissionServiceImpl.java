@@ -32,22 +32,22 @@ public class PermissionServiceImpl implements IPermissionService {
   }
 
   @Override
-  public List<Permission> searchWithName(String name) {
-    List<Permission> permissionList = permissionMapper.searchWithName(name);
+  public List<PermissionDto> searchWithName(String name) {
+    List<PermissionDto> permissionList = permissionMapper.searchWithName(name);
 
     return permissionList;
   }
 
   @Override
-  public List<Permission> searchWithRoleId(Long roleId) {
-    List<Permission> permissionList = permissionMapper.searchWithRoleId(roleId);
+  public List<PermissionDto> searchWithRoleId(Long roleId) {
+    List<PermissionDto> permissionList = permissionMapper.searchWithRoleId(roleId);
 
     return permissionList;
   }
 
   @Override
-  public List<Permission> searchWithUserId(Long userId) {
-    List<Permission> permissionList = permissionMapper.searchWithUserId(userId);
+  public List<PermissionDto> searchWithUserId(Long userId) {
+    List<PermissionDto> permissionList = permissionMapper.searchWithUserId(userId);
 
     return permissionList;
   }

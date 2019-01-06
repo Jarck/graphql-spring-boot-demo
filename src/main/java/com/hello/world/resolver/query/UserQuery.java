@@ -28,7 +28,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param userId 用户ID
    * @return 用户
    */
-  public User searchUserWithId(Long userId) {
+  public UserDto searchUserWithId(Long userId) {
     UserDto userDto = userService.searchWithId(userId);
 
     if (userDto == null) {
@@ -43,7 +43,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param phone 手机号
    * @return 用户
    */
-  public User searchUserWithPhone(String phone) {
+  public UserDto searchUserWithPhone(String phone) {
     return userService.getUserByPhone(phone);
   }
 
@@ -53,7 +53,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param searchUserDto searchUserDto
    * @return 用户列表
    */
-  public List<User> searchUsers(SearchUserDto searchUserDto) {
+  public List<UserDto> searchUsers(SearchUserDto searchUserDto) {
     return userService.searchWithCondition(searchUserDto);
   }
 
@@ -64,9 +64,9 @@ public class UserQuery implements GraphQLQueryResolver {
    * @param pageDto 分页参数
    * @return 用户page
    */
-  public List<User> searchUserPage(SearchUserDto searchUserDto, PageDto pageDto) {
-    PageInfo<User> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
-    List<User> userList = userPageInfo.getList();
+  public List<UserDto> searchUserPage(SearchUserDto searchUserDto, PageDto pageDto) {
+    PageInfo<UserDto> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
+    List<UserDto> userList = userPageInfo.getList();
     return userList;
   }
 }

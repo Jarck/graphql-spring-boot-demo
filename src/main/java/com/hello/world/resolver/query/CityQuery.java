@@ -3,7 +3,6 @@ package com.hello.world.resolver.query;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.result.CityDto;
-import com.hello.world.entity.City;
 import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +25,8 @@ public class CityQuery implements GraphQLQueryResolver {
    * @param searchCityDto 查询条件
    * @return 城市列表
    */
-  public List<City> searchCities(SearchCityDto searchCityDto) {
-    List<City> cityList = cityService.searchWithCondition(searchCityDto);
+  public List<CityDto> searchCities(SearchCityDto searchCityDto) {
+    List<CityDto> cityList = cityService.searchWithCondition(searchCityDto);
 
     return cityList;
   }
@@ -38,7 +37,7 @@ public class CityQuery implements GraphQLQueryResolver {
    * @param cityId 城市ID
    * @return 城市
    */
-  public City searchCityWithId(Long cityId) {
+  public CityDto searchCityWithId(Long cityId) {
     CityDto cityDto = cityService.searchWithId(cityId);
 
     if (cityDto == null) {
@@ -54,8 +53,8 @@ public class CityQuery implements GraphQLQueryResolver {
    * @param cityName 城市名
    * @return 城市列表
    */
-  public List<City> searchCityWithName(String cityName) {
-    List<City> cityList = cityService.searchWithName(cityName);
+  public List<CityDto> searchCityWithName(String cityName) {
+    List<CityDto> cityList = cityService.searchWithName(cityName);
 
     return cityList;
   }

@@ -13,10 +13,13 @@
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
+
+    <resultMap id="companyDtoMap" type="com.hello.world.dto.result.CompanyDto" extends="BaseResultMap"/>
+
     <sql id="Base_Column_List">
         id, name, short_name, address, link_name, phone, city_id, status, created_at, updated_at
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="companyDtoMap">
         select
         <include refid="Base_Column_List"/>
         from company
@@ -150,19 +153,19 @@
         where id = #{id,jdbcType=INTEGER}
       </update>
     
-    <select id="searchWithName" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="searchWithName" parameterType="java.lang.String" resultMap="companyDtoMap">
         select 
         <include refid="Base_Column_List"/>
         from company
         where name like concat(#{name}, '%')
     </select>
-    <select id="searchWithCityId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="searchWithCityId" parameterType="java.lang.Long" resultMap="companyDtoMap">
         select
         <include refid="Base_Column_List"/>
         from company
         where city_id = #{cityId}
     </select>
-    <select id="searchCondition" parameterType="com.hello.world.dto.condition.SearchCompanyDto" resultMap="BaseResultMap">
+    <select id="searchCondition" parameterType="com.hello.world.dto.condition.SearchCompanyDto" resultMap="companyDtoMap">
         select
         <include refid="Base_Column_List"/>
         from company

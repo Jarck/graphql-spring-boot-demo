@@ -2,6 +2,7 @@ package com.hello.world.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateCompanyDto;
+import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.ICompanyService;
@@ -27,7 +28,7 @@ public class CompanyMutation implements GraphQLMutationResolver {
    * @return 公司
    * @throws GraphQLValidateException 参数校验异常
    */
-  public Company createCompany(CreateCompanyDto createCompanyDto) throws GraphQLValidateException {
+  public CompanyDto createCompany(CreateCompanyDto createCompanyDto) throws GraphQLValidateException {
     // 校验参数
     Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createCompanyDto);
     if (errorMap != null) {
@@ -35,8 +36,8 @@ public class CompanyMutation implements GraphQLMutationResolver {
     }
 
     companyService.createCompany(createCompanyDto);
-    Company company = companyService.searchWithId(createCompanyDto.getId());
+    CompanyDto companyDto = companyService.searchWithId(createCompanyDto.getId());
 
-    return company;
+    return companyDto;
   }
 }

@@ -7,10 +7,13 @@
         <result column="created_at" jdbcType="TIMESTAMP" property="createdAt"/>
         <result column="updated_at" jdbcType="TIMESTAMP" property="updatedAt"/>
     </resultMap>
+
+    <resultMap id="cityDtoMap" type="com.hello.world.dto.result.CityDto" extends="BaseResultMap"/>
+
     <sql id="Base_Column_List">
         id, name, created_at, updated_at
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="cityDtoMap">
         select
         <include refid="Base_Column_List"/>
         from city
@@ -84,13 +87,13 @@
         insert into city (name)
         values (#{name})
     </insert>
-    <select id="searchWithName" resultMap="BaseResultMap">
+    <select id="searchWithName" resultMap="cityDtoMap">
         select
         <include refid="Base_Column_List"/>
         from city
         where name like concat(#{name}, '%')
     </select>
-    <select id="searchCondition" resultMap="BaseResultMap">
+    <select id="searchCondition" resultMap="cityDtoMap">
         select
         <include refid="Base_Column_List"/>
         from city

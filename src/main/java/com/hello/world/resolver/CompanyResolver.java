@@ -1,9 +1,9 @@
 package com.hello.world.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.hello.world.dao.CityMapper;
-import com.hello.world.entity.City;
-import com.hello.world.entity.Company;
+import com.hello.world.dto.result.CityDto;
+import com.hello.world.dto.result.CompanyDto;
+import com.hello.world.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,17 +12,17 @@ import org.springframework.stereotype.Component;
  * @date 2018/9/9 17:09
  **/
 @Component
-public class CompanyResolver implements GraphQLResolver<Company> {
+public class CompanyResolver implements GraphQLResolver<CompanyDto> {
   @Autowired
-  private CityMapper cityMapper;
+  private ICityService cityService;
 
   /**
    * 按公司查找城市
    *
-   * @param company 公司
+   * @param companyDto 公司
    * @return 城市
    */
-  public City city(Company company) {
-    return cityMapper.selectByPrimaryKey(company.getCityId());
+  public CityDto city(CompanyDto companyDto) {
+    return cityService.searchWithId(companyDto.getCityId());
   }
 }

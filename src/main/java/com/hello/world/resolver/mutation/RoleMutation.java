@@ -2,6 +2,7 @@ package com.hello.world.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.result.RoleDto;
 import com.hello.world.entity.Role;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.IRoleService;
@@ -27,7 +28,7 @@ public class RoleMutation implements GraphQLMutationResolver {
    * @return 角色
    * @throws GraphQLValidateException 参数校验异常
    */
-  public Role createRole(CreateRoleDto createRoleDto) throws GraphQLValidateException {
+  public RoleDto createRole(CreateRoleDto createRoleDto) throws GraphQLValidateException {
     // 校验参数
     Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createRoleDto);
     if (errorMap != null) {
@@ -35,8 +36,8 @@ public class RoleMutation implements GraphQLMutationResolver {
     }
 
     roleService.createRole(createRoleDto);
-    Role role = roleService.searchWithId(createRoleDto.getId());
+    RoleDto roleDto = roleService.searchWithId(createRoleDto.getId());
 
-    return role;
+    return roleDto;
   }
 }

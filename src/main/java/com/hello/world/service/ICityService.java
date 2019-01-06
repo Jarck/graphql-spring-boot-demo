@@ -5,7 +5,6 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.result.CityDto;
-import com.hello.world.entity.City;
 
 import java.util.List;
 
@@ -28,7 +27,7 @@ public interface ICityService {
    * @param cityName 城市名
    * @return 城市列表
    */
-  List<City> searchWithName(String cityName);
+  List<CityDto> searchWithName(String cityName);
 
   /**
    * 按条件查询
@@ -36,7 +35,7 @@ public interface ICityService {
    * @param searchCityDto 搜索条件
    * @return 城市列表
    */
-  List<City> searchWithCondition(SearchCityDto searchCityDto);
+  List<CityDto> searchWithCondition(SearchCityDto searchCityDto);
 
   /**
    * 分页查询
@@ -44,7 +43,7 @@ public interface ICityService {
    * @param pageDto 分页信息
    * @return 城市page
    */
-  PageInfo<City> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto);
+  PageInfo<CityDto> searchWithCondition(SearchCityDto searchCityDto, PageDto pageDto);
 
   /**
    * 创建城市

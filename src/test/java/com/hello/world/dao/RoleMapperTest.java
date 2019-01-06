@@ -1,7 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateRoleDto;
-import com.hello.world.entity.Role;
+import com.hello.world.dto.result.RoleDto;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -69,7 +69,7 @@ public class RoleMapperTest {
     createRoleDto.setRemark("测试2");
     Long i = roleMapper.insertRole(createRoleDto);
 
-    List<Role> roleList = roleMapper.searchWithName("test2");
+    List<RoleDto> roleList = roleMapper.searchWithName("test2");
     Assert.assertEquals(roleList.size(), 1);
     Assert.assertEquals(roleList.get(0).getId(), createRoleDto.getId());
     Assert.assertEquals(roleList.get(0).getName(), createRoleDto.getName());
@@ -78,7 +78,7 @@ public class RoleMapperTest {
 
   @Test
   public void testSearchWithName() {
-    List<Role> roleList = roleMapper.searchWithName("admin");
+    List<RoleDto> roleList = roleMapper.searchWithName("admin");
 
     Assert.assertEquals(roleList.size(), 1);
     Assert.assertEquals(roleList.get(0).getId(), new Long(1));
@@ -88,18 +88,18 @@ public class RoleMapperTest {
 
   @Test
   public void testFindAll() {
-    List<Role> roles = roleMapper.findAll();
+    List<RoleDto> roles = roleMapper.findAll();
     Assert.assertEquals(roles.size(), 2);
     Assert.assertEquals(roles.get(0).getName(), "admin");
   }
 
   @Test
   public void testFindByUserId() {
-    List<Role> admin_roles = roleMapper.searchWithUserId(1L);
+    List<RoleDto> admin_roles = roleMapper.searchWithUserId(1L);
     Assert.assertEquals(admin_roles.size(), 2);
     Assert.assertEquals(admin_roles.get(0).getName(), "admin");
 
-    List<Role> test_roles = roleMapper.searchWithUserId(2L);
+    List<RoleDto> test_roles = roleMapper.searchWithUserId(2L);
     Assert.assertEquals(test_roles.size(), 1);
     Assert.assertEquals(test_roles.get(0).getName(), "test");
   }

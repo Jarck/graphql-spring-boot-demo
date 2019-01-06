@@ -3,6 +3,7 @@ package com.hello.world.entity;
 import com.hello.world.enums.CompanyStatusEnum;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -12,7 +13,9 @@ import java.util.Date;
  * @date 2018/9/1 12:52
  **/
 @Data
-public class Company {
+public class Company implements Serializable {
+  private static final long serialVersionUID = 7253748290959526944L;
+
   private Long id;
   private String name;
   private String shortName;

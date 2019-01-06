@@ -3,7 +3,7 @@ package com.hello.world.service;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
-import com.hello.world.entity.Role;
+import com.hello.world.dto.result.RoleDto;
 
 import java.util.List;
 
@@ -18,14 +18,14 @@ public interface IRoleService {
    *
    * @return 角色列表
    */
-  List<Role> findAll();
+  List<RoleDto> findAll();
 
   /**
    * 分页查询
    * @param pageDto 分页信息
    * @return 角色id
    */
-  PageInfo<Role> findAll(PageDto pageDto);
+  PageInfo<RoleDto> findAll(PageDto pageDto);
 
   /**
    * 通过角色id查询
@@ -33,7 +33,7 @@ public interface IRoleService {
    * @param roleId 角色ID
    * @return 角色
    */
-  Role searchWithId(Long roleId);
+  RoleDto searchWithId(Long roleId);
 
   /**
    * 通过角色名查询
@@ -41,7 +41,7 @@ public interface IRoleService {
    * @param name 角色名
    * @return 角色列表
    */
-  List<Role> searchWithName(String name);
+  List<RoleDto> searchWithName(String name);
 
   /**
    * 通过用户ID查询
@@ -49,7 +49,7 @@ public interface IRoleService {
    * @param userId 用户ID
    * @return 角色列表
    */
-  List<Role> searchWithUserId(Long userId);
+  List<RoleDto> searchWithUserId(Long userId);
 
   /**
    * 创建角色

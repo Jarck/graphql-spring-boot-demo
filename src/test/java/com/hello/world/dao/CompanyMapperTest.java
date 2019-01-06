@@ -2,7 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
-import com.hello.world.entity.Company;
+import com.hello.world.dto.result.CompanyDto;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -62,7 +62,7 @@ public class CompanyMapperTest {
 
   @Test
   public void TestSearchWithName() {
-    List<Company> companyList = companyMapper.searchWithName("杭州");
+    List<CompanyDto> companyList = companyMapper.searchWithName("杭州");
 
     Assert.assertEquals(companyList.size(), 1);
     Assert.assertEquals(companyList.get(0).getName(), "杭州xxx有限公司");
@@ -71,7 +71,7 @@ public class CompanyMapperTest {
 
   @Test
   public void TestSearchWithCityId() {
-    List<Company> companyList = companyMapper.searchWithCityId(2L);
+    List<CompanyDto> companyList = companyMapper.searchWithCityId(2L);
 
     Assert.assertEquals(companyList.size(), 2);
     Assert.assertEquals(companyList.get(0).getName(),"苏州xxx有限公司");
@@ -83,7 +83,7 @@ public class CompanyMapperTest {
     SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
     searchCompanyDto.setCityId(2L);
     searchCompanyDto.setName("苏州xxx2有限公司");
-    List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
+    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
 
     Assert.assertEquals(companyList.size(), 1);
     Assert.assertEquals(companyList.get(0).getName(), "苏州xxx2有限公司");
@@ -101,7 +101,7 @@ public class CompanyMapperTest {
     SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
     searchCompanyDto.setCityId(1L);
     searchCompanyDto.setName("杭州xxx2有限公司");
-    List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
+    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
     Assert.assertEquals(companyList.size(), 1);
     Assert.assertEquals(companyList.get(0).getName(), createCompanyDto.getName());
     Assert.assertEquals(companyList.get(0).getShortName(), createCompanyDto.getShortName());

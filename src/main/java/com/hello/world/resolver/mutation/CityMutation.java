@@ -2,7 +2,7 @@ package com.hello.world.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateCityDto;
-import com.hello.world.entity.City;
+import com.hello.world.dto.result.CityDto;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.ICityService;
 import com.hello.world.util.ValidatorUtil;
@@ -27,7 +27,7 @@ public class CityMutation implements GraphQLMutationResolver {
    * @return 城市
    * @throws GraphQLValidateException 参数校验异常
    */
-  public City createCity(CreateCityDto createCityDto) throws GraphQLValidateException {
+  public CityDto createCity(CreateCityDto createCityDto) throws GraphQLValidateException {
     // 校验参数
     Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createCityDto);
     if (errorMap != null) {
@@ -35,8 +35,8 @@ public class CityMutation implements GraphQLMutationResolver {
     }
 
     cityService.createCity(createCityDto);
-    City city = cityService.searchWithId(createCityDto.getId());
+    CityDto cityDto = cityService.searchWithId(createCityDto.getId());
 
-    return city;
+    return cityDto;
   }
 }

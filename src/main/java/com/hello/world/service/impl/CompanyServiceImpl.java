@@ -36,34 +36,34 @@ public class CompanyServiceImpl implements ICompanyService {
   }
 
   @Override
-  public List<Company> searchWithName(String name) {
-    List<Company> companyList = companyMapper.searchWithName(name);
+  public List<CompanyDto> searchWithName(String name) {
+    List<CompanyDto> companyList = companyMapper.searchWithName(name);
 
     return companyList;
   }
 
   @Override
-  public List<Company> searchWithCityId(Long cityId) {
-    List<Company> companyList = companyMapper.searchWithCityId(cityId);
+  public List<CompanyDto> searchWithCityId(Long cityId) {
+    List<CompanyDto> companyList = companyMapper.searchWithCityId(cityId);
 
     return companyList;
   }
 
   @Override
-  public List<Company> searchCondition(SearchCompanyDto searchCompanyDto) {
-    List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
+  public List<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto) {
+    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
 
     return companyList;
   }
 
   @Override
-  public PageInfo<Company> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
+  public PageInfo<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "acs"));
 
-    List<Company> companyList = companyMapper.searchCondition(searchCompanyDto);
+    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
 
-    PageInfo<Company> companyPage = new PageInfo<>(companyList);
+    PageInfo<CompanyDto> companyPage = new PageInfo<>(companyList);
 
     return companyPage;
   }

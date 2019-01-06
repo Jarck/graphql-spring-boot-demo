@@ -17,6 +17,8 @@ import java.util.List;
  **/
 @Data
 public class UserDto extends User implements Serializable {
+  private static final long serialVersionUID = 4552788051779886957L;
+
   private String secretKey;
 
   private List<Role> roles = new ArrayList<>();

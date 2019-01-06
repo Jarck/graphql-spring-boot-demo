@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateUserDto;
+import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
 import com.hello.world.enums.UserStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
@@ -53,15 +54,15 @@ public class UserMapperTest {
 
   @Test
   public void testFindAll() {
-    List<User> users = userMapper.findAll();
+    List<UserDto> users = userMapper.findAll();
     Assert.assertEquals(users.size(), 1);
     Assert.assertEquals(users.get(0).getName(), "test");
   }
 
   @Test
   public void testSelectByPhone() {
-    User user = userMapper.selectByPhone("18812345671");
-    Assert.assertEquals(user.getName(), "test");
+    UserDto userDto = userMapper.selectByPhone("18812345671");
+    Assert.assertEquals(userDto.getName(), "test");
   }
 
   @Test
@@ -71,7 +72,7 @@ public class UserMapperTest {
     createUserDto.setPhone("12345678902");
     Long i = userMapper.insertUser(createUserDto);
 
-    User user = userMapper.selectByPhone("12345678902");
+    UserDto user = userMapper.selectByPhone("12345678902");
     Assert.assertEquals(user.getId(), createUserDto.getId());
     Assert.assertEquals(user.getName(), createUserDto.getName());
     Assert.assertEquals(user.getPhone(), createUserDto.getPhone());
@@ -85,7 +86,7 @@ public class UserMapperTest {
     user.setStatus(UserStatusEnum.ARCHIVED);
     int i = userMapper.insert(user);
 
-    User user_insert = userMapper.selectByPhone("12345678901");
+    UserDto user_insert = userMapper.selectByPhone("12345678901");
     Assert.assertEquals(user.getPhone(), user_insert.getPhone());
     Assert.assertEquals(user_insert.getStatus(), UserStatusEnum.ARCHIVED);
   }

@@ -2,7 +2,6 @@ package com.hello.world.service;
 
 import com.hello.world.dto.create.CreatePermissionDto;
 import com.hello.world.dto.result.PermissionDto;
-import com.hello.world.entity.Permission;
 
 import java.util.List;
 
@@ -25,7 +24,7 @@ public interface IPermissionService {
    * @param name 权限名称
    * @return 权限列表
    */
-  List<Permission> searchWithName(String name);
+  List<PermissionDto> searchWithName(String name);
 
   /**
    * 通过角色id查询
@@ -33,7 +32,7 @@ public interface IPermissionService {
    * @param roleId 角色ID
    * @return 权限列表
    */
-  List<Permission> searchWithRoleId(Long roleId);
+  List<PermissionDto> searchWithRoleId(Long roleId);
 
   /**
    * 通过用户id查询
@@ -41,7 +40,7 @@ public interface IPermissionService {
    * @param userId 用户ID
    * @return 权限列表
    */
-  List<Permission> searchWithUserId(Long userId);
+  List<PermissionDto> searchWithUserId(Long userId);
 
   /**
    * 创建权限

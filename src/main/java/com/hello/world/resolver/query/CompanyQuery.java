@@ -26,7 +26,7 @@ public class CompanyQuery implements GraphQLQueryResolver {
    * @param searchCompanyDto 搜索条件
    * @return 公司列表
    */
-  public List<Company> searchCompanies(SearchCompanyDto searchCompanyDto) {
+  public List<CompanyDto> searchCompanies(SearchCompanyDto searchCompanyDto) {
     return companyService.searchCondition(searchCompanyDto);
   }
 
@@ -36,7 +36,7 @@ public class CompanyQuery implements GraphQLQueryResolver {
    * @param companyId 公司ID
    * @return 公司
    */
-  public Company searchCompanyWithId(Long companyId) {
+  public CompanyDto searchCompanyWithId(Long companyId) {
     CompanyDto companyDto = companyService.searchWithId(companyId);
 
     if (companyDto == null) {
@@ -51,7 +51,7 @@ public class CompanyQuery implements GraphQLQueryResolver {
    * @param cityId 公司ID
    * @return 公司列表
    */
-  public List<Company> searchCompanyWithCityId(Long cityId) {
+  public List<CompanyDto> searchCompanyWithCityId(Long cityId) {
     return companyService.searchWithCityId(cityId);
   }
 
@@ -61,7 +61,7 @@ public class CompanyQuery implements GraphQLQueryResolver {
    * @param name 公司名称
    * @return 公司列表
    */
-  public List<Company> searchCompanyWithName(String name) {
+  public List<CompanyDto> searchCompanyWithName(String name) {
     return companyService.searchWithName(name);
   }
 }

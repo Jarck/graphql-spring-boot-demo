@@ -16,6 +16,8 @@ import java.util.List;
  **/
 @Data
 public class RoleDto extends Role implements Serializable {
+  private static final long serialVersionUID = 5885545897431481034L;
+
   private List<Permission> permissions = new ArrayList<>();
 
   public RoleDto() {

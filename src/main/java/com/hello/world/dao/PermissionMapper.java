@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreatePermissionDto;
+import com.hello.world.dto.result.PermissionDto;
 import com.hello.world.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -47,7 +48,7 @@ public interface PermissionMapper {
    * @param id id
    * @return 权限
    */
-  Permission selectByPrimaryKey(Long id);
+  PermissionDto selectByPrimaryKey(Long id);
 
   /**
    * 更新
@@ -79,7 +80,7 @@ public interface PermissionMapper {
    * @param name 权限名
    * @return 权限列表
    */
-  List<Permission> searchWithName(String name);
+  List<PermissionDto> searchWithName(String name);
 
   /**
    * 按角色ID查询
@@ -87,7 +88,7 @@ public interface PermissionMapper {
    * @param roleId 角色ID
    * @return 权限列表
    */
-  List<Permission> searchWithRoleId(@Param("roleId") Long roleId);
+  List<PermissionDto> searchWithRoleId(@Param("roleId") Long roleId);
 
   /**
    * 按用户ID查询
@@ -95,5 +96,5 @@ public interface PermissionMapper {
    * @param userId 用户ID
    * @return 权限列表
    */
-  List<Permission> searchWithUserId(@Param("userId") Long userId);
+  List<PermissionDto> searchWithUserId(@Param("userId") Long userId);
 }

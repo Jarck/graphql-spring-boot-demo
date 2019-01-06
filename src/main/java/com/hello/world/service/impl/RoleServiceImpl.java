@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.RoleMapper;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.result.RoleDto;
 import com.hello.world.entity.Role;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,34 +23,34 @@ public class RoleServiceImpl implements IRoleService {
   private RoleMapper roleMapper;
 
   @Override
-  public List<Role> findAll() {
+  public List<RoleDto> findAll() {
     return roleMapper.findAll();
   }
 
   @Override
-  public PageInfo<Role> findAll(PageDto pageDto) {
+  public PageInfo<RoleDto> findAll(PageDto pageDto) {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
 
-    List<Role> roleList = roleMapper.findAll();
-    PageInfo<Role> rolePageInfo = new PageInfo<>(roleList);
+    List<RoleDto> roleList = roleMapper.findAll();
+    PageInfo<RoleDto> rolePageInfo = new PageInfo<>(roleList);
 
     return rolePageInfo;
   }
 
   @Override
-  public Role searchWithId(Long roleId) {
-    Role role = roleMapper.selectByPrimaryKey(roleId);
-    return role;
+  public RoleDto searchWithId(Long roleId) {
+    RoleDto roleDto = roleMapper.selectByPrimaryKey(roleId);
+    return roleDto;
   }
 
   @Override
-  public List<Role> searchWithName(String name) {
+  public List<RoleDto> searchWithName(String name) {
     return roleMapper.searchWithName(name);
   }
 
   @Override
-  public List<Role> searchWithUserId(Long userId) {
+  public List<RoleDto> searchWithUserId(Long userId) {
     return roleMapper.searchWithUserId(userId);
   }
 

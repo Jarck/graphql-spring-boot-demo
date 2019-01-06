@@ -56,19 +56,13 @@ public class UserServiceImpl implements IUserService {
   private RedisTemplate redisTemplate;
 
   @Override
-  public List<User> findAll() {
+  public List<UserDto> findAll() {
     return userMapper.findAll();
   }
 
   @Override
   public UserDto searchWithId(Long userId) {
-    User user = userMapper.selectByPrimaryKey(userId);
-    UserDto userDto = null;
-
-    if (user != null) {
-      userDto = new UserDto(user);
-      setUserRolePermission(userDto);
-    }
+    UserDto userDto = userMapper.selectByPrimaryKey(userId);
 
     return userDto;
   }
@@ -88,7 +82,7 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
-  public User getUserByPhone(String phone) {
+  public UserDto getUserByPhone(String phone) {
     return userMapper.selectByPhone(phone);
   }
 
@@ -110,7 +104,7 @@ public class UserServiceImpl implements IUserService {
 
     String token = JWTUtil.sign(userDto);
 
-    stringRedisTemplate.opsForValue().set(SystemConstant.TOKEN_HEADER + userDto.getPhone(),
+    stringRedisTemplate.opsForValue().set(userDto.getPhone() + "_token",
             token, 1, TimeUnit.DAYS);
 
     return token;
@@ -137,18 +131,18 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
-  public List<User> searchWithCondition(SearchUserDto searchUserDto) {
+  public List<UserDto> searchWithCondition(SearchUserDto searchUserDto) {
     return userMapper.searchCondition(searchUserDto);
   }
 
   @Override
-  public PageInfo<User> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto) {
+  public PageInfo<UserDto> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto) {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
 
-    List<User> userList = userMapper.searchCondition(searchUserDto);
+    List<UserDto> userList = userMapper.searchCondition(searchUserDto);
 
-    PageInfo<User> userPageInfo = new PageInfo<>(userList);
+    PageInfo<UserDto> userPageInfo = new PageInfo<>(userList);
 
     return userPageInfo;
   }

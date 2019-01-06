@@ -1,10 +1,11 @@
 package com.hello.world.resolver;
 
 import com.coxautodev.graphql.tools.GraphQLResolver;
-import com.hello.world.entity.City;
-import com.hello.world.entity.Company;
+import com.hello.world.dto.result.CityDto;
+import com.hello.world.dto.result.CompanyDto;
+import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.Role;
-import com.hello.world.entity.User;
 import com.hello.world.service.ICityService;
 import com.hello.world.service.ICompanyService;
 import com.hello.world.service.IRoleService;
@@ -18,7 +19,7 @@ import java.util.List;
  * @date 2018/9/1 12:52
  **/
 @Component
-public class UserResolver implements GraphQLResolver<User> {
+public class UserResolver implements GraphQLResolver<UserDto> {
   @Autowired
   private ICityService cityService;
 
@@ -31,30 +32,30 @@ public class UserResolver implements GraphQLResolver<User> {
   /**
    * 按用户查询城市
    *
-   * @param user user
+   * @param userDto userDto
    * @return 城市
    */
-  public City city(User user) {
-    return cityService.searchWithId(user.getCityId());
+  public CityDto city(UserDto userDto) {
+    return cityService.searchWithId(userDto.getCityId());
   }
 
   /**
    * 按用户查询公司
    *
-   * @param user user
+   * @param userDto userDto
    * @return 公司
    */
-  public Company company(User user) {
-    return companyService.searchWithId(user.getCompanyId());
+  public CompanyDto company(UserDto userDto) {
+    return companyService.searchWithId(userDto.getCompanyId());
   }
 
   /**
    * 角色列表
    *
-   * @param user user
+   * @param userDto userDto
    * @return 角色列表
    */
-  public List<Role> roles(User user) {
-    return roleService.searchWithUserId(user.getId());
+  public List<RoleDto> roles(UserDto userDto) {
+    return roleService.searchWithUserId(userDto.getId());
   }
 }

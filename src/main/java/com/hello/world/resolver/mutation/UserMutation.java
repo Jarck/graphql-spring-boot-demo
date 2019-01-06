@@ -2,7 +2,7 @@ package com.hello.world.resolver.mutation;
 
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateUserDto;
-import com.hello.world.entity.User;
+import com.hello.world.dto.result.UserDto;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.IUserService;
 import com.hello.world.util.ValidatorUtil;
@@ -27,7 +27,7 @@ public class UserMutation implements GraphQLMutationResolver {
    * @return 用户
    * @throws GraphQLValidateException 参数校验异常
    */
-  public User createUser(CreateUserDto createUserDto) throws GraphQLValidateException {
+  public UserDto createUser(CreateUserDto createUserDto) throws GraphQLValidateException {
 
     // 校验参数
     Map<String, StringBuffer> errorMap = ValidatorUtil.validate(createUserDto);
@@ -36,8 +36,8 @@ public class UserMutation implements GraphQLMutationResolver {
     }
 
     userService.createUser(createUserDto);
-    User user = userService.searchWithId(createUserDto.getId());
+    UserDto userDto = userService.searchWithId(createUserDto.getId());
 
-    return user;
+    return userDto;
   }
 }
