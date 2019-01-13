@@ -3,7 +3,6 @@ package com.hello.world.web.rest;
 import com.hello.world.constant.CommonStatus;
 import com.hello.world.constant.SystemConstant;
 import com.hello.world.dto.condition.LoginDto;
-import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
 import com.hello.world.service.IUserService;
 import io.swagger.annotations.Api;
@@ -48,7 +47,7 @@ public class LoginController extends BaseController {
     User user = userService.getUserByPhone(loginUser.getPhone());
     Map<String, Object> result = new HashMap<>(1);
     result.put("user", user);
-    result.put(SystemConstant.TOKEN_HEADER + loginUser.getPhone(), token);
+    result.put(SystemConstant.TOKEN_HEADER, token);
 
     return new ResponseBean(CommonStatus.OK, "success", result);
   }

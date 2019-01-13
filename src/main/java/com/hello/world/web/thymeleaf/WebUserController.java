@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 @Controller
 @RequestMapping("users")
-public class UserController {
+public class WebUserController {
   @Autowired
   private IUserService userService;
 
