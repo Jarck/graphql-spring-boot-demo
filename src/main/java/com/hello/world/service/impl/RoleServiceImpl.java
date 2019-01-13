@@ -6,7 +6,6 @@ import com.hello.world.dao.RoleMapper;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.result.RoleDto;
-import com.hello.world.entity.Role;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

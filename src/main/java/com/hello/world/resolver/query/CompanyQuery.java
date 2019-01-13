@@ -3,7 +3,6 @@ package com.hello.world.resolver.query;
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.result.CompanyDto;
-import com.hello.world.entity.Company;
 import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -3,7 +3,6 @@ package com.hello.world.resolver.mutation;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateCompanyDto;
 import com.hello.world.dto.result.CompanyDto;
-import com.hello.world.entity.Company;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.ICompanyService;
 import com.hello.world.util.ValidatorUtil;

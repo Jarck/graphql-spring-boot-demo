@@ -5,7 +5,6 @@ import com.hello.world.dto.result.CityDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.Role;
 import com.hello.world.service.ICityService;
 import com.hello.world.service.ICompanyService;
 import com.hello.world.service.IRoleService;

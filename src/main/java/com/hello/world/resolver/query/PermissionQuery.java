@@ -2,7 +2,6 @@ package com.hello.world.resolver.query;
 
 import com.coxautodev.graphql.tools.GraphQLQueryResolver;
 import com.hello.world.dto.result.PermissionDto;
-import com.hello.world.entity.Permission;
 import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.IPermissionService;
 import org.springframework.beans.factory.annotation.Autowired;

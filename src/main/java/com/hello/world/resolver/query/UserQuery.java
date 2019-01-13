@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.User;
 import com.hello.world.exception.GraphQLNotFoundException;
 import com.hello.world.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

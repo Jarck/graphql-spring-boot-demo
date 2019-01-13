@@ -7,7 +7,6 @@ import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dao.CityMapper;
 import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.result.CityDto;
-import com.hello.world.entity.City;
 import com.hello.world.service.ICityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

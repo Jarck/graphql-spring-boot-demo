@@ -3,7 +3,6 @@ package com.hello.world.service;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.result.CompanyDto;
-import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
 

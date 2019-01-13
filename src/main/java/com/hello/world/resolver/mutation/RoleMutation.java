@@ -3,7 +3,6 @@ package com.hello.world.resolver.mutation;
 import com.coxautodev.graphql.tools.GraphQLMutationResolver;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.result.RoleDto;
-import com.hello.world.entity.Role;
 import com.hello.world.exception.GraphQLValidateException;
 import com.hello.world.service.IRoleService;
 import com.hello.world.util.ValidatorUtil;
