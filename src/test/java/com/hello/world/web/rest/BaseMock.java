@@ -21,7 +21,6 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
@@ -109,7 +108,7 @@ public class BaseMock extends AbstractShiroTest {
     String phone = "18812345671";
     String verifyCode = "123456";
 
-    MvcResult mvcResult = this.mockMvc.perform(post("/api/login")
+    this.mockMvc.perform(post("/api/login")
             .param("phone", phone)
             .param("verifyCode", verifyCode))
             .andDo(print())
