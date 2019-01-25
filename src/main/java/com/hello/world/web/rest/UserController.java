@@ -36,8 +36,6 @@ public class UserController extends BaseController {
   @ApiOperation("users")
   @GetMapping("users")
   public ResponseBean list(SearchUserDto searchUserDto, PageDto pageDto) {
-    UserDto userDto = currentUser();
-
     PageInfo<UserDto> userDtoPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
 
     return new ResponseBean(CommonStatus.OK, "success", userDtoPageInfo);

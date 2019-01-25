@@ -9,10 +9,12 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -25,7 +27,6 @@ import java.util.Map;
 @Slf4j
 @RestController
 @Api(value = "Rest登录", description = "Rest登录")
-@RequestMapping("api")
 public class LoginController extends BaseController {
   @Autowired
   private IUserService userService;
@@ -37,12 +38,13 @@ public class LoginController extends BaseController {
    * @param bindingResult bindingResult
    * @return 登录结果
    */
-  @ApiOperation("login")
-  @PostMapping("login")
+  @ApiOperation("api/login")
+  @PostMapping("api/login")
   public ResponseBean login(@Validated LoginDto loginUser, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
+
     String token = userService.login(loginUser);
     User user = userService.getUserByPhone(loginUser.getPhone());
     Map<String, Object> result = new HashMap<>(1);
@@ -50,5 +52,16 @@ public class LoginController extends BaseController {
     result.put(SystemConstant.TOKEN_HEADER, token);
 
     return new ResponseBean(CommonStatus.OK, "success", result);
+  }
+
+  /**
+   * 401 request
+   *
+   * @return 401
+   */
+  @RequestMapping("401")
+  @ResponseStatus(HttpStatus.UNAUTHORIZED)
+  public ResponseBean unauthorized() {
+    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), "Unauthorized", "token失效或没有访问权限");
   }
 }

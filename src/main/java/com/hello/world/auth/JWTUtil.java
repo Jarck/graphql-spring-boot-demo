@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTDecodeException;
+import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.hello.world.dto.result.UserDto;
 import lombok.extern.slf4j.Slf4j;
@@ -19,8 +20,8 @@ import java.util.Date;
  **/
 @Slf4j
 public final class JWTUtil {
-  // 过期时间5min
-  private static final long EXPIRE_TIME = 5 * 60 * 1000;
+  // 过期时间1天
+  private static final long EXPIRE_TIME = 60 * 60 * 1000 * 24;
 
   private JWTUtil() {
   }
@@ -40,12 +41,16 @@ public final class JWTUtil {
               .withClaim("name", user.getName())
               .withClaim("phone", user.getPhone())
               .withClaim("city_id", user.getCityId())
+              .acceptExpiresAt(System.currentTimeMillis() + EXPIRE_TIME)
               .build();
       DecodedJWT jwt = verifier.verify(token);
 
       return true;
-    } catch (Exception exception) {
-      log.error("校验token失败", exception);
+    } catch (TokenExpiredException ex) {
+      log.error("token过期", ex);
+      return false;
+    } catch (Exception ex) {
+      log.error("校验token失败", ex);
       return false;
     }
   }
@@ -67,6 +72,22 @@ public final class JWTUtil {
   }
 
   /**
+   * 获取token中的用户名
+   *
+   * @param token token
+   * @return token中包含的用户名
+   */
+  public static String getUserName(String token) {
+    try {
+      DecodedJWT jwt = JWT.decode(token);
+
+      return jwt.getClaim("name").asString();
+    } catch (JWTDecodeException e) {
+      return null;
+    }
+  }
+
+  /**
    * 获取token中的手机号码
    *
    * @param token token
@@ -77,6 +98,22 @@ public final class JWTUtil {
       DecodedJWT jwt = JWT.decode(token);
 
       return jwt.getClaim("phone").asString();
+    } catch (JWTDecodeException e) {
+      return null;
+    }
+  }
+
+  /**
+   * 获取token中的城市id
+   *
+   * @param token token
+   * @return token中包含的城市id
+   */
+  public static Integer getCityId(String token) {
+    try {
+      DecodedJWT jwt = JWT.decode(token);
+
+      return jwt.getClaim("city_id").asInt();
     } catch (JWTDecodeException e) {
       return null;
     }

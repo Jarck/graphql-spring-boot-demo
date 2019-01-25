@@ -11,12 +11,8 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
-import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.Permission;
-import com.hello.world.entity.Role;
 import com.hello.world.entity.User;
-import com.hello.world.entity.UserRole;
 import com.hello.world.exception.LoginFailedException;
 import com.hello.world.service.IUserService;
 import com.hello.world.util.SpringContextUtil;
@@ -75,7 +71,6 @@ public class UserServiceImpl implements IUserService {
     if (user != null) {
       userDto = new UserDto(user);
       userDto.setSecretKey(secretKey);
-      setUserRolePermission(userDto);
     }
 
     return userDto;
@@ -108,26 +103,6 @@ public class UserServiceImpl implements IUserService {
             token, 1, TimeUnit.DAYS);
 
     return token;
-  }
-
-  /**
-   * 设置用户角色
-   *
-   * @param userDto userDto
-   */
-  private void setUserRolePermission(UserDto userDto) {
-    List<UserRole> userRoleList = userRoleMapper.searchWithUserId(userDto.getId());
-    List<Role> roleList = userDto.getRoles();
-    List<Permission> permissionList = userDto.getPermissions();
-
-    userRoleList.stream().forEach(userRole -> {
-      Role role = roleMapper.selectByPrimaryKey(userRole.getRoleId());
-      RoleDto roleDto = new RoleDto(role);
-      roleDto.getPermissions().stream().forEach(permission -> permissionList.add(permission));
-      roleDto.setPermissions(null);
-
-      roleList.add(roleDto);
-    });
   }
 
   @Override

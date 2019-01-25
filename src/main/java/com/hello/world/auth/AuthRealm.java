@@ -1,8 +1,11 @@
 package com.hello.world.auth;
 
+import com.hello.world.dto.result.PermissionDto;
+import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.Permission;
 import com.hello.world.entity.Role;
+import com.hello.world.service.IPermissionService;
+import com.hello.world.service.IRoleService;
 import com.hello.world.service.IUserService;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -28,6 +31,12 @@ import java.util.stream.Collectors;
 public class AuthRealm extends AuthorizingRealm {
   @Resource
   private IUserService userService;
+
+  @Resource
+  private IRoleService roleService;
+
+  @Resource
+  private IPermissionService permissionService;
 
   @Resource
   private StringRedisTemplate stringRedisTemplate;
@@ -97,13 +106,16 @@ public class AuthRealm extends AuthorizingRealm {
 
     SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
 
-    List<Role> roles = user.getRoles();
+    List<RoleDto> roles = roleService.searchWithUserId(user.getId());
     authorizationInfo.addRoles(roles.stream().map(Role::getName).collect(Collectors.toList()));
 
-    List<Permission> permissions = user.getPermissions();
-    for (Permission permission : permissions) {
-      authorizationInfo.addStringPermission(permission.getName());
-    }
+    roles.stream().forEach(role -> {
+      List<PermissionDto> permissions = permissionService.searchWithRoleId(role.getId());
+
+      permissions.stream().forEach(permission -> {
+        authorizationInfo.addStringPermission(permission.getName());
+      });
+    });
 
     return authorizationInfo;
   }
