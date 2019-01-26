@@ -1,12 +1,10 @@
 package com.hello.world.dto.result;
 
-import com.hello.world.entity.Permission;
 import com.hello.world.entity.Role;
 import com.hello.world.entity.User;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,8 +19,9 @@ public class UserDto extends User implements Serializable {
 
   private String secretKey;
 
-  private List<Role> roles = new ArrayList<>();
-  private List<Permission> permissions = new ArrayList<>();
+  private CityDto cityDto;
+  private CompanyDto companyDto;
+  private List<RoleDto> roles;
 
   public UserDto() {
 

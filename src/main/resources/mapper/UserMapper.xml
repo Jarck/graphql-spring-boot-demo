@@ -14,6 +14,39 @@
 
     <resultMap id="userDtoMap" type="com.hello.world.dto.result.UserDto" extends="BaseResultMap"/>
 
+    <resultMap id="cityDtoAssocitionMap" type="com.hello.world.dto.result.CityDto">
+        <id column="city_city_id" property="id"/>
+        <result column="city_name" property="name"/>
+        <result column="city_created_at" property="createdAt"/>
+        <result column="city_updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <resultMap id="companyDtoAssocitionMap" type="com.hello.world.dto.result.CompanyDto">
+        <id column="company_company_id" property="id"/>
+        <result column="company_name" property="name"/>
+        <result column="short_name" property="shortName"/>
+        <result column="address" property="address"/>
+        <result column="link_name" property="linkName"/>
+        <result column="company_phone" property="phone"/>
+        <result column="company_city_id" property="cityId"/>
+        <result column="company_status" javaType="com.hello.world.enums.CompanyStatusEnum" property="status"/>
+        <result column="company_created_at" property="createdAt"/>
+        <result column="company_updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <resultMap id="UserAndRolesAndPermissions" type="com.hello.world.dto.result.UserDto" extends="userDtoMap">
+        <association property="cityDto" resultMap="cityDtoAssocitionMap"/>
+        <association property="companyDto" resultMap="companyDtoAssocitionMap"/>
+        <collection property="roles" ofType="com.hello.world.dto.result.RoleDto">
+            <id column="role_id" property="id"/>
+            <result column="role_name" property="name"/>
+            <result column="role_status" javaType="com.hello.world.enums.RoleStatusEnum" property="status"/>
+            <result column="role_remark" property="remark"/>
+            <result column="role_created_at" property="createdAt"/>
+            <result column="role_updated_at" property="updatedAt"/>
+        </collection>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id, name, phone, city_id, status, created_at, updated_at, company_id
     </sql>
@@ -176,4 +209,46 @@
         insert into user (name, phone, city_id, company_id)
         values (#{name}, #{phone}, #{cityId}, #{companyId})
     </insert>
+    
+    <select id="searchUserAndCityAndCompanyAndRoles" resultMap="UserAndRolesAndPermissions">
+      select user.id, user.name, user.phone, user.city_id, user.company_id, user.status, user.created_at, user.updated_at,
+        city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at,
+        company.id as company_company_id, company.name as company_name, company.short_name, company.address, company.link_name,
+        company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
+        company.created_at as company_created_at, company.updated_at as company_updated_at,
+        role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
+        role.created_at as role_created_at, role.updated_at as role_updated_at
+      from user
+      left join city
+        on user.city_id = city.id
+      left join company
+        on user.company_id = company.id
+      left join user_role
+        on user.id = user_role.user_id
+      left join role
+        on user_role.role_id = role.id
+      <where>
+          <if test="status != null and status != ''">
+              user.status = #{status}
+          </if>
+          <if test="status == null or status == ''">
+              and user.status = 1
+          </if>
+          <if test="name != null and name != ''">
+              and user.name like concat(#{name}, '%')
+          </if>
+          <if test="phone != null and phone != ''">
+              and user.phone like concat(#{phone}, '%')
+          </if>
+          <if test="cityId != null and cityId != ''">
+              and user.city_id = #{cityId}
+          </if>
+          <if test="companyId != null and companyId != ''">
+              and user.company_id = #{company_id}
+          </if>
+          <if test="id != null and id != ''">
+              and user.id = #{id}
+          </if>
+      </where>
+    </select>
 </mapper>

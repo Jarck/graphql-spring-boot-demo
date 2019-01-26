@@ -98,4 +98,12 @@ public interface UserMapper {
    * @return 用户列表
    */
   List<UserDto> searchCondition(SearchUserDto searchUserDto);
+
+  /**
+   * 按条件查询
+   *
+   * @param searchUserDto searchUserDto
+   * @return 用户列表
+   */
+  List<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto);
 }

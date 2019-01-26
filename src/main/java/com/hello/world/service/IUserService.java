@@ -73,6 +73,23 @@ public interface IUserService {
   PageInfo<UserDto> searchWithCondition(SearchUserDto searchUserDto, PageDto pageDto);
 
   /**
+   * 分页查询
+   *
+   * @param searchUserDto 搜索条件
+   * @param pageDto 分页信息
+   * @return 用户page
+   */
+  PageInfo<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto, PageDto pageDto);
+
+  /**
+   * 按条件查询
+   *
+   * @param searchUserDto 搜索条件
+   * @return 用户page
+   */
+  List<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto);
+
+  /**
    * 创建用户
    *
    * @param createUserDto 用户

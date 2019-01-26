@@ -123,6 +123,25 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
+  public PageInfo<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto, PageDto pageDto) {
+    PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
+    PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
+
+    List<UserDto> userList = userMapper.searchUserAndCityAndCompanyAndRoles(searchUserDto);
+
+    PageInfo<UserDto> userDtoPageInfo = new PageInfo<>(userList);
+
+    return userDtoPageInfo;
+  }
+
+  @Override
+  public List<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto) {
+    List<UserDto> userList = userMapper.searchUserAndCityAndCompanyAndRoles(searchUserDto);
+
+    return  userList;
+  }
+
+  @Override
   @Transactional
   public Long createUser(CreateUserDto createUserDto) {
     return userMapper.insertUser(createUserDto);
