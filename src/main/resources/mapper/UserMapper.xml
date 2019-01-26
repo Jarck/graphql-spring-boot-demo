@@ -209,7 +209,60 @@
         insert into user (name, phone, city_id, company_id)
         values (#{name}, #{phone}, #{cityId}, #{companyId})
     </insert>
-    
+
+    <select id="searchUserAndCityAndCompanyAndRolesWithId" resultMap="UserAndRolesAndPermissions">
+        select user.id, user.name, user.phone, user.city_id, user.company_id, user.status, user.created_at, user.updated_at,
+        city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at,
+        company.id as company_company_id, company.name as company_name, company.short_name, company.address, company.link_name,
+        company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
+        company.created_at as company_created_at, company.updated_at as company_updated_at,
+        role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
+        role.created_at as role_created_at, role.updated_at as role_updated_at
+        from user
+        left join city
+        on user.city_id = city.id
+        left join company
+        on user.company_id = company.id
+        left join user_role
+        on user.id = user_role.user_id
+        left join role
+        on user_role.role_id = role.id
+        where user.status = 1
+        <if test="id != null and id != ''">
+            and user.id = #{id}
+        </if>
+    </select>
+
+    <select id="searchUserAndCityAndCompanyAndRolesWithPhone" resultMap="UserAndRolesAndPermissions">
+        select user.id, user.name, user.phone, user.city_id, user.company_id, user.status, user.created_at, user.updated_at,
+        city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at,
+        company.id as company_company_id, company.name as company_name, company.short_name, company.address, company.link_name,
+        company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
+        company.created_at as company_created_at, company.updated_at as company_updated_at,
+        role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
+        role.created_at as role_created_at, role.updated_at as role_updated_at
+        from user
+        left join city
+        on user.city_id = city.id
+        left join company
+        on user.company_id = company.id
+        left join user_role
+        on user.id = user_role.user_id
+        left join role
+        on user_role.role_id = role.id
+        where user.status = 1
+         <if test="phone != null and phone != ''">
+            and user.phone like concat(#{phone}, '%')
+         </if>
+    </select>
+
+    <!--<select id="selectByPhone" parameterType="java.lang.String" resultMap="userDtoMap">-->
+        <!--select-->
+        <!--<include refid="Base_Column_List"/>-->
+        <!--from user-->
+        <!--where phone = #{phone}-->
+    <!--</select>-->
+
     <select id="searchUserAndCityAndCompanyAndRoles" resultMap="UserAndRolesAndPermissions">
       select user.id, user.name, user.phone, user.city_id, user.company_id, user.status, user.created_at, user.updated_at,
         city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at,

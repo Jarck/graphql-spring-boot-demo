@@ -28,7 +28,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @return 用户
    */
   public UserDto searchUserWithId(Long userId) {
-    UserDto userDto = userService.searchWithId(userId);
+    UserDto userDto = userService.searchUserAndCityAndCompanyAndRolesWithId(userId);
 
     if (userDto == null) {
       throw new GraphQLNotFoundException("Not found user with id " + userId);
@@ -43,7 +43,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @return 用户
    */
   public UserDto searchUserWithPhone(String phone) {
-    return userService.getUserByPhone(phone);
+    return userService.searchUserAndCityAndCompanyAndRolesWithPhone(phone);
   }
 
   /**
@@ -53,7 +53,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @return 用户列表
    */
   public List<UserDto> searchUsers(SearchUserDto searchUserDto) {
-    return userService.searchWithCondition(searchUserDto);
+    return userService.searchUserAndCityAndCompanyAndRoles(searchUserDto);
   }
 
   /**
@@ -64,7 +64,7 @@ public class UserQuery implements GraphQLQueryResolver {
    * @return 用户page
    */
   public List<UserDto> searchUserPage(SearchUserDto searchUserDto, PageDto pageDto) {
-    PageInfo<UserDto> userPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
+    PageInfo<UserDto> userPageInfo = userService.searchUserAndCityAndCompanyAndRoles(searchUserDto, pageDto);
     List<UserDto> userList = userPageInfo.getList();
     return userList;
   }

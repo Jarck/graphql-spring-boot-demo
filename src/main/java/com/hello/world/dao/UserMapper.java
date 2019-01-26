@@ -5,6 +5,7 @@ import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import springfox.documentation.annotations.Cacheable;
 
@@ -106,4 +107,20 @@ public interface UserMapper {
    * @return 用户列表
    */
   List<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto);
+
+  /**
+   * 按ID查询
+   *
+   * @param id id
+   * @return 用户
+   */
+  UserDto searchUserAndCityAndCompanyAndRolesWithId(@Param(value = "id") Long id);
+
+  /**
+   * 按手机号查询
+   *
+   * @param phone phone
+   * @return 用户
+   */
+  UserDto searchUserAndCityAndCompanyAndRolesWithPhone(@Param(value = "phone") String phone);
 }

@@ -142,4 +142,24 @@ public class UserMapperTest {
     Assert.assertEquals(users.get(0).getRoles().size(), 2);
     Assert.assertEquals(users.get(0).getRoles().get(0).getName(), "admin");
   }
+
+  @Test
+  public void testSearchUserAndCityAndCompanyAndRolesWithId() {
+    UserDto user = userMapper.searchUserAndCityAndCompanyAndRolesWithId(2L);
+    Assert.assertEquals(user.getName(), "user");
+    Assert.assertEquals(user.getCityDto().getName(), "杭州");
+    Assert.assertEquals(user.getCompanyDto().getName(), "杭州xxx有限公司");
+    Assert.assertEquals(user.getRoles().size(), 2);
+    Assert.assertEquals(user.getRoles().get(0).getName(), "admin");
+  }
+
+  @Test
+  public void testSearchUserAndCityAndCompanyAndRolesWithPhone() {
+    UserDto user = userMapper.searchUserAndCityAndCompanyAndRolesWithPhone("18812345672");
+    Assert.assertEquals(user.getName(), "user");
+    Assert.assertEquals(user.getCityDto().getName(), "杭州");
+    Assert.assertEquals(user.getCompanyDto().getName(), "杭州xxx有限公司");
+    Assert.assertEquals(user.getRoles().size(), 2);
+    Assert.assertEquals(user.getRoles().get(0).getName(), "admin");
+  }
 }

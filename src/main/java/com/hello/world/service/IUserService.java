@@ -90,6 +90,22 @@ public interface IUserService {
   List<UserDto> searchUserAndCityAndCompanyAndRoles(SearchUserDto searchUserDto);
 
   /**
+   * 按ID查询
+   *
+   * @param id id
+   * @return 用户
+   */
+  UserDto searchUserAndCityAndCompanyAndRolesWithId(Long id);
+
+  /**
+   * 按手机号查询
+   *
+   * @param phone phone
+   * @return 用户
+   */
+  UserDto searchUserAndCityAndCompanyAndRolesWithPhone(String phone);
+
+  /**
    * 创建用户
    *
    * @param createUserDto 用户

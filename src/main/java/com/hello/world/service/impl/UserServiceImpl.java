@@ -142,6 +142,16 @@ public class UserServiceImpl implements IUserService {
   }
 
   @Override
+  public UserDto searchUserAndCityAndCompanyAndRolesWithId(Long id) {
+    return userMapper.searchUserAndCityAndCompanyAndRolesWithId(id);
+  }
+
+  @Override
+  public UserDto searchUserAndCityAndCompanyAndRolesWithPhone(String phone) {
+    return userMapper.searchUserAndCityAndCompanyAndRolesWithPhone(phone);
+  }
+
+  @Override
   @Transactional
   public Long createUser(CreateUserDto createUserDto) {
     return userMapper.insertUser(createUserDto);

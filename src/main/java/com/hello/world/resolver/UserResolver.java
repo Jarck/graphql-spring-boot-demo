@@ -5,10 +5,6 @@ import com.hello.world.dto.result.CityDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.service.ICityService;
-import com.hello.world.service.ICompanyService;
-import com.hello.world.service.IRoleService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,14 +15,6 @@ import java.util.List;
  **/
 @Component
 public class UserResolver implements GraphQLResolver<UserDto> {
-  @Autowired
-  private ICityService cityService;
-
-  @Autowired
-  private ICompanyService companyService;
-
-  @Autowired
-  private IRoleService roleService;
 
   /**
    * 按用户查询城市
@@ -35,7 +23,7 @@ public class UserResolver implements GraphQLResolver<UserDto> {
    * @return 城市
    */
   public CityDto city(UserDto userDto) {
-    return cityService.searchWithId(userDto.getCityId());
+    return userDto.getCityDto();
   }
 
   /**
@@ -45,7 +33,7 @@ public class UserResolver implements GraphQLResolver<UserDto> {
    * @return 公司
    */
   public CompanyDto company(UserDto userDto) {
-    return companyService.searchWithId(userDto.getCompanyId());
+    return userDto.getCompanyDto();
   }
 
   /**
@@ -55,6 +43,6 @@ public class UserResolver implements GraphQLResolver<UserDto> {
    * @return 角色列表
    */
   public List<RoleDto> roles(UserDto userDto) {
-    return roleService.searchWithUserId(userDto.getId());
+    return userDto.getRoles();
   }
 }
