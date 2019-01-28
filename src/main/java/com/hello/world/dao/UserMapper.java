@@ -114,7 +114,7 @@ public interface UserMapper {
    * @param id id
    * @return 用户
    */
-  UserDto searchUserAndCityAndCompanyAndRolesWithId(@Param(value = "id") Long id);
+  UserDto searchUserAndCityAndCompanyAndRolesWithId(@Param("id") Long id);
 
   /**
    * 按手机号查询
@@ -122,5 +122,5 @@ public interface UserMapper {
    * @param phone phone
    * @return 用户
    */
-  UserDto searchUserAndCityAndCompanyAndRolesWithPhone(@Param(value = "phone") String phone);
+  UserDto searchUserAndCityAndCompanyAndRolesWithPhone(@Param("phone") String phone);
 }

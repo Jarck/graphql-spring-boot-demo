@@ -23,17 +23,25 @@ public interface IRoleService {
   /**
    * 分页查询
    * @param pageDto 分页信息
-   * @return 角色id
+   * @return 角色
    */
   PageInfo<RoleDto> findAll(PageDto pageDto);
 
   /**
-   * 通过角色id查询
+   * 通过角色ID查询
    *
    * @param roleId 角色ID
    * @return 角色
    */
   RoleDto searchWithId(Long roleId);
+
+  /**
+   * 通过角色ID查询
+   *
+   * @param roleId 角色ID
+   * @return 角色
+   */
+  RoleDto searchRoleAndPermissions(Long roleId);
 
   /**
    * 通过角色名查询

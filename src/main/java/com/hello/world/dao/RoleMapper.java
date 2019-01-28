@@ -21,7 +21,7 @@ public interface RoleMapper {
   /**
    * 按ID删除
    *
-   * @param id ID
+   * @param id 角色ID
    * @return 影响行数
    */
   int deleteByPrimaryKey(Long id);
@@ -96,4 +96,12 @@ public interface RoleMapper {
    * @return 角色列表
    */
   List<RoleDto> searchWithUserId(@Param("userId") Long userId);
+
+  /**
+   * 按ID查询
+   *
+   * @param id 角色ID
+   * @return 角色
+   */
+  RoleDto searchRoleAndPermissions(@Param("id") long id);
 }

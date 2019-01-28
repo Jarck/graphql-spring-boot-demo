@@ -101,10 +101,30 @@ public class CompanyMapperTest {
     SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
     searchCompanyDto.setCityId(1L);
     searchCompanyDto.setName("杭州xxx2有限公司");
+
     List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
     Assert.assertEquals(companyList.size(), 1);
     Assert.assertEquals(companyList.get(0).getName(), createCompanyDto.getName());
     Assert.assertEquals(companyList.get(0).getShortName(), createCompanyDto.getShortName());
     Assert.assertEquals(companyList.get(0).getCityId(), createCompanyDto.getCityId());
+  }
+
+  @Test
+  public void TestSearchCompanyAndCity() {
+    SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
+    searchCompanyDto.setName("杭州xxx有限公司");
+
+    List<CompanyDto> companyDtoList = companyMapper.searchCompanyAndCity(searchCompanyDto);
+    Assert.assertEquals(companyDtoList.size(), 1);
+    Assert.assertEquals(companyDtoList.get(0).getName(), "杭州xxx有限公司");
+    Assert.assertEquals(companyDtoList.get(0).getCityDto().getName(), "杭州");
+  }
+
+  @Test
+  public void TestSearchCompanyAndCityWithId() {
+    CompanyDto companyDto = companyMapper.searchCompanyAndCityWithId(1L);
+
+    Assert.assertEquals(companyDto.getName(), "杭州xxx有限公司");
+    Assert.assertEquals(companyDto.getCityDto().getName(), "杭州");
   }
 }

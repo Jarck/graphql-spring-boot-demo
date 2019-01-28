@@ -14,12 +14,20 @@ import java.util.List;
  **/
 public interface ICompanyService {
   /**
-   * find by id
+   * 通过ID查询
    *
    * @param companyId 公司ID
    * @return 公司
    */
   CompanyDto searchWithId(Long companyId);
+
+  /**
+   * 通过ID查询
+   *
+   * @param companyId 公司ID
+   * @return 公司
+   */
+  CompanyDto searchCompanyAndCityWithId(Long companyId);
 
   /**
    * 通过公司名查询

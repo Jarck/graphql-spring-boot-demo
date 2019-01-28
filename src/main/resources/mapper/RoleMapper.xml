@@ -12,6 +12,20 @@
 
     <resultMap id="roleDtoMap" type="com.hello.world.dto.result.RoleDto" extends="BaseResultMap"/>
 
+    <resultMap id="permissionDtoAssocitionMap" type="com.hello.world.dto.result.PermissionDto">
+        <id column="permission_permission_id" property="id"/>
+        <result column="permission_name" property="name"/>
+        <result column="permission_permission" property="permission"/>
+        <result column="permission_resourceType" property="resourceType"/>
+        <result column="permission_available" javaType="com.hello.world.enums.PermissionAvailableEnum" property="available"/>
+        <result column="permission_created_at" property="createdAt"/>
+        <result column="permission_updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <resultMap id="roleAndPermissions" type="com.hello.world.dto.result.RoleDto" extends="roleDtoMap">
+        <collection property="permissions" resultMap="permissionDtoAssocitionMap"/>
+    </resultMap>
+    
     <sql id="Base_Column_List">
         id, name, status, created_at, updated_at, remark
     </sql>
@@ -138,4 +152,21 @@
         insert into role (name, remark)
         values (#{name}, #{remark})
     </insert>
+    
+    <select id="searchRoleAndPermissions" resultMap="roleAndPermissions">
+        select role.id, role.name, role.status, role.remark, role.created_at, role.updated_at,
+        permission.id as permission_permission_id, permission.name as permission_name, permission.permission as permission_permission,
+        permission.resource_type as permission_resourceType, permission.available as permission_available,
+        permission.created_at as permission_created_at, permission.updated_at as permission_updated_at
+        from role
+        left join role_permission
+        on role.id = role_permission.role_id
+        left join permission
+        on role_permission.permission_id = permission.id
+        <where>
+            <if test="id != null and id !=''">
+                role.id = #{id}
+            </if>
+        </where>
+    </select>
 </mapper>

@@ -44,6 +44,11 @@ public class RoleServiceImpl implements IRoleService {
   }
 
   @Override
+  public RoleDto searchRoleAndPermissions(Long roleId) {
+    return roleMapper.searchRoleAndPermissions(roleId);
+  }
+
+  @Override
   public List<RoleDto> searchWithName(String name) {
     return roleMapper.searchWithName(name);
   }

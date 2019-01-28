@@ -1,10 +1,11 @@
 package com.hello.world.dto.result;
 
-import com.hello.world.entity.Role;
 import com.hello.world.entity.User;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -14,29 +15,14 @@ import java.util.List;
  * @date 2018/9/1 12:52
  **/
 @Data
-public class UserDto extends User implements Serializable {
-  private static final long serialVersionUID = 4552788051779886957L;
+@EqualsAndHashCode(callSuper = true)
+@NoArgsConstructor
+@AllArgsConstructor
+public class UserDto extends User {
 
   private String secretKey;
 
   private CityDto cityDto;
   private CompanyDto companyDto;
   private List<RoleDto> roles;
-
-  public UserDto() {
-
-  }
-
-  public UserDto(User user) {
-    if (user != null) {
-      this.setId(user.getId());
-      this.setName(user.getName());
-      this.setCityId(user.getCityId());
-      this.setCompanyId(user.getCompanyId());
-      this.setPhone(user.getPhone());
-      this.setStatus(user.getStatus());
-      this.setCreatedAt(user.getCreatedAt());
-      this.setUpdatedAt(user.getUpdatedAt());
-    }
-  }
 }

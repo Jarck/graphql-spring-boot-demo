@@ -39,7 +39,7 @@ public class RoleMapperTest {
   @Before
   public void setUp() throws Exception {
     Operation operation = Operations.sequenceOf(
-            Operations.deleteAllFrom("user", "role", "user_role"),
+            Operations.deleteAllFrom("user", "role", "user_role", "permission", "role_permission"),
             Operations.insertInto("user")
                     .columns("id", "name", "phone", "status")
                     .values(1, "admin", "18812345671", 1)
@@ -55,6 +55,21 @@ public class RoleMapperTest {
                     .values(1, 1, 1)
                     .values(2, 1, 2)
                     .values(3, 2, 2)
+                    .build(),
+            Operations.insertInto("permission")
+                    .columns("id", "name", "permission", "resource_type")
+                    .values(1, "读取用户", "user:read", "read")
+                    .values(2, "创建用户", "user:create", "create")
+                    .values(3, "编辑用户", "user:edit", "edit")
+                    .values(4, "删除用户", "user:delete", "delete")
+                    .build(),
+            Operations.insertInto("role_permission")
+                    .columns("id", "role_id", "permission_id")
+                    .values(1, 1, 1)
+                    .values(2, 1, 2)
+                    .values(3, 1, 3)
+                    .values(4, 1, 4)
+                    .values(5, 2, 1)
                     .build()
     );
 
@@ -102,5 +117,14 @@ public class RoleMapperTest {
     List<RoleDto> test_roles = roleMapper.searchWithUserId(2L);
     Assert.assertEquals(test_roles.size(), 1);
     Assert.assertEquals(test_roles.get(0).getName(), "test");
+  }
+
+  @Test
+  public void testSearchRoleAndPermissions() {
+    RoleDto roleDto = roleMapper.searchRoleAndPermissions(1L);
+
+    Assert.assertEquals(roleDto.getName(), "admin");
+    Assert.assertEquals(roleDto.getPermissions().size(), 4);
+    Assert.assertEquals(roleDto.getPermissions().get(0).getName(), "读取用户");
   }
 }

@@ -12,7 +12,6 @@ import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.entity.User;
 import com.hello.world.exception.LoginFailedException;
 import com.hello.world.service.IUserService;
 import com.hello.world.util.SpringContextUtil;
@@ -65,13 +64,7 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   public UserDto searchWithPhone(String phone) {
-    User user = userMapper.selectByPhone(phone);
-    UserDto userDto = null;
-
-    if (user != null) {
-      userDto = new UserDto(user);
-      userDto.setSecretKey(secretKey);
-    }
+    UserDto userDto = userMapper.selectByPhone(phone);
 
     return userDto;
   }

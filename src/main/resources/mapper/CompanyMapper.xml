@@ -16,6 +16,17 @@
 
     <resultMap id="companyDtoMap" type="com.hello.world.dto.result.CompanyDto" extends="BaseResultMap"/>
 
+    <resultMap id="cityDtoAssocitionMap" type="com.hello.world.dto.result.CityDto">
+        <id column="city_city_id" property="id"/>
+        <result column="city_name" property="name"/>
+        <result column="city_created_at" property="createdAt"/>
+        <result column="city_updated_at" property="updatedAt"/>
+    </resultMap>
+    
+    <resultMap id="companyAndCity" type="com.hello.world.dto.result.CompanyDto" extends="companyDtoMap">
+        <association property="cityDto" resultMap="cityDtoAssocitionMap"/>
+    </resultMap>
+
     <sql id="Base_Column_List">
         id, name, short_name, address, link_name, phone, city_id, status, created_at, updated_at
     </sql>
@@ -182,4 +193,35 @@
         insert into company (name, short_name, address, link_name, phone, city_id)
         values (#{name}, #{shortName}, #{address}, #{linkName}, #{phone}, #{cityId})
     </insert>
+
+    <select id="searchCompanyAndCity" parameterType="com.hello.world.dto.condition.SearchCompanyDto" resultMap="companyAndCity">
+        select company.id, company.name, company.short_name, company.address, company.link_name, company.phone, company.city_id,
+        company.status, company.created_at, company.updated_at,
+        city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at
+        from company
+        left join city
+        on company.city_id = city.id
+        <where>
+            <if test="name != null and name !=''">
+                company.name like concat(#{name}, '%')
+            </if>
+            <if test="cityId != null and cityId !=''">
+                and company.city_id = #{cityId}
+            </if>
+        </where>
+    </select>
+
+    <select id="searchCompanyAndCityWithId" resultMap="companyAndCity">
+        select company.id, company.name, company.short_name, company.address, company.link_name, company.phone, company.city_id,
+        company.status, company.created_at, company.updated_at,
+        city.id as city_city_id, city.name as city_name, city.created_at as city_created_at, city.updated_at as city_updated_at
+        from company
+        left join city
+        on company.city_id = city.id
+        <where>
+            <if test="id != null and id !=''">
+                company.id = #{id}
+            </if>
+        </where>
+    </select>
 </mapper>

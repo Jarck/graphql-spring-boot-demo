@@ -5,7 +5,6 @@ import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.CompanyMapper;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.result.CompanyDto;
-import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
 import com.hello.world.service.ICompanyService;
@@ -24,15 +23,15 @@ public class CompanyServiceImpl implements ICompanyService {
   private CompanyMapper companyMapper;
 
   @Override
-  public CompanyDto searchWithId(Long cityId) {
-    Company company = companyMapper.selectByPrimaryKey(cityId);
-
-    CompanyDto companyDto = null;
-    if (company != null) {
-      companyDto = new CompanyDto(company);
-    }
+  public CompanyDto searchWithId(Long companyId) {
+    CompanyDto companyDto = companyMapper.selectByPrimaryKey(companyId);
 
     return companyDto;
+  }
+
+  @Override
+  public CompanyDto searchCompanyAndCityWithId(Long companyId) {
+    return companyMapper.searchCompanyAndCityWithId(companyId);
   }
 
   @Override

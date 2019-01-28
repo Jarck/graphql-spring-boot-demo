@@ -5,6 +5,7 @@ import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -89,6 +90,22 @@ public interface CompanyMapper {
    * @return 公司列表
    */
   List<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto);
+
+  /**
+   * 按条件查询
+   *
+   * @param searchCompanyDto 查询条件
+   * @return 公司列表
+   */
+  List<CompanyDto> searchCompanyAndCity(SearchCompanyDto searchCompanyDto);
+
+  /**
+   * 按ID查询
+   *
+   * @param id id
+   * @return 公司
+   */
+  CompanyDto searchCompanyAndCityWithId(@Param("id") Long id);
 
   /**
    * 创建公司
