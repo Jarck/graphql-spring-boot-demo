@@ -56,14 +56,14 @@ public class CityMapperTest {
   }
 
   @Test
-  public void TestSelectByPrimaryKey() {
+  public void testSelectByPrimaryKey() {
     City city = cityMapper.selectByPrimaryKey(1L);
 
     Assert.assertEquals(city.getName(), "杭州");
   }
 
   @Test
-  public void TestInsert() {
+  public void testInsert() {
     City city = insertCity();
 
     City city_insert = cityMapper.selectByPrimaryKey(3L);
@@ -72,7 +72,7 @@ public class CityMapperTest {
   }
 
   @Test
-  public void TestInsertCity() {
+  public void testInsertCity() {
     CreateCityDto createCityDto = new CreateCityDto();
     createCityDto.setName("上海");
     Long i = cityMapper.insertCity(createCityDto);
@@ -82,7 +82,7 @@ public class CityMapperTest {
   }
 
   @Test
-  public void TestSearchWithName() {
+  public void testSearchWithName() {
     City city = insertCity();
 
     List<CityDto> cityList = cityMapper.searchWithName("上海");
@@ -92,7 +92,7 @@ public class CityMapperTest {
   }
 
   @Test
-  public void TestSearchCondition() {
+  public void testSearchCondition() {
     City city = insertCity();
 
     SearchCityDto searchCityDto = new SearchCityDto();

@@ -3,7 +3,6 @@ package com.hello.world.config;
 import com.hello.world.auth.AuthRealm;
 import com.hello.world.auth.JWTFilter;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.shiro.cache.ehcache.EhCacheManager;
 import org.apache.shiro.mgt.DefaultSessionStorageEvaluator;
 import org.apache.shiro.mgt.DefaultSubjectDAO;
 import org.apache.shiro.mgt.SecurityManager;
@@ -89,8 +88,8 @@ public class ShiroConfig {
     // 设置Realm
     securityManager.setRealm(realm());
 
-    // 注入缓存管理器
-    securityManager.setCacheManager(ehCacheManager());
+//    // 注入缓存管理器
+//    securityManager.setCacheManager(ehCacheManager());
 
     // 关闭Shiro自带的session
     DefaultSubjectDAO subjectDAO = new DefaultSubjectDAO();
@@ -141,17 +140,17 @@ public class ShiroConfig {
     return proxyCreator;
   }
 
-  /**
-   * Shiro缓存管理器
-   * 需要注入对应的其它实体类中
-   *
-   * @return ehCacheManager
-   */
-  @Bean
-  public EhCacheManager ehCacheManager() {
-    EhCacheManager ehCacheManager = new EhCacheManager();
-    ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
-
-    return ehCacheManager;
-  }
+//  /**
+//   * Shiro缓存管理器
+//   * 需要注入对应的其它实体类中
+//   *
+//   * @return ehCacheManager
+//   */
+//  @Bean
+//  public EhCacheManager ehCacheManager() {
+//    EhCacheManager ehCacheManager = new EhCacheManager();
+//    ehCacheManager.setCacheManagerConfigFile("classpath:ehcache.xml");
+//
+//    return ehCacheManager;
+//  }
 }

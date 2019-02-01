@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
+import com.hello.world.dto.edit.EditUserDto;
 import com.hello.world.dto.result.UserDto;
 import com.hello.world.entity.User;
 import org.apache.ibatis.annotations.Mapper;
@@ -55,10 +56,10 @@ public interface UserMapper {
   /**
    * 更新
    *
-   * @param record record
+   * @param user user
    * @return 影响行数
    */
-  int updateByPrimaryKeySelective(User record);
+  int update(EditUserDto user);
 
   /**
    * 更新

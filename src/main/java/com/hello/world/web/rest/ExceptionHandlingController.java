@@ -38,6 +38,7 @@ public class ExceptionHandlingController {
 
   /**
    * 捕捉shiro的异常
+   *
    * @param ex 异常
    * @return ResponseBean
    */
@@ -61,6 +62,7 @@ public class ExceptionHandlingController {
 
   /**
    * 捕捉其他所有异常
+   *
    * @param request request
    * @param ex 异常
    * @return ResponseBean

@@ -5,7 +5,9 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
+import com.hello.world.dto.edit.EditUserDto;
 import com.hello.world.dto.result.UserDto;
+import com.hello.world.exception.ArgumentsException;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -109,7 +111,16 @@ public interface IUserService {
    * 创建用户
    *
    * @param createUserDto 用户
-   * @return 影响行数
+   * @return 用户
+   * @throws ArgumentsException 参数校验异常
    */
-  Long createUser(CreateUserDto createUserDto);
+  UserDto createUser(CreateUserDto createUserDto) throws ArgumentsException;
+
+  /**
+   * 更新用户
+   *
+   * @param editUserDto 用户
+   * @return 用户
+   */
+  UserDto updateUser(EditUserDto editUserDto);
 }

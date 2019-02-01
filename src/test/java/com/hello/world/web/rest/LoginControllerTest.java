@@ -63,7 +63,7 @@ public class LoginControllerTest {
 
   @Test
   @Transactional
-  public void loginTest() throws Exception {
+  public void testLogin() throws Exception {
     this.mockMvc.perform(post("/api/login")
     .param("phone", "18812345671")
     .param("verifyCode", "123456"))

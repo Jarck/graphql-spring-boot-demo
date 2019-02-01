@@ -61,7 +61,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestSearchWithName() {
+  public void testSearchWithName() {
     List<CompanyDto> companyList = companyMapper.searchWithName("杭州");
 
     Assert.assertEquals(companyList.size(), 1);
@@ -70,7 +70,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestSearchWithCityId() {
+  public void testSearchWithCityId() {
     List<CompanyDto> companyList = companyMapper.searchWithCityId(2L);
 
     Assert.assertEquals(companyList.size(), 2);
@@ -79,7 +79,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestSearchCondition() {
+  public void testSearchCondition() {
     SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
     searchCompanyDto.setCityId(2L);
     searchCompanyDto.setName("苏州xxx2有限公司");
@@ -91,7 +91,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestCreateCompany() {
+  public void testCreateCompany() {
     CreateCompanyDto createCompanyDto = new CreateCompanyDto();
     createCompanyDto.setName("杭州xxx2有限公司");
     createCompanyDto.setShortName("杭州xxx2");
@@ -110,7 +110,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestSearchCompanyAndCity() {
+  public void testSearchCompanyAndCity() {
     SearchCompanyDto searchCompanyDto = new SearchCompanyDto();
     searchCompanyDto.setName("杭州xxx有限公司");
 
@@ -121,7 +121,7 @@ public class CompanyMapperTest {
   }
 
   @Test
-  public void TestSearchCompanyAndCityWithId() {
+  public void testSearchCompanyAndCityWithId() {
     CompanyDto companyDto = companyMapper.searchCompanyAndCityWithId(1L);
 
     Assert.assertEquals(companyDto.getName(), "杭州xxx有限公司");

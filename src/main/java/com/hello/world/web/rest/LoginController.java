@@ -1,6 +1,7 @@
 package com.hello.world.web.rest;
 
 import com.hello.world.constant.CommonStatus;
+import com.hello.world.constant.ResponseMessage;
 import com.hello.world.constant.SystemConstant;
 import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.entity.User;
@@ -51,7 +52,7 @@ public class LoginController extends BaseController {
     result.put("user", user);
     result.put(SystemConstant.TOKEN_HEADER, token);
 
-    return new ResponseBean(CommonStatus.OK, "success", result);
+    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, result);
   }
 
   /**
@@ -62,6 +63,6 @@ public class LoginController extends BaseController {
   @RequestMapping("401")
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   public ResponseBean unauthorized() {
-    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), "Unauthorized", "token失效或没有访问权限");
+    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHORIZED, "token失效或没有访问权限");
   }
 }

@@ -113,7 +113,7 @@ public class AuthRealm extends AuthorizingRealm {
       List<PermissionDto> permissions = permissionService.searchWithRoleId(role.getId());
 
       permissions.stream().forEach(permission -> {
-        authorizationInfo.addStringPermission(permission.getName());
+        authorizationInfo.addStringPermission(permission.getPermission());
       });
     });
 

@@ -11,7 +11,10 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
+import com.hello.world.dto.edit.EditUserDto;
 import com.hello.world.dto.result.UserDto;
+import com.hello.world.enums.UserStatusEnum;
+import com.hello.world.exception.ArgumentsException;
 import com.hello.world.exception.LoginFailedException;
 import com.hello.world.service.IUserService;
 import com.hello.world.util.SpringContextUtil;
@@ -65,6 +68,10 @@ public class UserServiceImpl implements IUserService {
   @Override
   public UserDto searchWithPhone(String phone) {
     UserDto userDto = userMapper.selectByPhone(phone);
+
+    if (userDto != null) {
+      userDto.setSecretKey(secretKey);
+    }
 
     return userDto;
   }
@@ -146,7 +153,26 @@ public class UserServiceImpl implements IUserService {
 
   @Override
   @Transactional
-  public Long createUser(CreateUserDto createUserDto) {
-    return userMapper.insertUser(createUserDto);
+  public UserDto createUser(CreateUserDto createUserDto) throws ArgumentsException {
+    UserDto user = userMapper.selectByPhone(createUserDto.getPhone());
+
+    // 校验用户是否已存在
+    if (user != null) {
+        if (user.getStatus() == UserStatusEnum.ACTIVE) {
+          throw new ArgumentsException("用户已存在");
+        }
+    }
+
+    userMapper.insertUser(createUserDto);
+
+    return userMapper.selectByPrimaryKey(createUserDto.getId());
+  }
+
+  @Override
+  public UserDto updateUser(EditUserDto editUserDto) {
+    int i = userMapper.update(editUserDto);
+    UserDto userDto = userMapper.selectByPrimaryKey(editUserDto.getId());
+
+    return userDto;
   }
 }

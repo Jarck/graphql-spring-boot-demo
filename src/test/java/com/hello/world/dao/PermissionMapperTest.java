@@ -80,7 +80,7 @@ public class PermissionMapperTest {
   }
 
   @Test
-  public void TestInsertPermission() {
+  public void testInsertPermission() {
     CreatePermissionDto createPermissionDto = new CreatePermissionDto();
     createPermissionDto.setName("创建角色");
     createPermissionDto.setPermission("role:create");
@@ -96,7 +96,7 @@ public class PermissionMapperTest {
   }
 
   @Test
-  public void TestSearchWithName() {
+  public void testSearchWithName() {
     List<PermissionDto> permissionList = permissionMapper.searchWithName("读取用户");
 
     Assert.assertEquals(permissionList.size(), 1);
@@ -106,7 +106,7 @@ public class PermissionMapperTest {
   }
 
   @Test
-  public void TestFindByRoleId() {
+  public void testFindByRoleId() {
     List<PermissionDto> admin_permissions = permissionMapper.searchWithRoleId(1L);
     Assert.assertEquals(admin_permissions.size(), 4);
     Assert.assertEquals(admin_permissions.get(0).getName(), "读取用户");
@@ -119,7 +119,7 @@ public class PermissionMapperTest {
   }
 
   @Test
-  public void TestFindByUserId() {
+  public void testFindByUserId() {
     List<PermissionDto> admin_permissions = permissionMapper.searchWithUserId(1L);
     Assert.assertEquals(admin_permissions.size(), 5);
     Assert.assertEquals(admin_permissions.get(0).getName(), "读取用户");
