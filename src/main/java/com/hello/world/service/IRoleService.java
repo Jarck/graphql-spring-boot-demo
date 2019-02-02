@@ -3,7 +3,9 @@ package com.hello.world.service;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.exception.ArgumentsException;
 
 import java.util.List;
 
@@ -64,6 +66,15 @@ public interface IRoleService {
    *
    * @param createRoleDto 角色
    * @return 影响行数
+   * @throws ArgumentsException 参数校验异常
    */
-  Long createRole(CreateRoleDto createRoleDto);
+  RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException;
+
+  /**
+   * 更新角色
+   *
+   * @param editRoleDto 角色
+   * @return 角色
+   */
+  RoleDto updateRole(EditRoleDto editRoleDto);
 }

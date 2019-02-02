@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
@@ -61,10 +62,10 @@ public interface RoleMapper {
   /**
    * 更新
    *
-   * @param record record
+   * @param role role
    * @return 影响行数
    */
-  int updateByPrimaryKey(Role record);
+  int update(EditRoleDto role);
 
   /**
    * 查询所有角色

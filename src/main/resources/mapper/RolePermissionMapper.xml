@@ -64,6 +64,15 @@
             </if>
         </trim>
     </insert>
+    
+    <insert id="createRolePermissions" useGeneratedKeys="true" keyProperty="id">
+      insert into role_permission
+      (role_id, permission_id) values
+      <foreach collection="permissionIds" separator="," item="permissionId">
+          (#{roleId}, #{permissionId})
+      </foreach>
+    </insert>
+    
     <update id="updateByPrimaryKeySelective" parameterType="com.hello.world.entity.RolePermission">
         update role_permission
         <set>

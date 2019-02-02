@@ -75,6 +75,13 @@ public interface PermissionMapper {
   Long insertPermission(CreatePermissionDto createPermissionDto);
 
   /**
+   * 查询所有权限
+   *
+   * @return 权限列表
+   */
+  List<PermissionDto> findAll();
+
+  /**
    * 按权限名查询
    *
    * @param name 权限名

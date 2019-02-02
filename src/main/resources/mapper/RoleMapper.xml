@@ -117,13 +117,16 @@
         </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.hello.world.entity.Role">
+    <update id="update" parameterType="com.hello.world.dto.edit.EditRoleDto">
         update role
-        set name = #{name,jdbcType=VARCHAR},
-          status = #{status,jdbcType=INTEGER},
-          created_at = #{createdAt,jdbcType=TIMESTAMP},
-          updated_at = #{updatedAt,jdbcType=TIMESTAMP},
-          remark = #{remark,jdbcType=VARCHAR}
+        <set>
+            <if test="name != null">
+              name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="remark != null">
+                remark = #{remark,jdbcType=VARCHAR},
+            </if>
+        </set>
         where id = #{id,jdbcType=BIGINT}
     </update>
 

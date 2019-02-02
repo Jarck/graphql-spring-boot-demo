@@ -35,9 +35,8 @@ CREATE TABLE `role` (
 
 INSERT INTO `role` (`id`, `name`, `status`, `remark`)
 VALUES
-  (1, 'admin', 1, '管理员'),
-  (2, 'manager', 1, '客户经理'),
-  (3, 'driver', 1, '司机');
+  (1, 'admin', 1, '系统管理员'),
+  (2, 'test', 1, '测试');
 
 CREATE TABLE `user_role` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -68,8 +67,29 @@ CREATE TABLE `permission` (
 INSERT INTO `permission` (`id`, `name`, `permission`, `resource_type`, `available`)
 VALUES
   (1, '读取用户', 'user:read', 'read', 1),
-  (2, '注册用户', 'user:create', 'create', 1),
-  (3, '编辑用户', 'user:edit', 'edit', 1);
+  (2, '创建用户', 'user:create', 'create', 1),
+  (3, '编辑用户', 'user:edit', 'edit', 1),
+  (4, '删除用户', 'user:delete', 'delete', 1),
+
+  (5, '读取角色', 'role:read', 'read', 1),
+  (6, '创建角色', 'role:create', 'create', 1),
+  (7, '编辑角色', 'role:edit', 'edit', 1),
+  (8, '删除角色', 'role:delete', 'delete', 1),
+
+  (9, '读取权限', 'permission:read', 'read', 1),
+  (10, '创建权限', 'permission:create', 'create', 1),
+  (11, '编辑权限', 'permission:edit', 'edit', 1),
+  (12, '删除权限', 'permission:delete', 'delete', 1),
+
+  (13, '读取城市', 'city:read', 'read', 1),
+  (14, '创建城市', 'city:create', 'create', 1),
+  (15, '编辑城市', 'city:edit', 'edit', 1),
+  (16, '删除城市', 'city:delete', 'delete', 1),
+
+  (17, '读取公司', 'company:read', 'read', 1),
+  (18, '创建公司', 'company:create', 'create', 1),
+  (19, '编辑公司', 'company:edit', 'edit', 1),
+  (20, '删除公司', 'company:delete', 'delete', 1);
 
 CREATE TABLE `role_permission` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -85,7 +105,8 @@ VALUES
   (1, 1, 1),
   (2, 1, 2),
   (3, 1, 3),
-  (4, 2, 1);
+  (4, 1, 4),
+  (5, 2, 1);
 
 CREATE TABLE `city` (
   `id` INT(11) UNSIGNED NOT NULL AUTO_INCREMENT,

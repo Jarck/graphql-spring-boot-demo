@@ -3,6 +3,12 @@ package com.hello.world.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.Application;
 import com.hello.world.dto.edit.EditUserDto;
+import com.ninja_squad.dbsetup.DbSetup;
+import com.ninja_squad.dbsetup.DbSetupTracker;
+import com.ninja_squad.dbsetup.Operations;
+import com.ninja_squad.dbsetup.destination.DataSourceDestination;
+import com.ninja_squad.dbsetup.operation.Operation;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,6 +32,25 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class, webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class UserControllerTest extends BaseMock {
+
+  private static DbSetupTracker dbSetupTracker = new DbSetupTracker();
+
+  @Before
+  public void setUp() {
+    Operation operation = Operations.sequenceOf(
+            Operations.deleteAllFrom("role_permission"),
+            Operations.insertInto("role_permission")
+                    .columns("role_id", "permission_id")
+                    .values(1, 1)
+                    .values(1, 2)
+                    .values(1, 3)
+                    .values(1, 4)
+                    .build()
+    );
+
+    DbSetup dbSetup = new DbSetup(new DataSourceDestination(dataSource), operation);
+    dbSetupTracker.launchIfNecessary(dbSetup);
+  }
 
   @Test
   @Transactional
@@ -71,6 +96,7 @@ public class UserControllerTest extends BaseMock {
             .param("name", "test2").param("phone", "18812345671"))
             .andDo(print())
             .andExpect(status().is4xxClientError())
+            .andExpect(jsonPath("code").value("500"))
             .andExpect(jsonPath("msg").value("用户已存在"))
             .andReturn();
   }

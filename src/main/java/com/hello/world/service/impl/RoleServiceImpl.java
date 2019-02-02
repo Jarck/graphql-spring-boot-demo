@@ -5,7 +5,9 @@ import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.RoleMapper;
 import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
+import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -59,7 +61,21 @@ public class RoleServiceImpl implements IRoleService {
   }
 
   @Override
-  public Long createRole(CreateRoleDto createRoleDto) {
-    return roleMapper.insertRole(createRoleDto);
+  public RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException {
+    List<RoleDto> roleList = roleMapper.searchWithName(createRoleDto.getName());
+
+    if (roleList != null && roleList.size() != 0) {
+      throw new ArgumentsException("角色已存在");
+    }
+
+    roleMapper.insertRole(createRoleDto);
+    return roleMapper.selectByPrimaryKey(createRoleDto.getId());
+  }
+
+  @Override
+  public RoleDto updateRole(EditRoleDto editRoleDto) {
+    roleMapper.update(editRoleDto);
+
+    return roleMapper.selectByPrimaryKey(editRoleDto.getId());
   }
 }

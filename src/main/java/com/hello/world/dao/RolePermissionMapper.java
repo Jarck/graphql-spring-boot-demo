@@ -1,8 +1,12 @@
 package com.hello.world.dao;
 
 import com.hello.world.entity.RolePermission;
+import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * 角色权限DAO
@@ -22,6 +26,15 @@ public interface RolePermissionMapper {
   int deleteByPrimaryKey(Long id);
 
   /**
+   * 按角色ID删除
+   *
+   * @param roleId 角色ID
+   * @return 影响行数
+   */
+  @Delete("DELETE * FROM role_permission WHERE role_id = #{roleId}")
+  int deleteByRoleId(Long roleId);
+
+  /**
    * 新建
    *
    * @param record record
@@ -36,6 +49,15 @@ public interface RolePermissionMapper {
    * @return 影响行数
    */
   int insertSelective(RolePermission record);
+
+  /**
+   * 创建角色对应权限
+   *
+   * @param roleId 角色ID
+   * @param permissionIds 权限IDs
+   * @return 影响行数
+   */
+  int createRolePermissions(@Param("roleId") Long roleId, @Param("permissionIds") List<Long> permissionIds);
 
   /**
    * 按ID查询

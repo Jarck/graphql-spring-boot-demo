@@ -70,21 +70,22 @@ public class UserController extends BaseController {
   /**
    * 创建用户
    *
-   * @param userDto 用户信息
+   * @param createUserDto 用户信息
    * @param bindingResult 校验对象
    * @return ResponseBean
    * @throws ArgumentsException 参数异常
    */
   @PostMapping("")
   @RequiresPermissions("user:create")
-  public ResponseBean create(@Validated CreateUserDto userDto, BindingResult bindingResult) throws ArgumentsException {
+  public ResponseBean create(@Validated CreateUserDto createUserDto, BindingResult bindingResult)
+          throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
 
-    UserDto user = userService.createUser(userDto);
+    UserDto userDto = userService.createUser(createUserDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, user);
+    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
   }
 
   /**
@@ -96,8 +97,8 @@ public class UserController extends BaseController {
   @PutMapping("")
   @RequiresPermissions("user:edit")
   public ResponseBean update(@RequestBody EditUserDto editUserDto) {
-    UserDto user = userService.updateUser(editUserDto);
+    UserDto userDto = userService.updateUser(editUserDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, user);
+    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
   }
 }

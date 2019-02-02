@@ -33,7 +33,7 @@ public class RoleServiceTest {
 
     Assert.assertEquals(rolePageInfo.getPageNum(), 1);
     Assert.assertEquals(rolePageInfo.getPageSize(), 20);
-    Assert.assertEquals(rolePageInfo.getTotal(), 3L);
+    Assert.assertEquals(rolePageInfo.getTotal(), 2L);
     Assert.assertEquals(rolePageInfo.isHasNextPage(), false);
     Assert.assertEquals(rolePageInfo.getList().get(0).getName(), "admin");
   }

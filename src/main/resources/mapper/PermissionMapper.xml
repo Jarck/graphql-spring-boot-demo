@@ -128,6 +128,14 @@
         insert into permission (name, permission, resource_type)
         values (#{name}, #{permission}, #{resourceType})
     </insert>
+
+    <select id="findAll" resultMap="permissionDtoMap">
+        select
+        <include refid="Base_Column_List"/>
+        from permission
+        where available = 1
+    </select>
+
     <select id="searchWithName" parameterType="java.lang.String" resultMap="permissionDtoMap">
         select
         <include refid="Base_Column_List"/>
