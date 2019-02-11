@@ -1,7 +1,10 @@
 package com.hello.world.service;
 
 import com.hello.world.dto.create.CreatePermissionDto;
+import com.hello.world.dto.edit.EditPermissionDto;
 import com.hello.world.dto.result.PermissionDto;
+import com.hello.world.exception.ArgumentsException;
+import org.apache.ibatis.javassist.NotFoundException;
 
 import java.util.List;
 
@@ -10,6 +13,14 @@ import java.util.List;
  * @date 2018/9/9 20:01
  **/
 public interface IPermissionService {
+
+  /**
+   * find all permissions
+   *
+   * @return 权限列表
+   */
+  List<PermissionDto> findAll();
+
   /**
    * find by id
    *
@@ -47,6 +58,16 @@ public interface IPermissionService {
    *
    * @param createPermissionDto 权限
    * @return 影响行数
+   * @throws ArgumentsException 参数异常
    */
-  Long insertPermission(CreatePermissionDto createPermissionDto);
+  PermissionDto createPermission(CreatePermissionDto createPermissionDto) throws ArgumentsException;
+
+  /**
+   * 更新权限
+   *
+   * @param editPermissionDto 权限
+   * @return 权限
+   * @throws NotFoundException notFoundException
+   */
+  PermissionDto updatePermission(EditPermissionDto editPermissionDto) throws NotFoundException;
 }

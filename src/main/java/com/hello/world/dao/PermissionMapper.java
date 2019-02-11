@@ -1,6 +1,7 @@
 package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreatePermissionDto;
+import com.hello.world.dto.edit.EditPermissionDto;
 import com.hello.world.dto.result.PermissionDto;
 import com.hello.world.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
@@ -61,10 +62,10 @@ public interface PermissionMapper {
   /**
    * 更新
    *
-   * @param record record
+   * @param permission permission
    * @return 影响行数
    */
-  int updateByPrimaryKey(Permission record);
+  int update(EditPermissionDto permission);
 
   /**
    * 创建权限

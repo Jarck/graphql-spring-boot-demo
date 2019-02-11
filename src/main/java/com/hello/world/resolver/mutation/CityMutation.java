@@ -25,7 +25,7 @@ public class CityMutation implements GraphQLMutationResolver {
    *
    * @param createCityDto 城市
    * @return 城市
-   * @throws GraphQLValidateException 参数校验异常
+   * @throws GraphQLValidateException 参数异常
    */
   public CityDto createCity(CreateCityDto createCityDto) throws GraphQLValidateException {
     // 校验参数

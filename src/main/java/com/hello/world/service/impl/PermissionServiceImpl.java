@@ -2,8 +2,11 @@ package com.hello.world.service.impl;
 
 import com.hello.world.dao.PermissionMapper;
 import com.hello.world.dto.create.CreatePermissionDto;
+import com.hello.world.dto.edit.EditPermissionDto;
 import com.hello.world.dto.result.PermissionDto;
+import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IPermissionService;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,35 +22,53 @@ public class PermissionServiceImpl implements IPermissionService {
   private PermissionMapper permissionMapper;
 
   @Override
-  public PermissionDto searchWithId(Long permissionId) {
-    PermissionDto permissionDto = permissionMapper.selectByPrimaryKey(permissionId);
+  public List<PermissionDto> findAll() {
+    return permissionMapper.findAll();
+  }
 
-    return permissionDto;
+  @Override
+  public PermissionDto searchWithId(Long permissionId) {
+    return permissionMapper.selectByPrimaryKey(permissionId);
   }
 
   @Override
   public List<PermissionDto> searchWithName(String name) {
-    List<PermissionDto> permissionList = permissionMapper.searchWithName(name);
-
-    return permissionList;
+    return permissionMapper.searchWithName(name);
   }
 
   @Override
   public List<PermissionDto> searchWithRoleId(Long roleId) {
-    List<PermissionDto> permissionList = permissionMapper.searchWithRoleId(roleId);
-
-    return permissionList;
+    return permissionMapper.searchWithRoleId(roleId);
   }
 
   @Override
   public List<PermissionDto> searchWithUserId(Long userId) {
-    List<PermissionDto> permissionList = permissionMapper.searchWithUserId(userId);
-
-    return permissionList;
+    return permissionMapper.searchWithUserId(userId);
   }
 
   @Override
-  public Long insertPermission(CreatePermissionDto createPermissionDto) {
-    return permissionMapper.insertPermission(createPermissionDto);
+  public PermissionDto createPermission(CreatePermissionDto createPermissionDto)
+          throws ArgumentsException {
+    List<PermissionDto> permissionList = permissionMapper.searchWithName(createPermissionDto.getName());
+
+    if (permissionList.size() != 0) {
+      throw new ArgumentsException("权限已存在");
+    }
+
+    permissionMapper.insertPermission(createPermissionDto);
+    return permissionMapper.selectByPrimaryKey(createPermissionDto.getId());
+  }
+
+  @Override
+  public PermissionDto updatePermission(EditPermissionDto editPermissionDto) throws NotFoundException {
+    PermissionDto permissionDto = permissionMapper.selectByPrimaryKey(editPermissionDto.getId());
+
+    if (permissionDto == null) {
+      throw new NotFoundException("权限不存在");
+    }
+
+    permissionMapper.update(editPermissionDto);
+    PermissionDto permissionDtoUpdate = permissionMapper.selectByPrimaryKey(editPermissionDto.getId());
+    return permissionDtoUpdate;
   }
 }

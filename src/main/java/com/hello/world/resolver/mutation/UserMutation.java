@@ -26,8 +26,8 @@ public class UserMutation implements GraphQLMutationResolver {
    *
    * @param createUserDto createUserDto
    * @return 用户
-   * @throws GraphQLValidateException 参数校验异常
-   * @throws ArgumentsException  参数校验异常
+   * @throws GraphQLValidateException 参数异常
+   * @throws ArgumentsException  参数异常
    */
   public UserDto createUser(CreateUserDto createUserDto) throws GraphQLValidateException, ArgumentsException {
 

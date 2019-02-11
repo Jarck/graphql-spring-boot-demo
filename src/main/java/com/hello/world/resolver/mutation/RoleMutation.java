@@ -26,8 +26,8 @@ public class RoleMutation implements GraphQLMutationResolver {
    *
    * @param createRoleDto createRoleDto
    * @return 角色
-   * @throws GraphQLValidateException 参数校验异常
-   * @throws ArgumentsException 参数校验异常
+   * @throws GraphQLValidateException 参数异常
+   * @throws ArgumentsException 参数异常
    */
   public RoleDto createRole(CreateRoleDto createRoleDto) throws GraphQLValidateException, ArgumentsException {
     // 校验参数

@@ -19,5 +19,6 @@ public class CreatePermissionDto {
   private String name;
   @NotBlank(message = "权限不能为空")
   private String permission;
+  @NotBlank(message = "权限类型不能为空")
   private String resourceType;
 }

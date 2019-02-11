@@ -64,7 +64,7 @@ public class RoleServiceImpl implements IRoleService {
   public RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException {
     List<RoleDto> roleList = roleMapper.searchWithName(createRoleDto.getName());
 
-    if (roleList != null && roleList.size() != 0) {
+    if (roleList.size() != 0) {
       throw new ArgumentsException("角色已存在");
     }
 

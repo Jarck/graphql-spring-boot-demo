@@ -66,7 +66,7 @@ public interface IRoleService {
    *
    * @param createRoleDto 角色
    * @return 影响行数
-   * @throws ArgumentsException 参数校验异常
+   * @throws ArgumentsException 参数异常
    */
   RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException;
 

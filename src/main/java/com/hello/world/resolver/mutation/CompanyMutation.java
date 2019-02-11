@@ -25,7 +25,7 @@ public class CompanyMutation implements GraphQLMutationResolver {
    *
    * @param createCompanyDto 公司
    * @return 公司
-   * @throws GraphQLValidateException 参数校验异常
+   * @throws GraphQLValidateException 参数异常
    */
   public CompanyDto createCompany(CreateCompanyDto createCompanyDto) throws GraphQLValidateException {
     // 校验参数
