@@ -75,11 +75,13 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.hello.world.entity.City">
+    <update id="update" parameterType="com.hello.world.entity.City">
         update city
-        set name = #{name,jdbcType=VARCHAR},
-          created_at = #{createdAt,jdbcType=TIMESTAMP},
-          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+          <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+          </set>
         where id = #{id,jdbcType=INTEGER}
      </update>
 

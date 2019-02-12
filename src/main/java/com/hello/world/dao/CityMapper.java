@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.condition.SearchCityDto;
+import com.hello.world.dto.edit.EditCityDto;
 import com.hello.world.dto.result.CityDto;
 import com.hello.world.entity.City;
 import org.apache.ibatis.annotations.Mapper;
@@ -61,10 +62,10 @@ public interface CityMapper {
   /**
    * 更新
    *
-   * @param record 城市
+   * @param city 城市
    * @return 影响行数
    */
-  int updateByPrimaryKey(City record);
+  int update(EditCityDto city);
 
   /**
    * 创建城市

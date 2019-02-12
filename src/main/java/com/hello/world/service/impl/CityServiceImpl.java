@@ -6,8 +6,11 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dao.CityMapper;
 import com.hello.world.dto.condition.SearchCityDto;
+import com.hello.world.dto.edit.EditCityDto;
 import com.hello.world.dto.result.CityDto;
+import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.ICityService;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -83,10 +86,32 @@ public class CityServiceImpl implements ICityService {
    * 创建城市
    *
    * @param createCityDto
+   * @throws ArgumentsException 参数异常
    * @return
    */
   @Override
-  public Long createCity(CreateCityDto createCityDto) {
-    return cityMapper.insertCity(createCityDto);
+  public CityDto createCity(CreateCityDto createCityDto) throws ArgumentsException {
+    List<CityDto> cityDtoList = cityMapper.searchWithName(createCityDto.getName());
+
+    if (cityDtoList.size() != 0) {
+      throw new ArgumentsException("城市已存在");
+    }
+
+    long i = cityMapper.insertCity(createCityDto);
+    return cityMapper.selectByPrimaryKey(createCityDto.getId());
+  }
+
+  @Override
+  public CityDto updateCity(EditCityDto editCityDto) throws NotFoundException {
+    CityDto cityDto = cityMapper.selectByPrimaryKey(editCityDto.getId());
+
+    if (cityDto == null) {
+      throw new NotFoundException("城市不存在");
+    }
+
+    long i = cityMapper.update(editCityDto);
+    CityDto cityDtoUpdate = cityMapper.selectByPrimaryKey(editCityDto.getId());
+
+    return cityDtoUpdate;
   }
 }
