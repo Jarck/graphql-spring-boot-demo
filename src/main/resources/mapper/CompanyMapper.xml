@@ -150,17 +150,31 @@
         </set>
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.hello.world.entity.Company">
+    <update id="update" parameterType="com.hello.world.entity.Company">
         update company
-        set name = #{name,jdbcType=VARCHAR},
-          short_name = #{shortName,jdbcType=VARCHAR},
-          address = #{address,jdbcType=VARCHAR},
-          link_name = #{linkName,jdbcType=VARCHAR},
-          phone = #{phone,jdbcType=VARCHAR},
-          city_id = #{cityId,jdbcType=INTEGER},
-          status = #{status,jdbcType=INTEGER},
-          created_at = #{createdAt,jdbcType=TIMESTAMP},
-          updated_at = #{updatedAt,jdbcType=TIMESTAMP}
+        <set>
+            <if test="name != null">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="shortName != null">
+                short_name = #{shortName,jdbcType=VARCHAR},
+            </if>
+            <if test="address != null">
+                address = #{address,jdbcType=VARCHAR},
+            </if>
+            <if test="linkName != null">
+                link_name = #{linkName,jdbcType=VARCHAR},
+            </if>
+             <if test="phone != null">
+                 phone = #{phone,jdbcType=VARCHAR},
+             </if>
+             <if test="cityId != null">
+                 city_id = #{cityId,jdbcType=INTEGER},
+             </if>
+             <!--<if test="status != null">-->
+                 <!--status = #{status,jdbcType=INTEGER},-->
+             <!--</if>-->
+        </set>
         where id = #{id,jdbcType=INTEGER}
       </update>
     

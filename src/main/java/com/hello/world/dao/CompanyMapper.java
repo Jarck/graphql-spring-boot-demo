@@ -1,5 +1,6 @@
 package com.hello.world.dao;
 
+import com.hello.world.dto.edit.EditCompanyDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
 import com.hello.world.dto.condition.SearchCompanyDto;
@@ -62,10 +63,10 @@ public interface CompanyMapper {
   /**
    * 更新
    *
-   * @param record record
+   * @param company 公司
    * @return 影响行数
    */
-  int updateByPrimaryKey(Company record);
+  int update(EditCompanyDto company);
 
   /**
    * 按公司名查询

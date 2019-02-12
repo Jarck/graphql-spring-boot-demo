@@ -2,9 +2,11 @@ package com.hello.world.service;
 
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
-import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
+import com.hello.world.dto.edit.EditCompanyDto;
+import com.hello.world.dto.result.CompanyDto;
+import org.apache.ibatis.javassist.NotFoundException;
 
 import java.util.List;
 
@@ -66,7 +68,16 @@ public interface ICompanyService {
    * 创建公司
    *
    * @param createCompanyDto 公司
-   * @return 影响行数
+   * @return 公司
    */
-  Long createCompany(CreateCompanyDto createCompanyDto);
+  CompanyDto createCompany(CreateCompanyDto createCompanyDto);
+
+  /**
+   * 更新公司
+   *
+   * @param editCompanyDto 公司信息
+   * @return 公司
+   * @throws NotFoundException notFoundException
+   */
+  CompanyDto updateCompany(EditCompanyDto editCompanyDto) throws NotFoundException;
 }

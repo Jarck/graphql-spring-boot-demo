@@ -110,8 +110,7 @@ public class CityServiceImpl implements ICityService {
     }
 
     long i = cityMapper.update(editCityDto);
-    CityDto cityDtoUpdate = cityMapper.selectByPrimaryKey(editCityDto.getId());
 
-    return cityDtoUpdate;
+    return cityMapper.selectByPrimaryKey(editCityDto.getId());
   }
 }

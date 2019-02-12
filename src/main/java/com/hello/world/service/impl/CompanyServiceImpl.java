@@ -4,10 +4,12 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dao.CompanyMapper;
 import com.hello.world.dto.PageDto;
-import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.dto.condition.SearchCompanyDto;
 import com.hello.world.dto.create.CreateCompanyDto;
+import com.hello.world.dto.edit.EditCompanyDto;
+import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.service.ICompanyService;
+import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -68,8 +70,23 @@ public class CompanyServiceImpl implements ICompanyService {
   }
 
   @Override
-  public Long createCompany(CreateCompanyDto companyDto) {
-    return companyMapper.createCompany(companyDto);
+  public CompanyDto createCompany(CreateCompanyDto companyDto) {
+    long i = companyMapper.createCompany(companyDto);
+
+    return companyMapper.selectByPrimaryKey(companyDto.getId());
+  }
+
+  @Override
+  public CompanyDto updateCompany(EditCompanyDto editCompanyDto) throws NotFoundException {
+    CompanyDto companyDto = companyMapper.selectByPrimaryKey(editCompanyDto.getId());
+
+    if (companyDto == null) {
+      throw new NotFoundException("公司不存在");
+    }
+
+    long i = companyMapper.update(editCompanyDto);
+
+    return companyMapper.selectByPrimaryKey(editCompanyDto.getId());
   }
 
 }
