@@ -52,7 +52,7 @@ public class CityController extends  BaseController {
   @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("city:read")
-  public ResponseBean list(SearchCityDto searchCityDto, PageDto pageDto) {
+  public ResponseBean<PageInfo<CityDto>> list(SearchCityDto searchCityDto, PageDto pageDto) {
     PageInfo<CityDto> cityDtoPageDto = cityService.searchWithCondition(searchCityDto, pageDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDtoPageDto);
@@ -71,7 +71,7 @@ public class CityController extends  BaseController {
   })
   @GetMapping("{id}")
   @RequiresPermissions("city:read")
-  public ResponseBean show(@PathVariable Long id) {
+  public ResponseBean<CityDto> show(@PathVariable Long id) {
     CityDto cityDto = cityService.searchWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
@@ -92,7 +92,7 @@ public class CityController extends  BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("city:create")
-  public ResponseBean create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult)
+  public ResponseBean<CityDto> create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -116,7 +116,7 @@ public class CityController extends  BaseController {
   })
   @PutMapping("")
   @RequiresPermissions("city:edit")
-  public ResponseBean update(@RequestBody EditCityDto editCityDto) throws NotFoundException {
+  public ResponseBean<CityDto> update(@RequestBody EditCityDto editCityDto) throws NotFoundException {
     CityDto cityDto = cityService.updateCity(editCityDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);

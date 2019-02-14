@@ -53,7 +53,7 @@ public class RoleController extends BaseController {
   @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("role:read")
-  public ResponseBean list() {
+  public ResponseBean<List<RoleDto>> list() {
     List<RoleDto> roleList = roleService.findAll();
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleList);
@@ -72,7 +72,7 @@ public class RoleController extends BaseController {
   })
   @GetMapping("{id}")
   @RequiresPermissions("role:read")
-  public ResponseBean show(@PathVariable Long id) {
+  public ResponseBean<RoleDto> show(@PathVariable Long id) {
     RoleDto roleDto = roleService.searchWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
@@ -91,7 +91,7 @@ public class RoleController extends BaseController {
   })
   @GetMapping("{id}/permissions")
   @RequiresPermissions("role:read")
-  public ResponseBean getRolePermissions(@PathVariable Long id) {
+  public ResponseBean<RoleDto> getRolePermissions(@PathVariable Long id) {
     RoleDto roleDto = roleService.searchRoleAndPermissions(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
@@ -114,7 +114,7 @@ public class RoleController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("role:create")
-  public ResponseBean create(@ApiIgnore @Validated CreateRoleDto createRoleDto, BindingResult bindingResult)
+  public ResponseBean<RoleDto> create(@ApiIgnore @Validated CreateRoleDto createRoleDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -140,7 +140,7 @@ public class RoleController extends BaseController {
   })
   @PutMapping("")
   @RequiresPermissions("role:edit")
-  public ResponseBean update(@ApiIgnore @RequestBody EditRoleDto editRoleDto) {
+  public ResponseBean<RoleDto> update(@ApiIgnore @RequestBody EditRoleDto editRoleDto) {
     RoleDto roleDto = roleService.updateRole(editRoleDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);

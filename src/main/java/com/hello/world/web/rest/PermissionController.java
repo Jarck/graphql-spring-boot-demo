@@ -48,7 +48,7 @@ public class PermissionController extends BaseController {
   @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("permission:read")
-  public ResponseBean list() {
+  public ResponseBean<List<PermissionDto>> list() {
     List<PermissionDto> permissionList = permissionService.findAll();
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, permissionList);
@@ -74,7 +74,7 @@ public class PermissionController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("permission:create")
-  public ResponseBean create(@ApiIgnore @RequestBody @Validated CreatePermissionDto createPermissionDto,
+  public ResponseBean<PermissionDto> create(@ApiIgnore @RequestBody @Validated CreatePermissionDto createPermissionDto,
                              BindingResult bindingResult)
           throws ArgumentsException {
 
@@ -100,7 +100,7 @@ public class PermissionController extends BaseController {
   })
   @PutMapping("")
   @RequiresPermissions("permission:edit")
-  public ResponseBean update(@RequestBody EditPermissionDto editPermissionDto)
+  public ResponseBean<PermissionDto> update(@RequestBody EditPermissionDto editPermissionDto)
           throws NotFoundException {
     PermissionDto permissionDto = permissionService.updatePermission(editPermissionDto);
 

@@ -51,7 +51,7 @@ public class CompanyController extends BaseController {
   @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("company:read")
-  public ResponseBean list(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
+  public ResponseBean<PageInfo<CompanyDto>> list(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
     PageInfo<CompanyDto> companyDtoList = companyService.searchCondition(searchCompanyDto, pageDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDtoList);
@@ -70,7 +70,7 @@ public class CompanyController extends BaseController {
   })
   @GetMapping("{id}")
   @RequiresPermissions("company:read")
-  public ResponseBean show(@PathVariable long id) {
+  public ResponseBean<CompanyDto> show(@PathVariable long id) {
     CompanyDto companyDto = companyService.searchWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
@@ -95,7 +95,8 @@ public class CompanyController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("company:create")
-  public ResponseBean create(@ApiIgnore @Validated CreateCompanyDto createCompanyDto, BindingResult bindingResult) {
+  public ResponseBean<CompanyDto> create(@ApiIgnore @Validated CreateCompanyDto createCompanyDto,
+                                         BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
@@ -118,7 +119,7 @@ public class CompanyController extends BaseController {
   })
   @PutMapping("")
   @RequiresPermissions("company:edit")
-  public ResponseBean update(@RequestBody EditCompanyDto editCompanyDto) throws NotFoundException {
+  public ResponseBean<CompanyDto> update(@RequestBody EditCompanyDto editCompanyDto) throws NotFoundException {
     CompanyDto companyDto = companyService.updateCompany(editCompanyDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);

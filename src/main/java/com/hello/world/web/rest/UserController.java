@@ -51,7 +51,7 @@ public class UserController extends BaseController {
   @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("user:read")
-  public ResponseBean list(SearchUserDto searchUserDto, PageDto pageDto) {
+  public ResponseBean<PageInfo<UserDto>> list(SearchUserDto searchUserDto, PageDto pageDto) {
     PageInfo<UserDto> userDtoPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDtoPageInfo);
@@ -70,7 +70,7 @@ public class UserController extends BaseController {
   })
   @GetMapping("{id}")
   @RequiresPermissions("user:read")
-  public ResponseBean show(@PathVariable Long id) {
+  public ResponseBean<UserDto> show(@PathVariable Long id) {
     UserDto user = userService.searchWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, user);
@@ -95,7 +95,7 @@ public class UserController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("user:create")
-  public ResponseBean create(@ApiIgnore @Validated CreateUserDto createUserDto, BindingResult bindingResult)
+  public ResponseBean<UserDto> create(@ApiIgnore @Validated CreateUserDto createUserDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -118,7 +118,7 @@ public class UserController extends BaseController {
   })
   @PutMapping("")
   @RequiresPermissions("user:edit")
-  public ResponseBean update(@RequestBody EditUserDto editUserDto) {
+  public ResponseBean<UserDto> update(@RequestBody EditUserDto editUserDto) {
     UserDto userDto = userService.updateUser(editUserDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
