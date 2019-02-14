@@ -9,6 +9,9 @@ import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRolePermissionsService;
 import com.hello.world.service.IRoleService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -31,7 +35,7 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest角色", description = "Rest角色")
+@Api(value = "RESTFul角色", description = "RESTFul角色")
 @RequestMapping("api/roles")
 public class RoleController extends BaseController {
   @Autowired
@@ -45,6 +49,8 @@ public class RoleController extends BaseController {
    *
    * @return ResponseBean
    */
+  @ApiOperation(value = "获取角色列表", notes = "获取全部角色信息")
+  @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("role:read")
   public ResponseBean list() {
@@ -59,6 +65,11 @@ public class RoleController extends BaseController {
    * @param id 角色ID
    * @return ResponseBean
    */
+  @ApiOperation(value = "获取角色详细信息", notes = "根据角色ID获取角色详细信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "角色ID", required = true, dataType = "Long", paramType = "path")
+  })
   @GetMapping("{id}")
   @RequiresPermissions("role:read")
   public ResponseBean show(@PathVariable Long id) {
@@ -73,6 +84,11 @@ public class RoleController extends BaseController {
    * @param id 角色ID
    * @return ResponseBean
    */
+  @ApiOperation(value = "获取角色对应的权限信息", notes = "根据角色ID获取角色对应的权限信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "角色ID", required = true, dataType = "Long", paramType = "path")
+  })
   @GetMapping("{id}/permissions")
   @RequiresPermissions("role:read")
   public ResponseBean getRolePermissions(@PathVariable Long id) {
@@ -89,9 +105,16 @@ public class RoleController extends BaseController {
    * @return ResponseBean
    * @throws ArgumentsException 参数异常
    */
+  @ApiOperation(value = "创建角色")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "name", value = "角色名称", defaultValue = "admin",
+                  required = true, paramType = "form"),
+          @ApiImplicitParam(name = "remark", value = "备注信息", paramType = "form")
+  })
   @PostMapping("")
   @RequiresPermissions("role:create")
-  public ResponseBean create(@Validated CreateRoleDto createRoleDto, BindingResult bindingResult)
+  public ResponseBean create(@ApiIgnore @Validated CreateRoleDto createRoleDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -108,9 +131,16 @@ public class RoleController extends BaseController {
    * @param editRoleDto 角色信息
    * @return ResponseBean
    */
+  @ApiOperation(value = "更新角色信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "name", value = "角色名称", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "remark", value = "备注", paramType = "form")
+  })
   @PutMapping("")
   @RequiresPermissions("role:edit")
-  public ResponseBean update(@RequestBody EditRoleDto editRoleDto) {
+  public ResponseBean update(@ApiIgnore @RequestBody EditRoleDto editRoleDto) {
     RoleDto roleDto = roleService.updateRole(editRoleDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
@@ -123,6 +153,10 @@ public class RoleController extends BaseController {
    * @return ResponseBean
    * @throws NotFoundException notFoundException
    */
+  @ApiOperation(value = "设置角色对应的权限")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
+  })
   @PutMapping("updateRolePermissions")
   @RequiresPermissions("role:edit")
   public ResponseBean updateRolePermissions(@RequestBody EditRoleDto editRoleDto)

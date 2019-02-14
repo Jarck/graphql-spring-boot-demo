@@ -8,6 +8,9 @@ import com.hello.world.dto.result.PermissionDto;
 import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IPermissionService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.List;
 
@@ -29,7 +33,7 @@ import java.util.List;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest权限", description = "Rest权限")
+@Api(value = "RESTFul权限", description = "RESTFul权限")
 @RequestMapping("api/permissions")
 public class PermissionController extends BaseController {
   @Autowired
@@ -40,6 +44,8 @@ public class PermissionController extends BaseController {
    *
    * @return ResponseBean
    */
+  @ApiOperation(value = "获取权限列表", notes = "获取全部权限信息")
+  @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("permission:read")
   public ResponseBean list() {
@@ -56,9 +62,19 @@ public class PermissionController extends BaseController {
    * @return ResponseBean
    * @throws ArgumentsException 参数异常
    */
+  @ApiOperation(value = "创建权限")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "name", value = "权限名称", defaultValue = "读取用户",
+                  required = true, paramType = "form"),
+          @ApiImplicitParam(name = "permission", value = "权限", defaultValue = "user:read",
+                  required = true, paramType = "form"),
+          @ApiImplicitParam(name = "resourceType", value = "权限类型", defaultValue = "read",
+                  required = true, paramType = "form")
+  })
   @PostMapping("")
   @RequiresPermissions("permission:create")
-  public ResponseBean create(@RequestBody @Validated CreatePermissionDto createPermissionDto,
+  public ResponseBean create(@ApiIgnore @RequestBody @Validated CreatePermissionDto createPermissionDto,
                              BindingResult bindingResult)
           throws ArgumentsException {
 
@@ -78,6 +94,10 @@ public class PermissionController extends BaseController {
    * @return ResponseBean
    * @throws NotFoundException notFoundException
    */
+  @ApiOperation(value = "更新权限信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
+  })
   @PutMapping("")
   @RequiresPermissions("permission:edit")
   public ResponseBean update(@RequestBody EditPermissionDto editPermissionDto)

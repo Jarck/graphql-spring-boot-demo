@@ -11,6 +11,8 @@ import com.hello.world.dto.result.CityDto;
 import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.ICityService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
@@ -25,6 +27,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author jarck-lou
@@ -32,7 +35,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest城市", description = "Rest城市")
+@Api(value = "RESTFul城市", description = "RESTFul城市")
 @RequestMapping("api/city")
 public class CityController extends  BaseController {
   @Autowired
@@ -45,7 +48,8 @@ public class CityController extends  BaseController {
    * @param pageDto 分页信息
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "获取城市列表", notes = "根据查询条件获取城市信息")
+  @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("city:read")
   public ResponseBean list(SearchCityDto searchCityDto, PageDto pageDto) {
@@ -60,7 +64,11 @@ public class CityController extends  BaseController {
    * @param id 城市ID
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "获取城市详细信息", notes = "根据城市ID获取城市详细信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "城市ID", required = true, dataType = "Long", paramType = "path")
+  })
   @GetMapping("{id}")
   @RequiresPermissions("city:read")
   public ResponseBean show(@PathVariable Long id) {
@@ -77,10 +85,14 @@ public class CityController extends  BaseController {
    * @return ResponseBean
    * @throws ArgumentsException 参数异常
    */
-  @ApiOperation("")
+  @ApiOperation(value = "创建城市")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "name", value = "城市名称", required = true, paramType = "form")
+  })
   @PostMapping("")
   @RequiresPermissions("city:create")
-  public ResponseBean create(@Validated CreateCityDto createCityDto, BindingResult bindingResult)
+  public ResponseBean create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -98,6 +110,10 @@ public class CityController extends  BaseController {
    * @return ResponseBean
    * @throws NotFoundException notFoundException
    */
+  @ApiOperation(value = "更新城市信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
+  })
   @PutMapping("")
   @RequiresPermissions("city:edit")
   public ResponseBean update(@RequestBody EditCityDto editCityDto) throws NotFoundException {

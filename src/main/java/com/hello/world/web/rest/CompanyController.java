@@ -10,6 +10,8 @@ import com.hello.world.dto.edit.EditCompanyDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.service.ICompanyService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.javassist.NotFoundException;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author jarck-lou
@@ -31,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest公司", description = "Rest公司")
+@Api(value = "RESTFul公司", description = "RESTFul公司")
 @RequestMapping("api/company")
 public class CompanyController extends BaseController {
   @Autowired
@@ -44,7 +47,8 @@ public class CompanyController extends BaseController {
    * @param pageDto 分页信息
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "获取公司列表", notes = "根据查询条件获取公司列表")
+  @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("company:read")
   public ResponseBean list(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
@@ -59,7 +63,11 @@ public class CompanyController extends BaseController {
    * @param id 公司ID
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "获取公司详细信息", notes = "根据公司ID获取公司详细信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "公司ID", required = true, dataType = "Long", paramType = "path")
+  })
   @GetMapping("{id}")
   @RequiresPermissions("company:read")
   public ResponseBean show(@PathVariable long id) {
@@ -75,10 +83,19 @@ public class CompanyController extends BaseController {
    * @param bindingResult 校验对象
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "创建公司")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "name", value = "公司名称", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "shortName", value = "公司简称", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "address", value = "公司地址", paramType = "form"),
+          @ApiImplicitParam(name = "linkName", value = "公司联系人", paramType = "form"),
+          @ApiImplicitParam(name = "phone", value = "联系号码", paramType = "form"),
+          @ApiImplicitParam(name = "cityId", value = "城市ID", paramType = "form")
+  })
   @PostMapping("")
   @RequiresPermissions("company:create")
-  public ResponseBean create(@Validated CreateCompanyDto createCompanyDto, BindingResult bindingResult) {
+  public ResponseBean create(@ApiIgnore @Validated CreateCompanyDto createCompanyDto, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
@@ -95,7 +112,10 @@ public class CompanyController extends BaseController {
    * @return ResponseBean
    * @throws NotFoundException notFoundException
    */
-  @ApiOperation("")
+  @ApiOperation(value = "更新公司信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
+  })
   @PutMapping("")
   @RequiresPermissions("company:edit")
   public ResponseBean update(@RequestBody EditCompanyDto editCompanyDto) throws NotFoundException {

@@ -15,7 +15,9 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CreateRoleDto {
   private Long id;
-  @NotBlank(message = "角色名不能为空")
+
+  @NotBlank(message = "角色名称不能为空")
   private String name;
+
   private String remark;
 }

@@ -11,6 +11,8 @@ import com.hello.world.dto.result.UserDto;
 import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IUserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -24,6 +26,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 /**
  * @author jarck-lou
@@ -31,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest用户", description = "Rest用户")
+@Api(value = "RESTFul用户", description = "RESTFul用户")
 @RequestMapping("api/users")
 public class UserController extends BaseController {
   @Autowired
@@ -44,7 +47,8 @@ public class UserController extends BaseController {
    * @param pageDto 分页信息
    * @return ResponseBean
    */
-  @ApiOperation("")
+  @ApiOperation(value = "查询用户列表", notes = "根据查询条件获取用户信息")
+  @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
   @GetMapping("")
   @RequiresPermissions("user:read")
   public ResponseBean list(SearchUserDto searchUserDto, PageDto pageDto) {
@@ -59,6 +63,11 @@ public class UserController extends BaseController {
    * @param id 用户ID
    * @return ResponseBean
    */
+  @ApiOperation(value = "获取用户详细信息", notes = "根据用户ID获取用户详细信息")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "id", value = "用户ID", required = true, dataType = "Long", paramType = "path")
+  })
   @GetMapping("{id}")
   @RequiresPermissions("user:read")
   public ResponseBean show(@PathVariable Long id) {
@@ -75,9 +84,18 @@ public class UserController extends BaseController {
    * @return ResponseBean
    * @throws ArgumentsException 参数异常
    */
+  @ApiOperation(value = "创建用户")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "name", value = "姓名", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "phone", value = "手机号码", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "cityId", value = "城市ID", paramType = "form"),
+          @ApiImplicitParam(name = "companyId", value = "公司ID", paramType = "form"),
+          @ApiImplicitParam(name = "roleIds", value = "角色IDs", paramType = "form")
+  })
   @PostMapping("")
   @RequiresPermissions("user:create")
-  public ResponseBean create(@Validated CreateUserDto createUserDto, BindingResult bindingResult)
+  public ResponseBean create(@ApiIgnore @Validated CreateUserDto createUserDto, BindingResult bindingResult)
           throws ArgumentsException {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -94,6 +112,10 @@ public class UserController extends BaseController {
    * @param editUserDto 用户信息
    * @return ResponseBean
    */
+  @ApiOperation(value = "更新用户详细")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header")
+  })
   @PutMapping("")
   @RequiresPermissions("user:edit")
   public ResponseBean update(@RequestBody EditUserDto editUserDto) {

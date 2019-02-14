@@ -15,10 +15,13 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class CreatePermissionDto {
   private Long id;
+
   @NotBlank(message = "权限名不能为空")
   private String name;
+
   @NotBlank(message = "权限不能为空")
   private String permission;
+
   @NotBlank(message = "权限类型不能为空")
   private String resourceType;
 }

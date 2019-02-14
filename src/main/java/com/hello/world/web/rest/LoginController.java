@@ -7,6 +7,8 @@ import com.hello.world.dto.condition.LoginDto;
 import com.hello.world.entity.User;
 import com.hello.world.service.IUserService;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +30,7 @@ import java.util.Map;
  **/
 @Slf4j
 @RestController
-@Api(value = "Rest登录", description = "Rest登录")
+@Api(value = "RESTFul登录", description = "RESTFul登录")
 public class LoginController extends BaseController {
   @Autowired
   private IUserService userService;
@@ -39,9 +42,16 @@ public class LoginController extends BaseController {
    * @param bindingResult bindingResult
    * @return 登录结果
    */
-  @ApiOperation("api/login")
+  @ApiOperation(value = "api/login", notes = "用户登录")
+  @ApiImplicitParams({
+          @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
+          @ApiImplicitParam(name = "phone", value = "手机号码", defaultValue = "18812345671",
+                  required = true, paramType = "form"),
+          @ApiImplicitParam(name = "verifyCode", value = "验证码", defaultValue = "123456",
+                  required = true, paramType = "form")
+  })
   @PostMapping("api/login")
-  public ResponseBean login(@Validated LoginDto loginUser, BindingResult bindingResult) {
+  public ResponseBean login(@ApiIgnore @Validated LoginDto loginUser, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
@@ -60,6 +70,7 @@ public class LoginController extends BaseController {
    *
    * @return 401
    */
+  @ApiOperation(value = "401")
   @RequestMapping("401")
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   public ResponseBean unauthorized() {

@@ -1,5 +1,7 @@
 package com.hello.world.dto.create;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,8 +17,12 @@ import javax.validation.constraints.NotBlank;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ApiModel(description = "城市")
 public class CreateCityDto {
+  @ApiModelProperty(hidden = true)
   private Long id;
-  @NotBlank(message = "城市名不能为空")
+
+  @ApiModelProperty(value = "城市名称", required = true, example = "杭州")
+  @NotBlank(message = "城市名称不能为空")
   private String name;
 }
