@@ -3,6 +3,7 @@ package com.hello.world.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.Application;
 import com.hello.world.dto.edit.EditUserDto;
+import com.hello.world.enums.UserStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -107,6 +108,8 @@ public class UserControllerTest extends BaseMock {
     EditUserDto editUserDto = new EditUserDto();
     editUserDto.setId(1L);
     editUserDto.setName("test-update");
+    editUserDto.setPhone("12345678901");
+    editUserDto.setStatus(UserStatusEnum.ARCHIVED);
 
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editUserDto);
@@ -117,6 +120,8 @@ public class UserControllerTest extends BaseMock {
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.data.name").value("test-update"))
+            .andExpect(jsonPath("$.data.phone").value("12345678901"))
+            .andExpect(jsonPath("$.data.status").value("ARCHIVED"))
             .andReturn();
   }
 }

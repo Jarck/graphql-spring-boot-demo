@@ -1,5 +1,6 @@
 package com.hello.world.dto.edit;
 
+import com.hello.world.enums.CompanyStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -39,4 +40,7 @@ public class EditCompanyDto {
 
   @ApiModelProperty(value = "城市ID")
   private Long cityId;
+
+  @ApiModelProperty(value = "状态")
+  private CompanyStatusEnum status;
 }

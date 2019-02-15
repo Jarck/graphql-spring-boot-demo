@@ -136,6 +136,7 @@ public class RoleController extends BaseController {
           @ApiImplicitParam(name = "auth-token", value = "token(required)", paramType = "header"),
           @ApiImplicitParam(name = "id", value = "角色ID", required = true, paramType = "form"),
           @ApiImplicitParam(name = "name", value = "角色名称", required = true, paramType = "form"),
+          @ApiImplicitParam(name = "status", value = "状态", paramType = "form"),
           @ApiImplicitParam(name = "remark", value = "备注", paramType = "form")
   })
   @PutMapping("")

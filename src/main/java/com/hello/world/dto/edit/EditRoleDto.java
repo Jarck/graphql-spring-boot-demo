@@ -1,5 +1,6 @@
 package com.hello.world.dto.edit;
 
+import com.hello.world.enums.RoleStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,9 @@ public class EditRoleDto {
   @ApiModelProperty(value = "角色名称", required = true)
   @NotBlank(message = "角色名称不能为空")
   private String name;
+
+  @ApiModelProperty(value = "状态")
+  private RoleStatusEnum status;
 
   @ApiModelProperty(value = "备注")
   private String remark;

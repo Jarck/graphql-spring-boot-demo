@@ -1,5 +1,6 @@
 package com.hello.world.dto.edit;
 
+import com.hello.world.enums.UserStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -35,6 +36,9 @@ public class EditUserDto {
 
   @ApiModelProperty(value = "公司ID")
   private Long companyId;
+
+  @ApiModelProperty(value = "状态")
+  private UserStatusEnum status;
 
   @ApiModelProperty(value = "角色IDs", example = "[1, 2]")
   private Long[] roleIds;

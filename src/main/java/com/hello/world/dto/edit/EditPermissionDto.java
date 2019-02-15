@@ -1,5 +1,6 @@
 package com.hello.world.dto.edit;
 
+import com.hello.world.enums.PermissionAvailableEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -31,4 +32,7 @@ public class EditPermissionDto {
   @ApiModelProperty(value = "权限类型", required = true)
   @NotBlank(message = "权限类型不能为空")
   private String resourceType;
+
+  @ApiModelProperty(value = "状态")
+  private PermissionAvailableEnum available;
 }

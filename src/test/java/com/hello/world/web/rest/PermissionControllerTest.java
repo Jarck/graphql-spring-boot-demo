@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.Application;
 import com.hello.world.dto.create.CreatePermissionDto;
 import com.hello.world.dto.edit.EditPermissionDto;
+import com.hello.world.enums.PermissionAvailableEnum;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -111,6 +112,7 @@ public class PermissionControllerTest extends BaseMock {
     EditPermissionDto editPermissionDto = new EditPermissionDto();
     editPermissionDto.setId(1L);
     editPermissionDto.setName("读取用户update");
+    editPermissionDto.setAvailable(PermissionAvailableEnum.UNAVAILABLE);
 
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editPermissionDto);
@@ -123,6 +125,7 @@ public class PermissionControllerTest extends BaseMock {
             .andExpect(jsonPath("code").value("200"))
             .andExpect(jsonPath("msg").value("success"))
             .andExpect(jsonPath("$.data.name").value("读取用户update"))
+            .andExpect(jsonPath("$.data.available").value("UNAVAILABLE"))
             .andReturn();
   }
 

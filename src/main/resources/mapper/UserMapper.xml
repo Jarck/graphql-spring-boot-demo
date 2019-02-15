@@ -133,11 +133,17 @@
             <if test="name != null">
                 name = #{name,jdbcType=VARCHAR},
             </if>
+            <if test="phone != null">
+                phone = #{phone,jdbcType=VARCHAR},
+            </if>
             <if test="cityId != null">
                 city_id = #{cityId,jdbcType=BIGINT},
             </if>
             <if test="companyId != null">
                 company_id = #{companyId,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status},
             </if>
         </set>
         where id = #{id,jdbcType=BIGINT}

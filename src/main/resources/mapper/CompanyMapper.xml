@@ -171,6 +171,9 @@
              <if test="cityId != null">
                  city_id = #{cityId,jdbcType=INTEGER},
              </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
              <!--<if test="status != null">-->
                  <!--status = #{status,jdbcType=INTEGER},-->
              <!--</if>-->

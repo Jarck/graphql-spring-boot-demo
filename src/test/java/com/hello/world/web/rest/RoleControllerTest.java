@@ -3,6 +3,7 @@ package com.hello.world.web.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.Application;
 import com.hello.world.dto.edit.EditRoleDto;
+import com.hello.world.enums.RoleStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -122,6 +123,7 @@ public class RoleControllerTest extends BaseMock {
     EditRoleDto editRoleDto = new EditRoleDto();
     editRoleDto.setId(1L);
     editRoleDto.setName("admin-update");
+    editRoleDto.setStatus(RoleStatusEnum.ARCHIVED);
 
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editRoleDto);
@@ -134,6 +136,7 @@ public class RoleControllerTest extends BaseMock {
             .andExpect(jsonPath("code").value("200"))
             .andExpect(jsonPath("msg").value("success"))
             .andExpect(jsonPath("$.data.name").value("admin-update"))
+            .andExpect(jsonPath("$.data.status").value("ARCHIVED"))
             .andReturn();
   }
 
