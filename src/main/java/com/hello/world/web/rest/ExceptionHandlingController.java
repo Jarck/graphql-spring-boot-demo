@@ -1,6 +1,7 @@
 package com.hello.world.web.rest;
 
 import com.hello.world.constant.CommonStatus;
+import com.hello.world.constant.ResponseMessage;
 import com.hello.world.exception.LoginFailedException;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.authz.UnauthenticatedException;
@@ -58,7 +59,7 @@ public class ExceptionHandlingController {
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   @ExceptionHandler(UnauthenticatedException.class)
   public ResponseBean handle401(UnauthenticatedException ex) {
-    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ex.getMessage(), null);
+    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHENTICATED, null);
   }
 
   /**
@@ -70,7 +71,7 @@ public class ExceptionHandlingController {
   @ResponseStatus(HttpStatus.FORBIDDEN)
   @ExceptionHandler(UnauthorizedException.class)
   public ResponseBean handle403(UnauthorizedException ex) {
-    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ex.getMessage(), null);
+    return new ResponseBean(HttpStatus.FORBIDDEN.value(), ResponseMessage.FORBIDDEN, null);
   }
 
   /**
