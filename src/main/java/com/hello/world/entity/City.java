@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -25,8 +26,10 @@ public class City implements Serializable {
   private String name;
 
   @ApiModelProperty(value = "创建时间")
+  @JsonIgnore
   private Date createdAt;
 
   @ApiModelProperty(value = "更新时间")
+  @JsonIgnore
   private Date updatedAt;
 }

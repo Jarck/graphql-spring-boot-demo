@@ -1,5 +1,6 @@
 package com.hello.world.dto.result;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hello.world.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -20,6 +21,7 @@ import java.util.List;
 @AllArgsConstructor
 public class UserDto extends User {
 
+  @JsonIgnore
   private String secretKey;
 
   private CityDto cityDto;

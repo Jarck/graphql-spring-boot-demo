@@ -1,5 +1,6 @@
 package com.hello.world.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hello.world.enums.UserStatusEnum;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -38,8 +39,10 @@ public class User implements Serializable {
   private UserStatusEnum status;
 
   @ApiModelProperty(value = "创建时间")
+  @JsonIgnore
   private Date createdAt;
 
   @ApiModelProperty(value = "更新时间")
+  @JsonIgnore
   private Date updatedAt;
 }
