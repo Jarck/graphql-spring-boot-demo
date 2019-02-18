@@ -7,6 +7,7 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.RolePermissionsDto;
 import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class RoleServiceImpl implements IRoleService {
   }
 
   @Override
-  public RoleDto searchRoleAndPermissions(Long roleId) {
+  public RolePermissionsDto searchRoleAndPermissions(Long roleId) {
     return roleMapper.searchRoleAndPermissions(roleId);
   }
 

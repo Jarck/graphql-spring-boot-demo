@@ -24,7 +24,7 @@ public class UserDto extends User {
   @JsonIgnore
   private String secretKey;
 
-  private CityDto cityDto;
-  private CompanyDto companyDto;
+  private CityDto city;
+  private CompanyDto company;
   private List<RoleDto> roles;
 }

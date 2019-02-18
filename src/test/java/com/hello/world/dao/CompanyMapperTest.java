@@ -117,7 +117,7 @@ public class CompanyMapperTest {
     List<CompanyDto> companyDtoList = companyMapper.searchCompanyAndCity(searchCompanyDto);
     Assert.assertEquals(companyDtoList.size(), 1);
     Assert.assertEquals(companyDtoList.get(0).getName(), "杭州xxx有限公司");
-    Assert.assertEquals(companyDtoList.get(0).getCityDto().getName(), "杭州");
+    Assert.assertEquals(companyDtoList.get(0).getCity().getName(), "杭州");
   }
 
   @Test
@@ -125,6 +125,6 @@ public class CompanyMapperTest {
     CompanyDto companyDto = companyMapper.searchCompanyAndCityWithId(1L);
 
     Assert.assertEquals(companyDto.getName(), "杭州xxx有限公司");
-    Assert.assertEquals(companyDto.getCityDto().getName(), "杭州");
+    Assert.assertEquals(companyDto.getCity().getName(), "杭州");
   }
 }

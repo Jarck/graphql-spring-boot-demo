@@ -52,7 +52,7 @@ public class UserController extends BaseController {
   @GetMapping("")
   @RequiresPermissions("user:read")
   public ResponseBean<PageInfo<UserDto>> list(SearchUserDto searchUserDto, PageDto pageDto) {
-    PageInfo<UserDto> userDtoPageInfo = userService.searchWithCondition(searchUserDto, pageDto);
+    PageInfo<UserDto> userDtoPageInfo = userService.searchUserAndCityAndCompanyAndRoles(searchUserDto, pageDto);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDtoPageInfo);
   }
@@ -71,7 +71,7 @@ public class UserController extends BaseController {
   @GetMapping("{id}")
   @RequiresPermissions("user:read")
   public ResponseBean<UserDto> show(@PathVariable Long id) {
-    UserDto user = userService.searchWithId(id);
+    UserDto user = userService.searchUserAndCityAndCompanyAndRolesWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, user);
   }

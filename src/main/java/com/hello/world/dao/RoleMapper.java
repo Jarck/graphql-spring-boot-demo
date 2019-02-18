@@ -3,6 +3,7 @@ package com.hello.world.dao;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.RolePermissionsDto;
 import com.hello.world.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -104,5 +105,5 @@ public interface RoleMapper {
    * @param id 角色ID
    * @return 角色
    */
-  RoleDto searchRoleAndPermissions(@Param("id") long id);
+  RolePermissionsDto searchRoleAndPermissions(@Param("id") long id);
 }

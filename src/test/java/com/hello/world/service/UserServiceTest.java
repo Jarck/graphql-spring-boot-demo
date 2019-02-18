@@ -41,7 +41,7 @@ public class UserServiceTest {
 
     Assert.assertEquals(userPageInfo.getPageNum(), 1);
     Assert.assertEquals(userPageInfo.getPageSize(), 20);
-    Assert.assertEquals(userPageInfo.getTotal(), 1L);
+    Assert.assertEquals(userPageInfo.getList().size(), 1L);
     Assert.assertEquals(userPageInfo.isHasNextPage(), false);
     Assert.assertEquals(userPageInfo.getList().get(0).getName(), "admin");
   }

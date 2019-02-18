@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.RolePermissionsDto;
 import com.ninja_squad.dbsetup.DbSetup;
 import com.ninja_squad.dbsetup.DbSetupTracker;
 import com.ninja_squad.dbsetup.Operations;
@@ -121,10 +122,10 @@ public class RoleMapperTest {
 
   @Test
   public void testSearchRoleAndPermissions() {
-    RoleDto roleDto = roleMapper.searchRoleAndPermissions(1L);
+    RolePermissionsDto rolePermissionsDto = roleMapper.searchRoleAndPermissions(1L);
 
-    Assert.assertEquals(roleDto.getName(), "admin");
-    Assert.assertEquals(roleDto.getPermissions().size(), 4);
-    Assert.assertEquals(roleDto.getPermissions().get(0).getName(), "读取用户");
+    Assert.assertEquals(rolePermissionsDto.getName(), "admin");
+    Assert.assertEquals(rolePermissionsDto.getPermissions().size(), 4);
+    Assert.assertEquals(rolePermissionsDto.getPermissions().get(0).getName(), "读取用户");
   }
 }

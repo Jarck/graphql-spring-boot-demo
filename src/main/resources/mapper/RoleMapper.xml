@@ -22,7 +22,7 @@
         <result column="permission_updated_at" property="updatedAt"/>
     </resultMap>
 
-    <resultMap id="roleAndPermissions" type="com.hello.world.dto.result.RoleDto" extends="roleDtoMap">
+    <resultMap id="roleAndPermissions" type="com.hello.world.dto.result.RolePermissionsDto" extends="roleDtoMap">
         <collection property="permissions" resultMap="permissionDtoAssocitionMap"/>
     </resultMap>
     

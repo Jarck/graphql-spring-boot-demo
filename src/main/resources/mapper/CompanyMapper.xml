@@ -24,7 +24,7 @@
     </resultMap>
     
     <resultMap id="companyAndCity" type="com.hello.world.dto.result.CompanyDto" extends="companyDtoMap">
-        <association property="cityDto" resultMap="cityDtoAssocitionMap"/>
+        <association property="city" resultMap="cityDtoAssocitionMap"/>
     </resultMap>
 
     <sql id="Base_Column_List">
@@ -174,9 +174,6 @@
             <if test="status != null">
                 status = #{status},
             </if>
-             <!--<if test="status != null">-->
-                 <!--status = #{status,jdbcType=INTEGER},-->
-             <!--</if>-->
         </set>
         where id = #{id,jdbcType=INTEGER}
       </update>
@@ -206,7 +203,7 @@
             </if>
         </where>
     </select>
-    <insert id="createCompany" useGeneratedKeys="true" keyProperty="id">
+    <insert id="createCompany" parameterType="com.hello.world.dto.create.CreateCompanyDto" useGeneratedKeys="true" keyProperty="id">
         insert into company (name, short_name, address, link_name, phone, city_id)
         values (#{name}, #{shortName}, #{address}, #{linkName}, #{phone}, #{cityId})
     </insert>

@@ -5,6 +5,7 @@ import com.hello.world.dto.PageDto;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.RolePermissionsDto;
 import com.hello.world.exception.ArgumentsException;
 
 import java.util.List;
@@ -43,7 +44,7 @@ public interface IRoleService {
    * @param roleId 角色ID
    * @return 角色
    */
-  RoleDto searchRoleAndPermissions(Long roleId);
+  RolePermissionsDto searchRoleAndPermissions(Long roleId);
 
   /**
    * 通过角色名查询

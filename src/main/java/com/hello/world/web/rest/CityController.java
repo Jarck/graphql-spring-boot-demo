@@ -36,7 +36,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Slf4j
 @RestController
 @Api(value = "RESTFul城市", description = "RESTFul城市")
-@RequestMapping("api/city")
+@RequestMapping("api/cities")
 public class CityController extends  BaseController {
   @Autowired
   private ICityService cityService;

@@ -21,6 +21,13 @@
         <result column="city_updated_at" property="updatedAt"/>
     </resultMap>
 
+    <resultMap id="companyCityDtoAssocitionMap" type="com.hello.world.dto.result.CityDto">
+        <id column="company_city_id" property="id"/>
+        <result column="company_city_name" property="name"/>
+        <result column="company_city_created_at" property="createdAt"/>
+        <result column="company_city_updated_at" property="updatedAt"/>
+    </resultMap>
+
     <resultMap id="companyDtoAssocitionMap" type="com.hello.world.dto.result.CompanyDto">
         <id column="company_company_id" property="id"/>
         <result column="company_name" property="name"/>
@@ -32,11 +39,12 @@
         <result column="company_status" javaType="com.hello.world.enums.CompanyStatusEnum" property="status"/>
         <result column="company_created_at" property="createdAt"/>
         <result column="company_updated_at" property="updatedAt"/>
+        <association property="city" resultMap="companyCityDtoAssocitionMap"/>
     </resultMap>
 
     <resultMap id="userAndRolesAndPermissions" type="com.hello.world.dto.result.UserDto" extends="userDtoMap">
-        <association property="cityDto" resultMap="cityDtoAssocitionMap"/>
-        <association property="companyDto" resultMap="companyDtoAssocitionMap"/>
+        <association property="city" resultMap="cityDtoAssocitionMap"/>
+        <association property="company" resultMap="companyDtoAssocitionMap"/>
         <collection property="roles" ofType="com.hello.world.dto.result.RoleDto">
             <id column="role_id" property="id"/>
             <result column="role_name" property="name"/>
@@ -212,7 +220,8 @@
             </if>
         </where>
     </select>
-    <insert id="insertUser" parameterType="com.hello.world.entity.User" useGeneratedKeys="true" keyProperty="id">
+
+    <insert id="insertUser" parameterType="com.hello.world.dto.create.CreateUserDto" useGeneratedKeys="true" keyProperty="id">
         insert into user (name, phone, city_id, company_id)
         values (#{name}, #{phone}, #{cityId}, #{companyId})
     </insert>
@@ -224,16 +233,20 @@
         company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
         company.created_at as company_created_at, company.updated_at as company_updated_at,
         role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
-        role.created_at as role_created_at, role.updated_at as role_updated_at
+        role.created_at as role_created_at, role.updated_at as role_updated_at, company_city.id as company_city_id,
+        company_city.name as company_city_name, company_city.created_at as company_city_created_at,
+        company_city.updated_at as company_city_updated_at
         from user
         left join city
-        on user.city_id = city.id
+          on user.city_id = city.id
         left join company
-        on user.company_id = company.id
+          on user.company_id = company.id
+        left join city as company_city
+          on company.city_id = company_city.id
         left join user_role
-        on user.id = user_role.user_id
+          on user.id = user_role.user_id
         left join role
-        on user_role.role_id = role.id
+          on user_role.role_id = role.id
         where user.status = 1
         <if test="id != null and id != ''">
             and user.id = #{id}
@@ -247,16 +260,20 @@
         company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
         company.created_at as company_created_at, company.updated_at as company_updated_at,
         role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
-        role.created_at as role_created_at, role.updated_at as role_updated_at
+        role.created_at as role_created_at, role.updated_at as role_updated_at, company_city.id as company_city_id,
+        company_city.name as company_city_name, company_city.created_at as company_city_created_at,
+        company_city.updated_at as company_city_updated_at
         from user
         left join city
-        on user.city_id = city.id
+          on user.city_id = city.id
         left join company
-        on user.company_id = company.id
+          on user.company_id = company.id
+        left join city as company_city
+          on company.city_id = company_city.id
         left join user_role
-        on user.id = user_role.user_id
+          on user.id = user_role.user_id
         left join role
-        on user_role.role_id = role.id
+          on user_role.role_id = role.id
         where user.status = 1
          <if test="phone != null and phone != ''">
             and user.phone like concat(#{phone}, '%')
@@ -270,12 +287,16 @@
         company.phone as company_phone, company.city_id as company_city_id, company.status as company_status,
         company.created_at as company_created_at, company.updated_at as company_updated_at,
         role.id as role_id, role.name as role_name, role.status as role_status, role.remark as role_remark,
-        role.created_at as role_created_at, role.updated_at as role_updated_at
+        role.created_at as role_created_at, role.updated_at as role_updated_at, company_city.id as company_city_id,
+        company_city.name as company_city_name, company_city.created_at as company_city_created_at,
+        company_city.updated_at as company_city_updated_at
       from user
       left join city
         on user.city_id = city.id
       left join company
         on user.company_id = company.id
+      left join city as company_city
+        on company.city_id = company_city.id
       left join user_role
         on user.id = user_role.user_id
       left join role

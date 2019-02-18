@@ -115,7 +115,7 @@ public class UserServiceImpl implements IUserService {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "asc"));
 
-    List<UserDto> userList = userMapper.searchCondition(searchUserDto);
+    List<UserDto> userList = userMapper.searchUserAndCityAndCompanyAndRoles(searchUserDto);
 
     PageInfo<UserDto> userPageInfo = new PageInfo<>(userList);
 
@@ -165,13 +165,18 @@ public class UserServiceImpl implements IUserService {
 
     userMapper.insertUser(createUserDto);
 
-    return userMapper.selectByPrimaryKey(createUserDto.getId());
+    // 设置用户角色
+    if (createUserDto.getRoleIds() != null && !createUserDto.getRoleIds().isEmpty()) {
+      userRoleMapper.createUserRoles(createUserDto.getId(), createUserDto.getRoleIds());
+    }
+
+    return userMapper.searchUserAndCityAndCompanyAndRolesWithId(createUserDto.getId());
   }
 
   @Override
   public UserDto updateUser(EditUserDto editUserDto) {
     int i = userMapper.update(editUserDto);
-    UserDto userDto = userMapper.selectByPrimaryKey(editUserDto.getId());
+    UserDto userDto = userMapper.searchUserAndCityAndCompanyAndRolesWithId(editUserDto.getId());
 
     return userDto;
   }

@@ -2,6 +2,7 @@ package com.hello.world.web.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hello.world.Application;
+import com.hello.world.dto.create.CreateCompanyDto;
 import com.hello.world.dto.edit.EditCompanyDto;
 import com.hello.world.enums.CompanyStatusEnum;
 import com.ninja_squad.dbsetup.DbSetup;
@@ -58,7 +59,7 @@ public class CompanyControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testList() throws Exception {
-    mockMvc.perform(get("/api/company").header("auth-token", token))
+    mockMvc.perform(get("/api/companies").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -70,7 +71,7 @@ public class CompanyControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testShow() throws Exception {
-    mockMvc.perform(get("/api/company/1").header("auth-token", token))
+    mockMvc.perform(get("/api/companies/1").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -82,7 +83,7 @@ public class CompanyControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testShowbyCompanyNotExist() throws Exception {
-    mockMvc.perform(get("/api/company/9999999").header("auth-token", token))
+    mockMvc.perform(get("/api/companies/9999999").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -94,9 +95,16 @@ public class CompanyControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testCreate() throws Exception {
-    mockMvc.perform(post("/api/company").header("auth-token", token)
-            .param("name", "createCompanyName")
-            .param("shortName", "createCompanyShortName"))
+    CreateCompanyDto createCompanyDto = new CreateCompanyDto();
+    createCompanyDto.setName("createCompanyName");
+    createCompanyDto.setShortName("createCompanyShortName");
+
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonInString = mapper.writeValueAsString(createCompanyDto);
+
+    mockMvc.perform(post("/api/companies").header("auth-token", token)
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content(jsonInString))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -109,9 +117,16 @@ public class CompanyControllerTest extends BaseMock {
   @Transactional
   @Ignore
   public void testCreateByCompanyExist() throws Exception {
-    mockMvc.perform(post("/api/company").header("auth-token", token)
-            .param("name", "杭州xxx有限公司")
-            .param("shortName", "杭州"))
+    CreateCompanyDto createCompanyDto = new CreateCompanyDto();
+    createCompanyDto.setName("杭州xxx有限公司");
+    createCompanyDto.setShortName("杭州");
+
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonInString = mapper.writeValueAsString(createCompanyDto);
+
+    mockMvc.perform(post("/api/companies").header("auth-token", token)
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content(jsonInString))
             .andDo(print())
             .andExpect(status().is4xxClientError())
             .andExpect(jsonPath("code").value("500"))
@@ -130,7 +145,7 @@ public class CompanyControllerTest extends BaseMock {
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editCompanyDto);
 
-    mockMvc.perform(put("/api/company").header("auth-token", token)
+    mockMvc.perform(put("/api/companies").header("auth-token", token)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())
@@ -152,7 +167,7 @@ public class CompanyControllerTest extends BaseMock {
     ObjectMapper objectMapper = new ObjectMapper();
     String jsonInString = objectMapper.writeValueAsString(editCompanyDto);
 
-    mockMvc.perform(put("/api/company").header("auth-token", token)
+    mockMvc.perform(put("/api/companies").header("auth-token", token)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())

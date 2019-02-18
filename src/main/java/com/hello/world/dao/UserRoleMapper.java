@@ -2,6 +2,7 @@ package com.hello.world.dao;
 
 import com.hello.world.entity.UserRole;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Repository;
@@ -41,6 +42,15 @@ public interface UserRoleMapper {
    * @return 影响行数
    */
   int insertSelective(UserRole record);
+
+  /**
+   * 创建用户对应的角色
+   *
+   * @param userId 用户ID
+   * @param roleIds 角色IDs
+   * @return 影响行数
+   */
+  int createUserRoles(@Param("userID") Long userId, @Param("roleIds") List<Long> roleIds);
 
   /**
    * 按ID查询

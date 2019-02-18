@@ -81,7 +81,8 @@ public class UserControllerTest extends BaseMock {
   @Transactional
   public void testCreate() throws Exception {
     mockMvc.perform(post("/api/users").header("auth-token", token)
-            .param("name", "test2").param("phone", "18812345673"))
+            .param("name", "test2")
+            .param("phone", "18812345673"))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -94,7 +95,8 @@ public class UserControllerTest extends BaseMock {
   @Transactional
   public void testCreateByPhoneExist() throws Exception {
     mockMvc.perform(post("/api/users").header("auth-token", token)
-            .param("name", "test2").param("phone", "18812345671"))
+            .param("name", "test2")
+            .param("phone", "18812345671"))
             .andDo(print())
             .andExpect(status().is4xxClientError())
             .andExpect(jsonPath("code").value("500"))
@@ -109,7 +111,6 @@ public class UserControllerTest extends BaseMock {
     editUserDto.setId(1L);
     editUserDto.setName("test-update");
     editUserDto.setPhone("12345678901");
-    editUserDto.setStatus(UserStatusEnum.ARCHIVED);
 
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editUserDto);
@@ -121,7 +122,27 @@ public class UserControllerTest extends BaseMock {
             .andExpect(status().isOk())
             .andExpect(jsonPath("$.data.name").value("test-update"))
             .andExpect(jsonPath("$.data.phone").value("12345678901"))
-            .andExpect(jsonPath("$.data.status").value("ARCHIVED"))
+            .andReturn();
+  }
+
+  @Test
+  @Transactional
+  public void testUpdateByUserArchived() throws Exception {
+    EditUserDto editUserDto = new EditUserDto();
+    editUserDto.setId(1L);
+    editUserDto.setName("test-update");
+    editUserDto.setPhone("12345678901");
+    editUserDto.setStatus(UserStatusEnum.ARCHIVED);
+
+    ObjectMapper mapper = new ObjectMapper();
+    String jsonInString = mapper.writeValueAsString(editUserDto);
+
+    mockMvc.perform(put("/api/users").header("auth-token", token)
+            .contentType(MediaType.APPLICATION_JSON_UTF8)
+            .content(jsonInString))
+            .andDo(print())
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("data").isEmpty())
             .andReturn();
   }
 }

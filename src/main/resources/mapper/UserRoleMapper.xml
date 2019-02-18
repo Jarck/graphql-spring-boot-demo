@@ -63,6 +63,15 @@
             </if>
         </trim>
     </insert>
+
+    <insert id="createUserRoles" useGeneratedKeys="true" keyProperty="id">
+        insert into user_role
+        (user_id, role_id) values
+        <foreach collection="roleIds" separator="," item="roleId">
+            (#{userId}, #{roleId})
+        </foreach>
+    </insert>
+
     <update id="updateByPrimaryKeySelective" parameterType="com.hello.world.entity.UserRole">
         update user_role
         <set>

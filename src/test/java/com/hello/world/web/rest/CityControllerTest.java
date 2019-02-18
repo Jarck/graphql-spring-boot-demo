@@ -54,7 +54,7 @@ public class CityControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testList() throws Exception {
-    mockMvc.perform(get("/api/city").header("auth-token", token))
+    mockMvc.perform(get("/api/cities").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -66,7 +66,7 @@ public class CityControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testShow() throws Exception {
-    mockMvc.perform(get("/api/city/1").header("auth-token", token))
+    mockMvc.perform(get("/api/cities/1").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -78,7 +78,7 @@ public class CityControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testShowByNotExist() throws Exception {
-    mockMvc.perform(get("/api/city/9999999").header("auth-token", token))
+    mockMvc.perform(get("/api/cities/9999999").header("auth-token", token))
             .andDo(print())
             .andExpect(status().isOk())
             .andExpect(jsonPath("code").value("200"))
@@ -90,7 +90,7 @@ public class CityControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testCreate() throws Exception {
-    mockMvc.perform(post("/api/city").header("auth-token", token)
+    mockMvc.perform(post("/api/cities").header("auth-token", token)
             .param("name", "上海"))
             .andDo(print())
             .andExpect(status().isOk())
@@ -103,7 +103,7 @@ public class CityControllerTest extends BaseMock {
   @Test
   @Transactional
   public void testCreateByNameExist() throws Exception {
-    mockMvc.perform(post("/api/city").header("auth-token", token)
+    mockMvc.perform(post("/api/cities").header("auth-token", token)
             .param("name", "杭州"))
             .andDo(print())
             .andExpect(status().is4xxClientError())
@@ -122,7 +122,7 @@ public class CityControllerTest extends BaseMock {
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editCityDto);
 
-    mockMvc.perform(put("/api/city").header("auth-token", token)
+    mockMvc.perform(put("/api/cities").header("auth-token", token)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())
@@ -143,7 +143,7 @@ public class CityControllerTest extends BaseMock {
     ObjectMapper mapper = new ObjectMapper();
     String jsonInString = mapper.writeValueAsString(editCityDto);
 
-    mockMvc.perform(put("/api/city").header("auth-token", token)
+    mockMvc.perform(put("/api/cities").header("auth-token", token)
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())

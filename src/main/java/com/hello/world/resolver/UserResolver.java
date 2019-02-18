@@ -23,7 +23,7 @@ public class UserResolver implements GraphQLResolver<UserDto> {
    * @return 城市
    */
   public CityDto city(UserDto userDto) {
-    return userDto.getCityDto();
+    return userDto.getCity();
   }
 
   /**
@@ -33,7 +33,7 @@ public class UserResolver implements GraphQLResolver<UserDto> {
    * @return 公司
    */
   public CompanyDto company(UserDto userDto) {
-    return userDto.getCompanyDto();
+    return userDto.getCompany();
   }
 
   /**

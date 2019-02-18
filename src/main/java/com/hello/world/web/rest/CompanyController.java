@@ -35,7 +35,7 @@ import springfox.documentation.annotations.ApiIgnore;
 @Slf4j
 @RestController
 @Api(value = "RESTFul公司", description = "RESTFul公司")
-@RequestMapping("api/company")
+@RequestMapping("api/companies")
 public class CompanyController extends BaseController {
   @Autowired
   private ICompanyService companyService;
@@ -71,7 +71,7 @@ public class CompanyController extends BaseController {
   @GetMapping("{id}")
   @RequiresPermissions("company:read")
   public ResponseBean<CompanyDto> show(@PathVariable long id) {
-    CompanyDto companyDto = companyService.searchWithId(id);
+    CompanyDto companyDto = companyService.searchCompanyAndCityWithId(id);
 
     return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
   }
@@ -95,7 +95,7 @@ public class CompanyController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("company:create")
-  public ResponseBean<CompanyDto> create(@ApiIgnore @Validated CreateCompanyDto createCompanyDto,
+  public ResponseBean<CompanyDto> create(@ApiIgnore @RequestBody @Validated CreateCompanyDto createCompanyDto,
                                          BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);

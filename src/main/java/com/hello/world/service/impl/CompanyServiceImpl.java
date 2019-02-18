@@ -52,7 +52,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
   @Override
   public List<CompanyDto> searchCondition(SearchCompanyDto searchCompanyDto) {
-    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
+    List<CompanyDto> companyList = companyMapper.searchCompanyAndCity(searchCompanyDto);
 
     return companyList;
   }
@@ -62,7 +62,7 @@ public class CompanyServiceImpl implements ICompanyService {
     PageHelper.startPage(pageDto.getPageNum(), pageDto.getPageSize());
     PageHelper.orderBy(pageDto.getOrderBy() + " " + (pageDto.isDesc() ? "desc" : "acs"));
 
-    List<CompanyDto> companyList = companyMapper.searchCondition(searchCompanyDto);
+    List<CompanyDto> companyList = companyMapper.searchCompanyAndCity(searchCompanyDto);
 
     PageInfo<CompanyDto> companyPage = new PageInfo<>(companyList);
 
@@ -73,7 +73,7 @@ public class CompanyServiceImpl implements ICompanyService {
   public CompanyDto createCompany(CreateCompanyDto companyDto) {
     long i = companyMapper.createCompany(companyDto);
 
-    return companyMapper.selectByPrimaryKey(companyDto.getId());
+    return companyMapper.searchCompanyAndCityWithId(companyDto.getId());
   }
 
   @Override
@@ -86,7 +86,7 @@ public class CompanyServiceImpl implements ICompanyService {
 
     long i = companyMapper.update(editCompanyDto);
 
-    return companyMapper.selectByPrimaryKey(editCompanyDto.getId());
+    return companyMapper.searchCompanyAndCityWithId(editCompanyDto.getId());
   }
 
 }

@@ -5,6 +5,7 @@ import com.hello.world.constant.ResponseMessage;
 import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
+import com.hello.world.dto.result.RolePermissionsDto;
 import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRolePermissionsService;
 import com.hello.world.service.IRoleService;
@@ -91,10 +92,10 @@ public class RoleController extends BaseController {
   })
   @GetMapping("{id}/permissions")
   @RequiresPermissions("role:read")
-  public ResponseBean<RoleDto> getRolePermissions(@PathVariable Long id) {
-    RoleDto roleDto = roleService.searchRoleAndPermissions(id);
+  public ResponseBean<RolePermissionsDto> getRolePermissions(@PathVariable Long id) {
+    RolePermissionsDto rolePermissionsDto = roleService.searchRoleAndPermissions(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
+    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, rolePermissionsDto);
   }
 
   /**
