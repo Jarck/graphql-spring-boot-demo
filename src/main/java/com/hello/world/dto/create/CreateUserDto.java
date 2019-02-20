@@ -1,5 +1,6 @@
 package com.hello.world.dto.create;
 
+import com.hello.world.validator.UniqUserPhone;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -25,6 +26,7 @@ public class CreateUserDto {
 
   @Pattern(regexp = "^1\\d{10}$", message = "手机号码格式错误")
   @NotBlank(message = "手机号不能为空")
+  @UniqUserPhone
   private String phone;
 
   private Long cityId;

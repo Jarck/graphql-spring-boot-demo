@@ -106,9 +106,10 @@ public class CityControllerTest extends BaseMock {
     mockMvc.perform(post("/api/cities").header("auth-token", token)
             .param("name", "杭州"))
             .andDo(print())
-            .andExpect(status().is4xxClientError())
-            .andExpect(jsonPath("code").value("500"))
-            .andExpect(jsonPath("msg").value("城市已存在"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("code").value("400"))
+            .andExpect(jsonPath("msg").value("请求参数错误"))
+            .andExpect(jsonPath("$.data[0].name").value("城市名称已存在"))
             .andReturn();
   }
 

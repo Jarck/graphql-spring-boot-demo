@@ -8,7 +8,6 @@ import com.hello.world.dto.condition.SearchCityDto;
 import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.edit.EditCityDto;
 import com.hello.world.dto.result.CityDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.ICityService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -83,7 +82,6 @@ public class CityController extends  BaseController {
    * @param createCityDto 城市信息
    * @param bindingResult 校验对象
    * @return ResponseBean
-   * @throws ArgumentsException 参数异常
    */
   @ApiOperation(value = "创建城市")
   @ApiImplicitParams({
@@ -92,8 +90,7 @@ public class CityController extends  BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("city:create")
-  public ResponseBean<CityDto> create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult)
-          throws ArgumentsException {
+  public ResponseBean<CityDto> create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }

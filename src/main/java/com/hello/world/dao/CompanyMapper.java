@@ -1,12 +1,13 @@
 package com.hello.world.dao;
 
+import com.hello.world.dto.condition.SearchCompanyDto;
+import com.hello.world.dto.create.CreateCompanyDto;
 import com.hello.world.dto.edit.EditCompanyDto;
 import com.hello.world.dto.result.CompanyDto;
 import com.hello.world.entity.Company;
-import com.hello.world.dto.condition.SearchCompanyDto;
-import com.hello.world.dto.create.CreateCompanyDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -115,4 +116,13 @@ public interface CompanyMapper {
    * @return 影响的行数
    */
   Long createCompany(CreateCompanyDto createCompanyDto);
+
+  /**
+   * 判断公司名称是否存在
+   *
+   * @param name name
+   * @return boolean
+   */
+  @Select("select count(*) from company where name = #{name} and status = 1")
+  int countByName(@Param("name") String name);
 }

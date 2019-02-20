@@ -80,4 +80,12 @@ public interface ICompanyService {
    * @throws NotFoundException notFoundException
    */
   CompanyDto updateCompany(EditCompanyDto editCompanyDto) throws NotFoundException;
+
+  /**
+   * 判断公司名称是否存在
+   *
+   * @param name 公司名称
+   * @return boolean
+   */
+  boolean exitsCompanyName(String name);
 }

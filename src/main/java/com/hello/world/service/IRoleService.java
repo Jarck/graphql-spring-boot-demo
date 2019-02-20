@@ -6,7 +6,6 @@ import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.RolePermissionsDto;
-import com.hello.world.exception.ArgumentsException;
 
 import java.util.List;
 
@@ -67,9 +66,8 @@ public interface IRoleService {
    *
    * @param createRoleDto 角色
    * @return 影响行数
-   * @throws ArgumentsException 参数异常
    */
-  RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException;
+  RoleDto createRole(CreateRoleDto createRoleDto);
 
   /**
    * 更新角色
@@ -78,4 +76,12 @@ public interface IRoleService {
    * @return 角色
    */
   RoleDto updateRole(EditRoleDto editRoleDto);
+
+  /**
+   * 判断角色名称是否存在
+   *
+   * @param name 角色名称
+   * @return boolean
+   */
+  boolean exitsRoleName(String name);
 }

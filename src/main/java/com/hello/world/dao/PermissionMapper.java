@@ -6,6 +6,7 @@ import com.hello.world.dto.result.PermissionDto;
 import com.hello.world.entity.Permission;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -105,4 +106,13 @@ public interface PermissionMapper {
    * @return 权限列表
    */
   List<PermissionDto> searchWithUserId(@Param("userId") Long userId);
+
+  /**
+   * 判断权限名称是否存在
+   *
+   * @param name name
+   * @return boolean
+   */
+  @Select("select count(*) from permission where name = #{name} and available = 1")
+  int countByName(@Param("name") String name);
 }

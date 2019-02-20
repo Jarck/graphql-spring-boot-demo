@@ -1,5 +1,6 @@
 package com.hello.world.dto.create;
 
+import com.hello.world.validator.UniqPermissionName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ public class CreatePermissionDto {
   private Long id;
 
   @NotBlank(message = "权限名不能为空")
+  @UniqPermissionName
   private String name;
 
   @NotBlank(message = "权限不能为空")

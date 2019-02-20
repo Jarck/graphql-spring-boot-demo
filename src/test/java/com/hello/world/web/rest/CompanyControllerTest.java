@@ -11,7 +11,6 @@ import com.ninja_squad.dbsetup.Operations;
 import com.ninja_squad.dbsetup.destination.DataSourceDestination;
 import com.ninja_squad.dbsetup.operation.Operation;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,7 +114,6 @@ public class CompanyControllerTest extends BaseMock {
 
   @Test
   @Transactional
-  @Ignore
   public void testCreateByCompanyExist() throws Exception {
     CreateCompanyDto createCompanyDto = new CreateCompanyDto();
     createCompanyDto.setName("杭州xxx有限公司");
@@ -128,9 +126,10 @@ public class CompanyControllerTest extends BaseMock {
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())
-            .andExpect(status().is4xxClientError())
-            .andExpect(jsonPath("code").value("500"))
-            .andExpect(jsonPath("msg").value("公司已存在"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("code").value("400"))
+            .andExpect(jsonPath("msg").value("请求参数错误"))
+            .andExpect(jsonPath("$.data[0].name").value("公司名称已存在"))
             .andReturn();
   }
 

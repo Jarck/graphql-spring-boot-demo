@@ -2,11 +2,10 @@ package com.hello.world.service;
 
 import com.github.pagehelper.PageInfo;
 import com.hello.world.dto.PageDto;
-import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.condition.SearchCityDto;
+import com.hello.world.dto.create.CreateCityDto;
 import com.hello.world.dto.edit.EditCityDto;
 import com.hello.world.dto.result.CityDto;
-import com.hello.world.exception.ArgumentsException;
 import org.apache.ibatis.javassist.NotFoundException;
 
 import java.util.List;
@@ -53,9 +52,8 @@ public interface ICityService {
    *
    * @param createCityDto 城市
    * @return 城市
-   * @throws ArgumentsException 参数异常
    */
-  CityDto createCity(CreateCityDto createCityDto) throws ArgumentsException;
+  CityDto createCity(CreateCityDto createCityDto);
 
   /**
    * 更新城市
@@ -65,4 +63,12 @@ public interface ICityService {
    * @throws NotFoundException notFoundException
    */
   CityDto updateCity(EditCityDto editCityDto) throws NotFoundException;
+
+  /**
+   * 判断城市名称是否存在
+   *
+   * @param name 城市名称
+   * @return boolean
+   */
+  boolean exitsCityName(String name);
 }

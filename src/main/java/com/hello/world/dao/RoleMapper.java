@@ -7,6 +7,7 @@ import com.hello.world.dto.result.RolePermissionsDto;
 import com.hello.world.entity.Role;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -106,4 +107,13 @@ public interface RoleMapper {
    * @return 角色
    */
   RolePermissionsDto searchRoleAndPermissions(@Param("id") long id);
+
+  /**
+   * 判断角色名称是否存在
+   *
+   * @param name name
+   * @return boolean
+   */
+  @Select("select count(*) from role where name = #{name} and status = 1")
+  int countByName(@Param("name") String name);
 }

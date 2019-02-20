@@ -89,4 +89,10 @@ public class CompanyServiceImpl implements ICompanyService {
     return companyMapper.searchCompanyAndCityWithId(editCompanyDto.getId());
   }
 
+  @Override
+  public boolean exitsCompanyName(String name) {
+    int count = companyMapper.countByName(name);
+
+    return count > 0;
+  }
 }

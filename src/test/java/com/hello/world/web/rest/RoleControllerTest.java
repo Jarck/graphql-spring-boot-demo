@@ -111,9 +111,10 @@ public class RoleControllerTest extends BaseMock {
     mockMvc.perform(post("/api/roles").header("auth-token", token)
             .param("name", "test").param("remark", "测试重名"))
             .andDo(print())
-            .andExpect(status().is4xxClientError())
-            .andExpect(jsonPath("code").value("500"))
-            .andExpect(jsonPath("msg").value("角色已存在"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("code").value("400"))
+            .andExpect(jsonPath("msg").value("请求参数错误"))
+            .andExpect(jsonPath("$.data[0].name").value("角色名称已存在"))
             .andReturn();
   }
 

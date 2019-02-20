@@ -90,13 +90,7 @@ public class CityServiceImpl implements ICityService {
    * @return
    */
   @Override
-  public CityDto createCity(CreateCityDto createCityDto) throws ArgumentsException {
-    List<CityDto> cityDtoList = cityMapper.searchWithName(createCityDto.getName());
-
-    if (cityDtoList.size() != 0) {
-      throw new ArgumentsException("城市已存在");
-    }
-
+  public CityDto createCity(CreateCityDto createCityDto) {
     long i = cityMapper.insertCity(createCityDto);
     return cityMapper.selectByPrimaryKey(createCityDto.getId());
   }
@@ -112,5 +106,12 @@ public class CityServiceImpl implements ICityService {
     long i = cityMapper.update(editCityDto);
 
     return cityMapper.selectByPrimaryKey(editCityDto.getId());
+  }
+
+  @Override
+  public boolean exitsCityName(String name) {
+    int count = cityMapper.countByName(name);
+
+    return count > 0;
   }
 }

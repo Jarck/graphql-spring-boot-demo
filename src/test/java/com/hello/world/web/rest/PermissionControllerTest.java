@@ -100,9 +100,10 @@ public class PermissionControllerTest extends BaseMock {
             .contentType(MediaType.APPLICATION_JSON_UTF8)
             .content(jsonInString))
             .andDo(print())
-            .andExpect(status().is4xxClientError())
-            .andExpect(jsonPath("code").value("500"))
-            .andExpect(jsonPath("msg").value("权限已存在"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("code").value("400"))
+            .andExpect(jsonPath("msg").value("请求参数错误"))
+            .andExpect(jsonPath("$.data[0].name").value("权限名称已存在"))
             .andReturn();
   }
 

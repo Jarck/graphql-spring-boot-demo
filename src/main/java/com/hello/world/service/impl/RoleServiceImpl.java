@@ -8,7 +8,6 @@ import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.RolePermissionsDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -62,13 +61,7 @@ public class RoleServiceImpl implements IRoleService {
   }
 
   @Override
-  public RoleDto createRole(CreateRoleDto createRoleDto) throws ArgumentsException {
-    List<RoleDto> roleList = roleMapper.searchWithName(createRoleDto.getName());
-
-    if (roleList.size() != 0) {
-      throw new ArgumentsException("角色已存在");
-    }
-
+  public RoleDto createRole(CreateRoleDto createRoleDto) {
     roleMapper.insertRole(createRoleDto);
     return roleMapper.selectByPrimaryKey(createRoleDto.getId());
   }
@@ -78,5 +71,12 @@ public class RoleServiceImpl implements IRoleService {
     roleMapper.update(editRoleDto);
 
     return roleMapper.selectByPrimaryKey(editRoleDto.getId());
+  }
+
+  @Override
+  public boolean exitsRoleName(String name) {
+    int count = roleMapper.countByName(name);
+
+    return count > 0;
   }
 }

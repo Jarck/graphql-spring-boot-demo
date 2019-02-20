@@ -1,5 +1,6 @@
 package com.hello.world.dto.create;
 
+import com.hello.world.validator.UniqCityName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -24,5 +25,6 @@ public class CreateCityDto {
 
   @ApiModelProperty(value = "城市名称", required = true, example = "杭州")
   @NotBlank(message = "城市名称不能为空")
+  @UniqCityName
   private String name;
 }

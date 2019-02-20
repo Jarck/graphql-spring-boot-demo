@@ -98,9 +98,10 @@ public class UserControllerTest extends BaseMock {
             .param("name", "test2")
             .param("phone", "18812345671"))
             .andDo(print())
-            .andExpect(status().is4xxClientError())
-            .andExpect(jsonPath("code").value("500"))
-            .andExpect(jsonPath("msg").value("用户已存在"))
+            .andExpect(status().isOk())
+            .andExpect(jsonPath("code").value("400"))
+            .andExpect(jsonPath("msg").value("请求参数错误"))
+            .andExpect(jsonPath("$.data[0].phone").value("手机号码已存在"))
             .andReturn();
   }
 

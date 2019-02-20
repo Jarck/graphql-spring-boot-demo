@@ -114,7 +114,7 @@ public interface IUserService {
    * @return 用户
    * @throws ArgumentsException 参数异常
    */
-  UserDto createUser(CreateUserDto createUserDto) throws ArgumentsException;
+  UserDto createUser(CreateUserDto createUserDto);
 
   /**
    * 更新用户

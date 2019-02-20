@@ -4,7 +4,6 @@ import com.hello.world.dao.PermissionMapper;
 import com.hello.world.dto.create.CreatePermissionDto;
 import com.hello.world.dto.edit.EditPermissionDto;
 import com.hello.world.dto.result.PermissionDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IPermissionService;
 import org.apache.ibatis.javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,14 +46,7 @@ public class PermissionServiceImpl implements IPermissionService {
   }
 
   @Override
-  public PermissionDto createPermission(CreatePermissionDto createPermissionDto)
-          throws ArgumentsException {
-    List<PermissionDto> permissionList = permissionMapper.searchWithName(createPermissionDto.getName());
-
-    if (permissionList.size() != 0) {
-      throw new ArgumentsException("权限已存在");
-    }
-
+  public PermissionDto createPermission(CreatePermissionDto createPermissionDto) {
     permissionMapper.insertPermission(createPermissionDto);
     return permissionMapper.selectByPrimaryKey(createPermissionDto.getId());
   }
@@ -70,5 +62,12 @@ public class PermissionServiceImpl implements IPermissionService {
     permissionMapper.update(editPermissionDto);
     PermissionDto permissionDtoUpdate = permissionMapper.selectByPrimaryKey(editPermissionDto.getId());
     return permissionDtoUpdate;
+  }
+
+  @Override
+  public boolean exitsPermissionName(String name) {
+    int count = permissionMapper.countByName(name);
+
+    return count > 0;
   }
 }

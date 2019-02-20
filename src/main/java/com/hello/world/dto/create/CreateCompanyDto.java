@@ -1,5 +1,6 @@
 package com.hello.world.dto.create;
 
+import com.hello.world.validator.UniqCompanyName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ public class CreateCompanyDto {
 
   @ApiModelProperty(value = "公司名称", required = true, example = "杭州xxx有限公司")
   @NotBlank(message = "公司名称不能为空")
+  @UniqCompanyName
   private String name;
 
   @ApiModelProperty(value = "公司简称", required = true, example = "杭州xxx")
