@@ -6,7 +6,6 @@ import com.hello.world.dto.create.CreateRoleDto;
 import com.hello.world.dto.edit.EditRoleDto;
 import com.hello.world.dto.result.RoleDto;
 import com.hello.world.dto.result.RolePermissionsDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IRolePermissionsService;
 import com.hello.world.service.IRoleService;
 import io.swagger.annotations.Api;
@@ -57,7 +56,7 @@ public class RoleController extends BaseController {
   public ResponseBean<List<RoleDto>> list() {
     List<RoleDto> roleList = roleService.findAll();
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleList);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, roleList);
   }
 
   /**
@@ -76,7 +75,7 @@ public class RoleController extends BaseController {
   public ResponseBean<RoleDto> show(@PathVariable Long id) {
     RoleDto roleDto = roleService.searchWithId(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
   }
 
   /**
@@ -95,7 +94,7 @@ public class RoleController extends BaseController {
   public ResponseBean<RolePermissionsDto> getRolePermissions(@PathVariable Long id) {
     RolePermissionsDto rolePermissionsDto = roleService.searchRoleAndPermissions(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, rolePermissionsDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, rolePermissionsDto);
   }
 
   /**
@@ -104,7 +103,6 @@ public class RoleController extends BaseController {
    * @param createRoleDto 角色信息
    * @param bindingResult 校验对象
    * @return ResponseBean
-   * @throws ArgumentsException 参数异常
    */
   @ApiOperation(value = "创建角色")
   @ApiImplicitParams({
@@ -115,15 +113,15 @@ public class RoleController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("role:create")
-  public ResponseBean<RoleDto> create(@ApiIgnore @Validated CreateRoleDto createRoleDto, BindingResult bindingResult)
-          throws ArgumentsException {
+  @SuppressWarnings("unchecked")
+  public ResponseBean<RoleDto> create(@ApiIgnore @Validated CreateRoleDto createRoleDto, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
 
     RoleDto roleDto = roleService.createRole(createRoleDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
   }
 
   /**
@@ -145,7 +143,7 @@ public class RoleController extends BaseController {
   public ResponseBean<RoleDto> update(@ApiIgnore @RequestBody EditRoleDto editRoleDto) {
     RoleDto roleDto = roleService.updateRole(editRoleDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, roleDto);
   }
 
   /**
@@ -165,6 +163,6 @@ public class RoleController extends BaseController {
           throws NotFoundException {
     rolePermissionsService.updateRolePermissions(editRoleDto.getId(), editRoleDto.getPermissionIds());
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, null);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, null);
   }
 }

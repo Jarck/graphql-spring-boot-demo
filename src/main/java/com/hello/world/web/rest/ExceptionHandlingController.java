@@ -35,7 +35,7 @@ public class ExceptionHandlingController {
   public ResponseBean handleLoginFailedException(HttpServletRequest request, Exception ex) {
     logger.error("Request: " + request.getRequestURL() + " raised " + ex);
 
-    return new ResponseBean(CommonStatus.UNAUTHORIZED, ex.getMessage(), null);
+    return new ResponseBean<>(CommonStatus.UNAUTHORIZED, ex.getMessage(), null);
   }
 
   /**
@@ -47,7 +47,7 @@ public class ExceptionHandlingController {
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   @ExceptionHandler(ShiroException.class)
   public ResponseBean handle401(ShiroException ex) {
-    return new ResponseBean(HttpStatus.FORBIDDEN.value(), ex.getMessage(), null);
+    return new ResponseBean<>(HttpStatus.FORBIDDEN.value(), ex.getMessage(), null);
   }
 
   /**
@@ -59,7 +59,7 @@ public class ExceptionHandlingController {
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   @ExceptionHandler(UnauthenticatedException.class)
   public ResponseBean handle401(UnauthenticatedException ex) {
-    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHENTICATED, null);
+    return new ResponseBean<>(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHENTICATED, null);
   }
 
   /**
@@ -71,7 +71,7 @@ public class ExceptionHandlingController {
   @ResponseStatus(HttpStatus.FORBIDDEN)
   @ExceptionHandler(UnauthorizedException.class)
   public ResponseBean handle403(UnauthorizedException ex) {
-    return new ResponseBean(HttpStatus.FORBIDDEN.value(), ResponseMessage.FORBIDDEN, null);
+    return new ResponseBean<>(HttpStatus.FORBIDDEN.value(), ResponseMessage.FORBIDDEN, null);
   }
 
   /**
@@ -84,7 +84,7 @@ public class ExceptionHandlingController {
   @ExceptionHandler(Exception.class)
   @ResponseStatus(HttpStatus.BAD_REQUEST)
   public ResponseBean globalException(HttpServletRequest request, Throwable ex) {
-    return new ResponseBean(getStatus(request).value(), ex.getMessage(), null);
+    return new ResponseBean<>(getStatus(request).value(), ex.getMessage(), null);
   }
 
   /**

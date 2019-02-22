@@ -35,7 +35,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 @RunWith(SpringRunner.class)
 @SpringBootTest(classes = Application.class)
-public class BaseMock extends AbstractShiroTest {
+public abstract class BaseMock extends AbstractShiroTest {
   @Mock
   protected StringRedisTemplate stringRedisTemplate;
 

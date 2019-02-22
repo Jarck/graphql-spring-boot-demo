@@ -54,7 +54,7 @@ public class CityController extends  BaseController {
   public ResponseBean<PageInfo<CityDto>> list(SearchCityDto searchCityDto, PageDto pageDto) {
     PageInfo<CityDto> cityDtoPageDto = cityService.searchWithCondition(searchCityDto, pageDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDtoPageDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, cityDtoPageDto);
   }
 
   /**
@@ -73,7 +73,7 @@ public class CityController extends  BaseController {
   public ResponseBean<CityDto> show(@PathVariable Long id) {
     CityDto cityDto = cityService.searchWithId(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
   }
 
   /**
@@ -90,6 +90,7 @@ public class CityController extends  BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("city:create")
+  @SuppressWarnings("unchecked")
   public ResponseBean<CityDto> create(@ApiIgnore @Validated CreateCityDto createCityDto, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -97,7 +98,7 @@ public class CityController extends  BaseController {
 
     CityDto cityDto = cityService.createCity(createCityDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
   }
 
   /**
@@ -116,6 +117,6 @@ public class CityController extends  BaseController {
   public ResponseBean<CityDto> update(@RequestBody EditCityDto editCityDto) throws NotFoundException {
     CityDto cityDto = cityService.updateCity(editCityDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, cityDto);
   }
 }

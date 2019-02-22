@@ -5,7 +5,6 @@ import com.hello.world.constant.ResponseMessage;
 import com.hello.world.dto.create.CreatePermissionDto;
 import com.hello.world.dto.edit.EditPermissionDto;
 import com.hello.world.dto.result.PermissionDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IPermissionService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -51,7 +50,7 @@ public class PermissionController extends BaseController {
   public ResponseBean<List<PermissionDto>> list() {
     List<PermissionDto> permissionList = permissionService.findAll();
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, permissionList);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, permissionList);
   }
 
   /**
@@ -60,7 +59,6 @@ public class PermissionController extends BaseController {
    * @param createPermissionDto 权限信息
    * @param bindingResult 校验对象
    * @return ResponseBean
-   * @throws ArgumentsException 参数异常
    */
   @ApiOperation(value = "创建权限")
   @ApiImplicitParams({
@@ -74,9 +72,9 @@ public class PermissionController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("permission:create")
+  @SuppressWarnings("unchecked")
   public ResponseBean<PermissionDto> create(@ApiIgnore @RequestBody @Validated CreatePermissionDto createPermissionDto,
-                             BindingResult bindingResult)
-          throws ArgumentsException {
+                             BindingResult bindingResult) {
 
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
@@ -84,7 +82,7 @@ public class PermissionController extends BaseController {
 
     PermissionDto permissionDto = permissionService.createPermission(createPermissionDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, permissionDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, permissionDto);
   }
 
   /**
@@ -104,6 +102,6 @@ public class PermissionController extends BaseController {
           throws NotFoundException {
     PermissionDto permissionDto = permissionService.updatePermission(editPermissionDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, permissionDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, permissionDto);
   }
 }

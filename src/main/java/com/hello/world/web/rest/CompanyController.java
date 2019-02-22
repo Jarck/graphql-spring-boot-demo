@@ -54,7 +54,7 @@ public class CompanyController extends BaseController {
   public ResponseBean<PageInfo<CompanyDto>> list(SearchCompanyDto searchCompanyDto, PageDto pageDto) {
     PageInfo<CompanyDto> companyDtoList = companyService.searchCondition(searchCompanyDto, pageDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDtoList);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, companyDtoList);
   }
 
   /**
@@ -73,7 +73,7 @@ public class CompanyController extends BaseController {
   public ResponseBean<CompanyDto> show(@PathVariable long id) {
     CompanyDto companyDto = companyService.searchCompanyAndCityWithId(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
   }
 
   /**
@@ -95,6 +95,7 @@ public class CompanyController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("company:create")
+  @SuppressWarnings("unchecked")
   public ResponseBean<CompanyDto> create(@ApiIgnore @RequestBody @Validated CreateCompanyDto createCompanyDto,
                                          BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
@@ -103,7 +104,7 @@ public class CompanyController extends BaseController {
 
     CompanyDto companyDto = companyService.createCompany(createCompanyDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
   }
 
   /**
@@ -122,6 +123,6 @@ public class CompanyController extends BaseController {
   public ResponseBean<CompanyDto> update(@RequestBody EditCompanyDto editCompanyDto) throws NotFoundException {
     CompanyDto companyDto = companyService.updateCompany(editCompanyDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, companyDto);
   }
 }
