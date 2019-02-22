@@ -8,7 +8,6 @@ import com.hello.world.dto.condition.SearchUserDto;
 import com.hello.world.dto.create.CreateUserDto;
 import com.hello.world.dto.edit.EditUserDto;
 import com.hello.world.dto.result.UserDto;
-import com.hello.world.exception.ArgumentsException;
 import com.hello.world.service.IUserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -54,7 +53,7 @@ public class UserController extends BaseController {
   public ResponseBean<PageInfo<UserDto>> list(SearchUserDto searchUserDto, PageDto pageDto) {
     PageInfo<UserDto> userDtoPageInfo = userService.searchUserAndCityAndCompanyAndRoles(searchUserDto, pageDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDtoPageInfo);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, userDtoPageInfo);
   }
 
   /**
@@ -73,7 +72,7 @@ public class UserController extends BaseController {
   public ResponseBean<UserDto> show(@PathVariable Long id) {
     UserDto user = userService.searchUserAndCityAndCompanyAndRolesWithId(id);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, user);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, user);
   }
 
   /**
@@ -82,7 +81,6 @@ public class UserController extends BaseController {
    * @param createUserDto 用户信息
    * @param bindingResult 校验对象
    * @return ResponseBean
-   * @throws ArgumentsException 参数异常
    */
   @ApiOperation(value = "创建用户")
   @ApiImplicitParams({
@@ -95,15 +93,15 @@ public class UserController extends BaseController {
   })
   @PostMapping("")
   @RequiresPermissions("user:create")
-  public ResponseBean<UserDto> create(@ApiIgnore @Validated CreateUserDto createUserDto, BindingResult bindingResult)
-          throws ArgumentsException {
+  @SuppressWarnings("unchecked")
+  public ResponseBean<UserDto> create(@ApiIgnore @Validated CreateUserDto createUserDto, BindingResult bindingResult) {
     if (bindingResult.hasErrors()) {
       return validateError(bindingResult);
     }
 
     UserDto userDto = userService.createUser(createUserDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
   }
 
   /**
@@ -121,6 +119,6 @@ public class UserController extends BaseController {
   public ResponseBean<UserDto> update(@RequestBody EditUserDto editUserDto) {
     UserDto userDto = userService.updateUser(editUserDto);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, userDto);
   }
 }

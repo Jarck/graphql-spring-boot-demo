@@ -62,7 +62,7 @@ public class LoginController extends BaseController {
     result.put("user", user);
     result.put(SystemConstant.TOKEN_HEADER, token);
 
-    return new ResponseBean(CommonStatus.OK, ResponseMessage.SUCCESS, result);
+    return new ResponseBean<>(CommonStatus.OK, ResponseMessage.SUCCESS, result);
   }
 
   /**
@@ -74,6 +74,6 @@ public class LoginController extends BaseController {
   @RequestMapping("401")
   @ResponseStatus(HttpStatus.UNAUTHORIZED)
   public ResponseBean unauthorized() {
-    return new ResponseBean(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHORIZED, "token失效或没有访问权限");
+    return new ResponseBean<>(HttpStatus.UNAUTHORIZED.value(), ResponseMessage.UNAUTHORIZED, "token失效或没有访问权限");
   }
 }

@@ -36,7 +36,7 @@ public class BaseController {
       return map;
     }).collect(Collectors.toList());
 
-    return new ResponseBean(CommonStatus.BAD_REQUEST, ResponseMessage.ARGUMENTS_ERROR, errors);
+    return new ResponseBean<>(CommonStatus.BAD_REQUEST, ResponseMessage.ARGUMENTS_ERROR, errors);
   }
 
   /**
