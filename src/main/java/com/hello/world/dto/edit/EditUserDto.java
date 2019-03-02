@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * @author jarck-lou
@@ -41,5 +42,5 @@ public class EditUserDto {
   private UserStatusEnum status;
 
   @ApiModelProperty(value = "角色IDs", example = "[1, 2]")
-  private Long[] roleIds;
+  private List<Long> roleIds;
 }

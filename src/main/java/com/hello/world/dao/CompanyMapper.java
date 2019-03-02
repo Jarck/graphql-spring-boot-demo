@@ -112,7 +112,7 @@ public interface CompanyMapper {
   /**
    * 创建公司
    *
-   * @param createCompanyDto 查询公司
+   * @param createCompanyDto 公司
    * @return 影响的行数
    */
   Long createCompany(CreateCompanyDto createCompanyDto);
